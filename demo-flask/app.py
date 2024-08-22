@@ -1,52 +1,42 @@
 import os
+from .login_form import LoginForm
 
-from flask import Flask, request, render_template, redirect, session, make_response
+from flask import (
+    Flask,
+    request,
+    Request,
+    render_template,
+    redirect,
+    session,
+    make_response,
+)
 
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
+from onelogin.saml2.errors import OneLogin_Saml2_Error
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "authgeardemosamlsp"
+app.config["SESSION_COOKIE_NAME"] = "authgeardemosamlspsession"
 app.config["SAML_PATH"] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "saml"
 )
 
 
-def init_saml_auth(req):
+def init_saml_auth(req, login_form: LoginForm):
     auth = OneLogin_Saml2_Auth(
         req,
         old_settings={
+            **login_form.to_saml_settings(),
             "strict": True,
             "debug": True,
-            "sp": {
-                "entityId": "http://localhost:5001/metadata/",
-                "assertionConsumerService": {
-                    "url": "http://localhost:5001/?acs",
-                    "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
-                },
-                "singleLogoutService": {
-                    "url": "http://localhost:5001/?sls",
-                    "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
-                },
-                "NameIDFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
-                "x509cert": "",
-                "privateKey": "",
-            },
-            "idp": {
-                "entityId": "urn:my-app.localhost",
-                "singleSignOnService": {
-                    "url": "http://localhost:3000/saml2/login/sp1",
-                    "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
-                },
-                "x509cert": "-----BEGIN CERTIFICATE-----\nMIIC1TCCAb2gAwIBAgIRAJpxx1DW2ObGLT5lUpXARWkwDQYJKoZIhvcNAQELBQAwGzEZMBcGA1UEAxMQbXktYXBwLmxvY2FsaG9zdDAgFw0yNDA4MDkwODA3MzlaGA8yMDc0MDcyODA4MDczOVowGzEZMBcGA1UEAxMQbXktYXBwLmxvY2FsaG9zdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN83SCP6m3ayNriEX6VLiwCqoIHuE1d2vFwULyUWOjinI3olWWkA1txAZu2e0Rm+Zslq2sWx/HZ5e83NCzyLQ8aaG1JQOtpbxV2IOybOonveZr1qszvs+1ofGw9sW6AZa7vhH9HhuDqZnM6ArsC7E/D03D4xJ/2hb6uVj9zHb+Cx4vh1nAnBXXwOSIuo1Jm4a0vZHFs8HT2gmX31K/5hhJuchqiHptqerf0OHq/Zyx+v40oj3/cFwGAJ291z6kv318bfjBhZTdQ2ovbnFnU9NfQ02IgWtSj1Grr8dAp5aIDZvgvvYg/m+FnyMqrSU5s0NIyn13tqipZgN4YUk8CUkCECAwEAAaMSMBAwDgYDVR0PAQH/BAQDAgeAMA0GCSqGSIb3DQEBCwUAA4IBAQAVuZEbgLi0gzKy5x+L1j+uQMFdY4taFWGdTF7gZx/hw2YpKakPSCl/Sb+624u3+XhQSzByjt7m0yGhAml5aLQ+y7jOAwagL0pWhK/AW6kZKU2lz36J+T8LTzq3YOFBHrLTJ58ZcWKekgwAWDr8Uj9BgxnQWF4Rwu8yAP8POV4E6aIajalFK3tNdyGaXIS5rSHGd/QKuJNWeCHF7sKGUSTw3p3MADXGkDykUCuXevyNACH6opOLrDCHr/uEEFmSTVf5zlIeSk+YEMgvAyAtQw4fi3WItQNOSLm+01kxkCC1SF+LXTSUPMsLOnX++WJ4u4VJTMfqrh6dUgPkRnolBQXT\n-----END CERTIFICATE-----",
-            },
         },
     )
     return auth
 
 
-def prepare_flask_request(request):
+def prepare_flask_request(request: Request):
     # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
     return {
         "https": "on" if request.scheme == "https" else "off",
@@ -62,34 +52,50 @@ def prepare_flask_request(request):
 @app.route("/", methods=["GET", "POST"])
 def index():
     req = prepare_flask_request(request)
-    auth = init_saml_auth(req)
     errors = []
     error_reason = None
     not_auth_warn = False
     success_slo = False
     attributes = False
     paint_logout = False
+    # Create a form with stored values
+    login_form = LoginForm.parse(request, session.get(LoginForm.session_key(), dict()))
+    auth = None
+    init_error = None
+    try:
+        auth = init_saml_auth(req, login_form)
+    except OneLogin_Saml2_Error as e:
+        # If the stored values are invalid, init will fail.
+        # Ignore the error at the moment.
+        pass
 
-    if "sso" in request.args:
-        return redirect(auth.login())
-        # If AuthNRequest ID need to be stored in order to later validate it, do instead
-        # sso_built_url = auth.login()
-        # request.session['AuthNRequestID'] = auth.get_last_request_id()
-        # return redirect(sso_built_url)
-    elif "sso2" in request.args:
+    if "sso2" in request.args:
+        login_form = LoginForm.parse(request, request.form)
+        session[LoginForm.session_key()] = login_form.to_dict()
+        try:
+            auth = init_saml_auth(req, login_form)
+        except OneLogin_Saml2_Error as e:
+            return render_template("invalid.html", init_error=init_error)
+
         return_to = "%sattrs/" % request.host_url
-        return redirect(auth.login(return_to))
+        return redirect(
+            auth.login(
+                return_to,
+                force_authn=login_form.force_authn,
+                is_passive=login_form.is_passive,
+            ),
+        )
     elif "slo" in request.args:
-        session.clear()
+        del session["samlUserdata"]
         return redirect("./")
         # SLO not supported yet, only clear local session
-        # name_id = session_index = name_id_format = name_id_nq = name_id_spnq = None
+        # name_id = session_index = nameid_format = name_id_nq = name_id_spnq = None
         # if "samlNameId" in session:
         #     name_id = session["samlNameId"]
         # if "samlSessionIndex" in session:
         #     session_index = session["samlSessionIndex"]
         # if "samlNameIdFormat" in session:
-        #     name_id_format = session["samlNameIdFormat"]
+        #     nameid_format = session["samlNameIdFormat"]
         # if "samlNameIdNameQualifier" in session:
         #     name_id_nq = session["samlNameIdNameQualifier"]
         # if "samlNameIdSPNameQualifier" in session:
@@ -99,7 +105,7 @@ def index():
         #         name_id=name_id,
         #         session_index=session_index,
         #         nq=name_id_nq,
-        #         name_id_format=name_id_format,
+        #         nameid_format=nameid_format,
         #         spnq=name_id_spnq,
         #     )
         # )
@@ -126,7 +132,6 @@ def index():
                 # the value of the request.form['RelayState'] is a trusted URL.
                 return redirect(auth.redirect_to(request.form["RelayState"]))
         elif auth.get_settings().is_debug_active():
-            print(auth.get_errors())
             error_reason = auth.get_last_error_reason()
     elif "sls" in request.args:
         request_id = None
@@ -152,12 +157,14 @@ def index():
 
     return render_template(
         "index.html",
+        request=request,
         errors=errors,
         error_reason=error_reason,
         not_auth_warn=not_auth_warn,
         success_slo=success_slo,
         attributes=attributes,
         paint_logout=paint_logout,
+        login_form=login_form,
     )
 
 

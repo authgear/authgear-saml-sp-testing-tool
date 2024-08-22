@@ -46,7 +46,126 @@
   {% endif %}
   <a href="?slo" class="btn btn-danger">Logout</a>
 {% else %}
-  <a href="?sso" class="btn btn-primary">Login</a> <a href="?sso2" class="btn btn-info">Login and access to attrs page</a>
+  <form action="/?sso2" method="POST" id="loginform">
+    <h3>Settings</h3>
+    <div class="form-group">
+      <label for="nameidformat">NameID Format</label>
+      <select name="nameid_format" class="form-control" id="nameidformat">
+        {% for option in login_form.nameid_format_options() %}
+        <option value="{{ option }}"
+          {% if login_form.nameid_format == option %}
+          selected
+          {% endif %}
+        >
+          {{ option }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sp_audience">Expected Assertion Audience</label>
+      <input
+        type="text"
+        class="form-control"
+        name="sp_audience"
+        value="{{ login_form.sp_audience}}"
+        placeholder="{{ login_form.default_sp_audience(request) }}" />
+    </div>
+    <div class="form-group">
+      <label for="sp_audience">Expected Assertion Recipient</label>
+      <input
+        type="text"
+        class="form-control"
+        name="readonly_recipient"
+        value="{{ login_form.sp_recipient(request) }}"
+        readonly />
+    </div>
+    <div class="form-group">
+      <label for="sp_audience">Expected Response Destination</label>
+      <input
+        type="text"
+        class="form-control"
+        name="readonly_destination"
+        value="{{ login_form.sp_destination(request) }}"
+        readonly />
+    </div>
+    <div class="form-group">
+      <label for="sp_audience">IdP Entity ID (Response Issuer)</label>
+      <input
+        type="text"
+        class="form-control"
+        name="idp_issuer"
+        value="{{ login_form.idp_issuer }}"
+        required />
+    </div>
+    <div class="form-group">
+      <label for="sp_audience">IdP SSO URL</label>
+      <input
+        type="text"
+        class="form-control"
+        name="idp_sso_url"
+        value="{{ login_form.idp_sso_url }}"
+        required />
+    </div>
+    <div class="form-group">
+      <label for="idp_sso_binding">IdP SSO Binding</label>
+      <select name="idp_sso_binding" class="form-control" id="idp_sso_binding">
+        {% for option in login_form.idp_sso_binding_options() %}
+        <option value="{{ option }}"
+          {% if login_form.idp_sso_binding == option %}
+          selected
+          {% endif %}
+        >
+          {{ option }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="idp_cert">IdP Cert (In PEM format)</label>
+      <textarea
+        type="text"
+        class="form-control"
+        name="idp_cert"
+        value="{{ login_form.idp_cert }}">{{ login_form.idp_cert }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="acs_binding">ACS Binding</label>
+      <select name="acs_binding" class="form-control" id="acs_binding">
+        {% for option in login_form.acs_binding_options() %}
+        <option value="{{ option }}"
+          {% if login_form.acs_binding == option %}
+          selected
+          {% endif %}
+        >
+          {{ option }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+    <h3>AuthnRequest Parameters</h3>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+          name="is_passive"
+          value="true"
+          {% if login_form.is_passive %}checked{% endif %}
+        />
+        IsPassive
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+          name="force_authn"
+          value="true"
+          {% if login_form.force_authn %}checked{% endif %}
+        />
+        ForceAuthn
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
 {% endif %}
 
 {% endblock %}
