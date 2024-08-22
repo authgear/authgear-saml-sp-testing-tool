@@ -1,0 +1,12 @@
+**/.git
+**/*.jks
+**/*.keystore
+**/*.pfx
+**/*.p12
+**/*.cer
+**/*.cert
+**/*.pem
+**/*.key
+**/*.env
+**/docker-compose.override.yml
+**/docker-compose.override.yaml
