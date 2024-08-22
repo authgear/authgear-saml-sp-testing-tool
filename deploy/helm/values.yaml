@@ -1,0 +1,2 @@
+images:
+  app: "us-east1-docker.pkg.dev/oursky-kube/pandawork/authgear-demo-saml-sp"

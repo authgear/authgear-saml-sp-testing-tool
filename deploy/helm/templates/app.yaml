@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: authgear-demo-saml-sp
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 5001
+      protocol: TCP
+  selector:
+    app: authgear-demo-saml-sp
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authgear-demo-saml-sp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authgear-demo-saml-sp
+  template:
+    metadata:
+      labels:
+        app: authgear-demo-saml-sp
+    spec:
+      containers:
+        - name: app
+          image: "{{ .Values.images.app }}:{{ .Values.appVersion }}"
+          ports:
+            - containerPort: 5001
+          resources:
+            requests:
+              cpu: "10m"
+              memory: "32Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5001
+            periodSeconds: 60
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 2
