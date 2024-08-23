@@ -80,7 +80,7 @@ def index():
         login_form = LoginForm.parse(request, request.form)
         session[LoginForm.session_key()] = login_form.to_dict()
         try:
-            auth = init_saml_auth(req, login_form)
+            auth = init_saml_auth(req, request, login_form)
         except OneLogin_Saml2_Error as e:
             return render_template("invalid.html", init_error=init_error)
 
@@ -195,7 +195,8 @@ def attrs():
 @app.route("/metadata/")
 def metadata():
     req = prepare_flask_request(request)
-    auth = init_saml_auth(req)
+    login_form = LoginForm.parse(request, session.get(LoginForm.session_key(), dict()))
+    auth = init_saml_auth(req, request, login_form)
     settings = auth.get_settings()
     metadata = settings.get_sp_metadata()
     errors = settings.validate_metadata(metadata)
