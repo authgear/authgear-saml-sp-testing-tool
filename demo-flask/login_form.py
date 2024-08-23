@@ -1,3 +1,4 @@
+import os
 from typing import Self
 from dataclasses import dataclass, replace, asdict
 from flask import Request
@@ -13,6 +14,15 @@ class NameID(StrEnum):
 class Binding(StrEnum):
     HTTPPost = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
     HTTPRedirect = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+
+
+USE_HTTPS = os.environ.get("USE_HTTPS") == "true"
+
+
+def get_scheme() -> str:
+    if USE_HTTPS:
+        return "https"
+    return "http"
 
 
 @dataclass
@@ -53,17 +63,21 @@ class LoginForm:
     @classmethod
     def sp_recipient(cls, request: Request) -> str:
         parsed_uri = parse.urlparse(request.url)
-        return "{uri.scheme}://{uri.netloc}/?acs".format(uri=parsed_uri)
+        return "{scheme}://{uri.netloc}/?acs".format(
+            scheme=get_scheme(), uri=parsed_uri
+        )
 
     @classmethod
     def sp_destination(cls, request: Request) -> str:
         parsed_uri = parse.urlparse(request.url)
-        return "{uri.scheme}://{uri.netloc}/?acs".format(uri=parsed_uri)
+        return "{scheme}://{uri.netloc}/?acs".format(
+            scheme=get_scheme(), uri=parsed_uri
+        )
 
     @classmethod
     def default_sp_audience(cls, request: Request) -> str:
         parsed_uri = parse.urlparse(request.url)
-        return "{uri.scheme}://{uri.netloc}".format(uri=parsed_uri)
+        return "{scheme}://{uri.netloc}".format(scheme=get_scheme(), uri=parsed_uri)
 
     @classmethod
     def default_acs_binding(cls) -> Binding:

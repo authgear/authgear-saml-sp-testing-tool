@@ -45,3 +45,6 @@ spec:
             successThreshold: 1
             failureThreshold: 3
             timeoutSeconds: 2
+          env:
+            - name: USE_HTTPS
+              value: "true"
