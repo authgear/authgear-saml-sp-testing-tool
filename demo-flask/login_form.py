@@ -4,6 +4,7 @@ from dataclasses import dataclass, replace, asdict
 from flask import Request
 from urllib import parse
 from enum import StrEnum
+from .config import USE_HTTPS
 
 
 class NameID(StrEnum):
@@ -14,9 +15,6 @@ class NameID(StrEnum):
 class Binding(StrEnum):
     HTTPPost = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
     HTTPRedirect = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-
-
-USE_HTTPS = os.environ.get("USE_HTTPS") == "true"
 
 
 def get_scheme() -> str:

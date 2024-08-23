@@ -15,6 +15,7 @@ from flask import (
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from onelogin.saml2.errors import OneLogin_Saml2_Error
+from .config import USE_HTTPS
 
 
 app = Flask(__name__)
@@ -46,7 +47,7 @@ def init_saml_auth(req, request: Request, login_form: LoginForm):
 def prepare_flask_request(request: Request):
     # If server is behind proxys or balancers use the HTTP_X_FORWARDED fields
     return {
-        "https": "on" if request.scheme == "https" else "off",
+        "https": "on" if USE_HTTPS else "off",
         "http_host": request.host,
         "script_name": request.path,
         "get_data": request.args.copy(),
