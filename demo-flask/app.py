@@ -31,11 +31,11 @@ def make_session_permanent():
     session.permanent = True
 
 
-def init_saml_auth(req, login_form: LoginForm):
+def init_saml_auth(req, request: Request, login_form: LoginForm):
     auth = OneLogin_Saml2_Auth(
         req,
         old_settings={
-            **login_form.to_saml_settings(),
+            **login_form.to_saml_settings(request),
             "strict": True,
             "debug": True,
         },
@@ -70,7 +70,7 @@ def index():
     auth = None
     init_error = None
     try:
-        auth = init_saml_auth(req, login_form)
+        auth = init_saml_auth(req, request, login_form)
     except OneLogin_Saml2_Error as e:
         # If the stored values are invalid, init will fail.
         # Ignore the error at the moment.

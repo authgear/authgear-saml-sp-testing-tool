@@ -61,18 +61,19 @@ class LoginForm:
         ]
 
     @classmethod
-    def sp_recipient(cls, request: Request) -> str:
+    def acs_url(cls, request: Request) -> str:
         parsed_uri = parse.urlparse(request.url)
         return "{scheme}://{uri.netloc}/?acs".format(
             scheme=get_scheme(), uri=parsed_uri
         )
 
     @classmethod
+    def sp_recipient(cls, request: Request) -> str:
+        return cls.acs_url(request)
+
+    @classmethod
     def sp_destination(cls, request: Request) -> str:
-        parsed_uri = parse.urlparse(request.url)
-        return "{scheme}://{uri.netloc}/?acs".format(
-            scheme=get_scheme(), uri=parsed_uri
-        )
+        return cls.acs_url(request)
 
     @classmethod
     def default_sp_audience(cls, request: Request) -> str:
@@ -151,12 +152,12 @@ class LoginForm:
     def to_dict(self) -> dict:
         return asdict(self)
 
-    def to_saml_settings(self) -> dict:
+    def to_saml_settings(self, request: Request) -> dict:
         return {
             "sp": {
                 "entityId": self.sp_audience,
                 "assertionConsumerService": {
-                    "url": "http://localhost:5001/?acs",
+                    "url": self.acs_url(request),
                     "binding": self.acs_binding,
                 },
                 "singleLogoutService": {
