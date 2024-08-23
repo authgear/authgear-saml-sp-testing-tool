@@ -155,6 +155,8 @@ def index():
         if len(session["samlUserdata"]) > 0:
             attributes = session["samlUserdata"].items()
 
+    login_form = login_form.update_from_query(request)
+
     return render_template(
         "index.html",
         request=request,
