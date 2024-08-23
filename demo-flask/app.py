@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from .login_form import LoginForm
 
 from flask import (
@@ -19,9 +20,15 @@ from onelogin.saml2.errors import OneLogin_Saml2_Error
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "authgeardemosamlsp"
 app.config["SESSION_COOKIE_NAME"] = "authgeardemosamlspsession"
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(days=365)
 app.config["SAML_PATH"] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "saml"
 )
+
+
+@app.before_request
+def make_session_permanent():
+    session.permanent = True
 
 
 def init_saml_auth(req, login_form: LoginForm):
