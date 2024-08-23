@@ -182,14 +182,23 @@ def index():
 def attrs():
     paint_logout = False
     attributes = False
+    nameid = None
+    nameid_format = None
 
     if "samlUserdata" in session:
         paint_logout = True
+
         if len(session["samlUserdata"]) > 0:
             attributes = session["samlUserdata"].items()
+            nameid = session["samlNameId"]
+            nameid_format = session["samlNameIdFormat"]
 
     return render_template(
-        "attrs.html", paint_logout=paint_logout, attributes=attributes
+        "attrs.html",
+        paint_logout=paint_logout,
+        attributes=attributes,
+        nameid=nameid,
+        nameid_format=nameid_format,
     )
 
 

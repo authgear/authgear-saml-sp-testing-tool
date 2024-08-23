@@ -3,6 +3,24 @@
 {% block content %}
 
 {% if paint_logout %}
+  <table class="table table-striped">
+    <tbody>
+      {% if nameid %}
+        <tr><td>NameID</td>
+          <td><ul class="list-unstyled">
+            <li>{{ nameid }}</li>
+          </ul></td>
+        </tr>
+      {% endif %}
+      {% if nameid %}
+        <tr><td>NameID Format</td>
+          <td><ul class="list-unstyled">
+              <li>{{ nameid_format }}</li>
+          </ul></td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
   {% if attributes %}
     <p>You have the following attributes:</p>
     <table class="table table-striped">
