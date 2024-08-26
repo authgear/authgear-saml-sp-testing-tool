@@ -138,7 +138,10 @@ def index():
             if "RelayState" in request.form and self_url != request.form["RelayState"]:
                 # To avoid 'Open Redirect' attacks, before execute the redirection confirm
                 # the value of the request.form['RelayState'] is a trusted URL.
-                return redirect(auth.redirect_to(request.form["RelayState"]))
+                if request.form["RelayState"]:
+                    return redirect(auth.redirect_to(request.form["RelayState"]))
+                else:
+                    return redirect("./")
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif "sls" in request.args:
