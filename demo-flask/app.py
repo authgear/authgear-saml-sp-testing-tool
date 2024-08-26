@@ -121,7 +121,8 @@ def index():
         request_id = None
         if "AuthNRequestID" in session:
             request_id = session["AuthNRequestID"]
-
+        if auth is None:
+            return "Failed to initialize. Session is missing."
         auth.process_response(request_id=request_id)
         errors = auth.get_errors()
         not_auth_warn = not auth.is_authenticated()
