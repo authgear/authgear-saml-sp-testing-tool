@@ -141,7 +141,7 @@ def index():
                 if request.form["RelayState"]:
                     return redirect(auth.redirect_to(request.form["RelayState"]))
                 else:
-                    return redirect("./")
+                    return redirect("./attrs/")
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif "sls" in request.args:
