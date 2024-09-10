@@ -34,6 +34,7 @@ class LoginForm:
     idp_sso_url: str
     idp_sso_binding: Binding
     idp_cert: str
+    subject_nameid: str
 
     @classmethod
     def session_key(cls) -> str:
@@ -104,6 +105,7 @@ class LoginForm:
         idp_sso_url = form_data.get("idp_sso_url", "")
         idp_sso_binding = form_data.get("idp_sso_binding", cls.default_sso_binding())
         idp_cert = form_data.get("idp_cert", "")
+        subject_nameid = form_data.get("subject_nameid", "")
 
         return LoginForm(
             is_passive=is_passive,
@@ -115,6 +117,7 @@ class LoginForm:
             idp_sso_url=idp_sso_url,
             idp_sso_binding=idp_sso_binding,
             idp_cert=idp_cert,
+            subject_nameid=subject_nameid,
         )
 
     def update_from_query(self, request: Request) -> Self:
@@ -145,6 +148,8 @@ class LoginForm:
             )
         if request.args.get("idp_cert"):
             result.idp_cert = request.args.get("idp_cert", "")
+        if request.args.get("subject_nameid"):
+            result.subject_nameid = request.args.get("subject_nameid", "")
         return result
 
     def to_dict(self) -> dict:
@@ -175,6 +180,11 @@ class LoginForm:
                 "x509cert": self.idp_cert,
             },
         }
+
+    def maybe_subject_nameid(self) -> str | None:
+        if self.subject_nameid == "":
+            return None
+        return self.subject_nameid
 
 
 def _parse_strbool_from_dict(d: dict, key: str) -> bool:

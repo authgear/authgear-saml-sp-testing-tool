@@ -86,11 +86,13 @@ def index():
             return render_template("invalid.html", init_error=init_error)
 
         return_to = "%sattrs/" % request.host_url
+
         return redirect(
             auth.login(
                 return_to,
                 force_authn=login_form.force_authn,
                 is_passive=login_form.is_passive,
+                name_id_value_req=login_form.maybe_subject_nameid(),
             ),
         )
     elif "slo" in request.args:
