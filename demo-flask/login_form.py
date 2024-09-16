@@ -34,6 +34,7 @@ class LoginForm:
     idp_sso_url: str
     idp_sso_binding: Binding
     idp_cert: str
+    idp_slo_url: str
     subject_nameid: str
 
     @classmethod
@@ -105,6 +106,7 @@ class LoginForm:
         idp_sso_url = form_data.get("idp_sso_url", "")
         idp_sso_binding = form_data.get("idp_sso_binding", cls.default_sso_binding())
         idp_cert = form_data.get("idp_cert", "")
+        idp_slo_url = form_data.get("idp_slo_url", "")
         subject_nameid = form_data.get("subject_nameid", "")
 
         return LoginForm(
@@ -117,6 +119,7 @@ class LoginForm:
             idp_sso_url=idp_sso_url,
             idp_sso_binding=idp_sso_binding,
             idp_cert=idp_cert,
+            idp_slo_url=idp_slo_url,
             subject_nameid=subject_nameid,
         )
 
@@ -148,6 +151,8 @@ class LoginForm:
             )
         if request.args.get("idp_cert"):
             result.idp_cert = request.args.get("idp_cert", "")
+        if request.args.get("idp_slo_url"):
+            result.idp_slo_url = request.args.get("idp_slo_url", "")
         if request.args.get("subject_nameid"):
             result.subject_nameid = request.args.get("subject_nameid", "")
         return result
@@ -156,7 +161,7 @@ class LoginForm:
         return asdict(self)
 
     def to_saml_settings(self, request: Request) -> dict:
-        return {
+        settings = {
             "sp": {
                 "entityId": self.sp_audience,
                 "assertionConsumerService": {
@@ -180,6 +185,12 @@ class LoginForm:
                 "x509cert": self.idp_cert,
             },
         }
+        if self.idp_slo_url:
+            settings["idp"]["singleLogoutService"] = {
+                "url": self.idp_slo_url,
+                "responseUrl": self.idp_slo_url,
+            }
+        return settings
 
     def maybe_subject_nameid(self) -> str | None:
         if self.subject_nameid == "":

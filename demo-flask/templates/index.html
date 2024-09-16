@@ -122,6 +122,15 @@
       </select>
     </div>
     <div class="form-group">
+      <label for="idp_slo_url">IdP Single Logout URL</label>
+      <input
+        type="text"
+        class="form-control"
+        name="idp_slo_url"
+        value="{{ login_form.idp_slo_url }}"
+        />
+    </div>
+    <div class="form-group">
       <label for="idp_cert">IdP Cert (In PEM format)</label>
       <textarea
         type="text"
