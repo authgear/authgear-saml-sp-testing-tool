@@ -112,7 +112,7 @@ def index():
                 name_id=name_id,
                 session_index=session_index,
                 nq=name_id_nq,
-                nameid_format=nameid_format,
+                name_id_format=nameid_format,
                 spnq=name_id_spnq,
             )
         )
