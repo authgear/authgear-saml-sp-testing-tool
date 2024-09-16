@@ -96,29 +96,26 @@ def index():
             ),
         )
     elif "slo" in request.args:
-        del session["samlUserdata"]
-        return redirect("./")
-        # SLO not supported yet, only clear local session
-        # name_id = session_index = nameid_format = name_id_nq = name_id_spnq = None
-        # if "samlNameId" in session:
-        #     name_id = session["samlNameId"]
-        # if "samlSessionIndex" in session:
-        #     session_index = session["samlSessionIndex"]
-        # if "samlNameIdFormat" in session:
-        #     nameid_format = session["samlNameIdFormat"]
-        # if "samlNameIdNameQualifier" in session:
-        #     name_id_nq = session["samlNameIdNameQualifier"]
-        # if "samlNameIdSPNameQualifier" in session:
-        #     name_id_spnq = session["samlNameIdSPNameQualifier"]
-        # return redirect(
-        #     auth.logout(
-        #         name_id=name_id,
-        #         session_index=session_index,
-        #         nq=name_id_nq,
-        #         nameid_format=nameid_format,
-        #         spnq=name_id_spnq,
-        #     )
-        # )
+        name_id = session_index = nameid_format = name_id_nq = name_id_spnq = None
+        if "samlNameId" in session:
+            name_id = session["samlNameId"]
+        if "samlSessionIndex" in session:
+            session_index = session["samlSessionIndex"]
+        if "samlNameIdFormat" in session:
+            nameid_format = session["samlNameIdFormat"]
+        if "samlNameIdNameQualifier" in session:
+            name_id_nq = session["samlNameIdNameQualifier"]
+        if "samlNameIdSPNameQualifier" in session:
+            name_id_spnq = session["samlNameIdSPNameQualifier"]
+        return redirect(
+            auth.logout(
+                name_id=name_id,
+                session_index=session_index,
+                nq=name_id_nq,
+                nameid_format=nameid_format,
+                spnq=name_id_spnq,
+            )
+        )
     elif "acs" in request.args:
         request_id = None
         if "AuthNRequestID" in session:
@@ -151,8 +148,16 @@ def index():
         request_id = None
         if "LogoutRequestID" in session:
             request_id = session["LogoutRequestID"]
-        dscb = lambda: session.clear()
-        url = auth.process_slo(request_id=request_id, delete_session_cb=dscb)
+
+        def delete_session():
+            del session["samlUserdata"]
+            del session["samlNameId"]
+            del session["samlNameIdFormat"]
+            del session["samlNameIdNameQualifier"]
+            del session["samlNameIdSPNameQualifier"]
+            del session["samlSessionIndex"]
+
+        url = auth.process_slo(request_id=request_id, delete_session_cb=delete_session)
         errors = auth.get_errors()
         if len(errors) == 0:
             if url is not None:
