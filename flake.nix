@@ -21,6 +21,8 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             python3
+            kubectl
+            kubernetes-helm
           ];
         };
       }
