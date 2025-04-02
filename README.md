@@ -1,21 +1,13 @@
 # Authgear Demo SAML SP
 
+Assume you have python3 installed globally on your machine, or
+you are a user of https://github.com/nix-community/nix-direnv
+
 ## Development
 
-This project uses pipenv to manage packages.
-
-https://github.com/pypa/pipenv
-
 ```sh
-cd ./demo-flask
-pipenv install
-```
-
-Start the server
-
-```sh
-# In ./demo-flask
-make start
+make -C demo-flask setup
+make -C demo-flask start
 ```
 
 ## Deploying to Pandawork

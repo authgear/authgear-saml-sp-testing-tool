@@ -1,12 +1,24 @@
-GIT_SHA ?= git-$(shell git rev-parse --short=8 HEAD)
-DOCKER_REGISTRY ?= us-east1-docker.pkg.dev/oursky-kube/pandawork
+GIT_SHA ?= git-$(shell git rev-parse --short=12 HEAD)
+DOCKER_REGISTRY ?= quay.io/theauthgear
 APP_IMAGE_NAME ?= authgear-demo-saml-sp
 APP_IMAGE ?= $(DOCKER_REGISTRY)/$(APP_IMAGE_NAME):$(GIT_SHA)
 
+.PHONY: clean
+clean:
+	rm -rf ./venv
+
+setup: venv
+
+venv:
+	$(shell command -v python3) -m venv venv
+	./venv/bin/pip install -r ./requirements.txt
 
 .PHONY: start
 start:
-	FLASK_APP=app pipenv run flask run --host=0.0.0.0 --port=5001
+	FLASK_APP=app ./venv/bin/flask run --host=0.0.0.0 --port=5001
+
+docker-run: image
+	docker run --rm -p 5001:5001 ${APP_IMAGE}
 
 .PHONY: image
 image:

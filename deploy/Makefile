@@ -1,4 +1,4 @@
-GIT_SHA ?= git-$(shell git rev-parse --short=8 HEAD)
+GIT_SHA ?= git-$(shell git rev-parse --short=12 HEAD)
 K8S_NAMESPACE ?= authgear-demo
 
 .PHONY: deploy
