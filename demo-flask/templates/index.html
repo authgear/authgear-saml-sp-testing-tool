@@ -107,7 +107,50 @@
       <h3 class="text-lg font-medium text-gray-900 mb-4">Settings</h3>
       
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <!-- Critical IdP Configuration (Required) -->
+        <div class="sm:col-span-2">
+          <label for="idp_issuer" class="block text-sm font-medium text-gray-700">IdP Entity ID (Response Issuer)</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_issuer"
+            value="{{ login_form.idp_issuer }}"
+            placeholder="e.g., https://your-idp.com or urn:your-idp:entity"
+            required />
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="idp_sso_url" class="block text-sm font-medium text-gray-700">IdP SSO URL</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_sso_url"
+            value="{{ login_form.idp_sso_url }}"
+            placeholder="e.g., https://your-idp.com/saml/sso or /saml/login"
+            required />
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
+          <textarea
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_cert"
+            placeholder="-----BEGIN CERTIFICATE-----&#10;Your IdP's X.509 certificate in PEM format&#10;-----END CERTIFICATE-----"
+            rows="4">{{ login_form.idp_cert }}</textarea>
+        </div>
+        
+        <!-- SP Configuration -->
         <div>
+          <label for="sp_audience" class="block text-sm font-medium text-gray-700">Expected Assertion Audience</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="sp_audience"
+            value="{{ login_form.sp_audience}}"
+            placeholder="e.g., http://localhost:5001 or your SP entity ID" />
+        </div>
+        
+        <div class="sm:col-span-2">
           <label for="nameidformat" class="block text-sm font-medium text-gray-700">NameID Format</label>
           <select name="nameid_format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="nameidformat">
             {% for option in login_form.nameid_format_options() %}
@@ -122,16 +165,38 @@
           </select>
         </div>
         
-        <div>
-          <label for="sp_audience" class="block text-sm font-medium text-gray-700">Expected Assertion Audience</label>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="sp_audience"
-            value="{{ login_form.sp_audience}}"
-            placeholder="{{ login_form.default_sp_audience(request) }}" />
+        <!-- Binding Configuration -->
+        <div class="sm:col-span-2">
+          <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
+          <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
+            {% for option in login_form.idp_sso_binding_options() %}
+            <option value="{{ option }}"
+              {% if login_form.idp_sso_binding == option %}
+              selected
+              {% endif %}
+            >
+              {{ option }}
+            </option>
+            {% endfor %}
+          </select>
         </div>
         
+        <div>
+          <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
+          <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
+            {% for option in login_form.acs_binding_options() %}
+            <option value="{{ option }}"
+              {% if login_form.acs_binding == option %}
+              selected
+              {% endif %}
+            >
+              {{ option }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <!-- Read-only Information -->
         <div>
           <label for="readonly_recipient" class="block text-sm font-medium text-gray-700">Expected Assertion Recipient</label>
           <input
@@ -152,41 +217,7 @@
             readonly />
         </div>
         
-        <div class="sm:col-span-2">
-          <label for="idp_issuer" class="block text-sm font-medium text-gray-700">IdP Entity ID (Response Issuer)</label>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_issuer"
-            value="{{ login_form.idp_issuer }}"
-            required />
-        </div>
-        
-        <div class="sm:col-span-2">
-          <label for="idp_sso_url" class="block text-sm font-medium text-gray-700">IdP SSO URL</label>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_sso_url"
-            value="{{ login_form.idp_sso_url }}"
-            required />
-        </div>
-        
-        <div>
-          <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
-          <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
-            {% for option in login_form.idp_sso_binding_options() %}
-            <option value="{{ option }}"
-              {% if login_form.idp_sso_binding == option %}
-              selected
-              {% endif %}
-            >
-              {{ option }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
-        
+        <!-- Optional Configuration -->
         <div>
           <label for="idp_slo_url" class="block text-sm font-medium text-gray-700">IdP Single Logout URL</label>
           <input
@@ -194,66 +225,57 @@
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
             name="idp_slo_url"
             value="{{ login_form.idp_slo_url }}"
-            />
-        </div>
-        
-        <div class="sm:col-span-2">
-          <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
-          <textarea
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_cert"
-            rows="4">{{ login_form.idp_cert }}</textarea>
-        </div>
-        
-        <div>
-          <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
-          <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
-            {% for option in login_form.acs_binding_options() %}
-            <option value="{{ option }}"
-              {% if login_form.acs_binding == option %}
-              selected
-              {% endif %}
-            >
-              {{ option }}
-            </option>
-            {% endfor %}
-          </select>
+            placeholder="e.g., https://your-idp.com/saml/slo (optional)" />
         </div>
       </div>
     </div>
     
     <div class="bg-gray-50 rounded-lg p-6">
       <h3 class="text-lg font-medium text-gray-900 mb-4">AuthnRequest Parameters</h3>
+      <p class="text-sm text-gray-600 mb-6">These parameters control how the SAML authentication request is sent to your Identity Provider.</p>
       
-      <div class="space-y-4">
-        <div class="flex items-center">
-          <input type="checkbox"
-            name="is_passive"
-            value="true"
-            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-            {% if login_form.is_passive %}checked{% endif %}
-          />
-          <label class="ml-2 block text-sm text-gray-900">IsPassive</label>
+      <div class="space-y-6">
+        <div class="border border-gray-200 rounded-md p-4">
+          <div class="flex items-start">
+            <input type="checkbox"
+              id="is_passive"
+              name="is_passive"
+              value="true"
+              class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-0.5"
+              {% if login_form.is_passive %}checked{% endif %}
+            />
+            <div class="ml-3">
+              <label for="is_passive" class="block text-sm font-medium text-gray-900 cursor-pointer">IsPassive</label>
+              <p class="text-sm text-gray-600 mt-1">When checked, the IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks.</p>
+            </div>
+          </div>
         </div>
         
-        <div class="flex items-center">
-          <input type="checkbox"
-            name="force_authn"
-            value="true"
-            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-            {% if login_form.force_authn %}checked{% endif %}
-          />
-          <label class="ml-2 block text-sm text-gray-900">ForceAuthn</label>
+        <div class="border border-gray-200 rounded-md p-4">
+          <div class="flex items-start">
+            <input type="checkbox"
+              id="force_authn"
+              name="force_authn"
+              value="true"
+              class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-0.5"
+              {% if login_form.force_authn %}checked{% endif %}
+            />
+            <div class="ml-3">
+              <label for="force_authn" class="block text-sm font-medium text-gray-900 cursor-pointer">ForceAuthn</label>
+              <p class="text-sm text-gray-600 mt-1">When checked, the IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication.</p>
+            </div>
+          </div>
         </div>
         
-        <div>
-          <label for="subject_nameid" class="block text-sm font-medium text-gray-700">Subject NameID</label>
+        <div class="border border-gray-200 rounded-md p-4">
+          <label for="subject_nameid" class="block text-sm font-medium text-gray-900 mb-2">Subject NameID</label>
           <input
             type="text"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
             name="subject_nameid"
             value="{{ login_form.subject_nameid }}"
-            />
+            placeholder="e.g., user@example.com (optional, for specific user testing)" />
+          <p class="text-sm text-gray-600 mt-2">Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection.</p>
         </div>
       </div>
     </div>

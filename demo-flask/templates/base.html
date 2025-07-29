@@ -26,11 +26,69 @@
     </script>
   </head>
   <body class="bg-gray-50 min-h-screen">
-    <div class="container mx-auto px-4 py-8 max-w-4xl">
-      <div class="bg-white rounded-lg shadow-lg p-8">
-        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">A Python SAML Toolkit Demo</h1>
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Left Sidebar - SAML Explanation -->
+        <div class="lg:w-1/3">
+          <div class="bg-white rounded-lg shadow-lg p-6 sticky top-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-6">SAML SP Testing Tool</h1>
+            
+            <div class="space-y-6">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">What is this tool?</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  This is a SAML Service Provider (SP) testing tool that allows you to configure and test SAML authentication flows with any Identity Provider (IdP).
+                </p>
+              </div>
 
-        {% block content %}{% endblock %}
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">How to use it:</h3>
+                <ol class="text-gray-600 text-sm space-y-2 list-decimal list-inside">
+                  <li><strong>Configure your IdP settings</strong> - Enter your Identity Provider's details in the form</li>
+                  <li><strong>Set up your SP</strong> - Configure your Service Provider settings</li>
+                  <li><strong>Test authentication</strong> - Click "Login" to initiate SAML authentication</li>
+                  <li><strong>View results</strong> - Check the attributes and user information returned</li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Features:</h3>
+                <ul class="text-gray-600 text-sm space-y-2 list-disc list-inside">
+                  <li>Test SAML 2.0 authentication flows</li>
+                  <li>View user attributes and claims</li>
+                  <li>Configure various SAML bindings</li>
+                  <li>Test different NameID formats</li>
+                  <li>Validate SAML responses</li>
+                </ul>
+              </div>
+
+              <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                <h4 class="text-sm font-semibold text-blue-900 mb-2">💡 Pro Tips:</h4>
+                <ul class="text-blue-800 text-xs space-y-1 list-disc list-inside">
+                  <li>Use this tool to test your IdP configuration before integrating with your application</li>
+                  <li>Check the metadata endpoint at <code class="bg-blue-100 px-1 rounded">/metadata/</code> for SP metadata</li>
+                  <li>Review the returned attributes to understand your IdP's user data structure</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+                <h4 class="text-sm font-semibold text-yellow-900 mb-2">⚠️ Important Notes:</h4>
+                <ul class="text-yellow-800 text-xs space-y-1 list-disc list-inside">
+                  <li>This is a testing tool - don't use in production</li>
+                  <li>Make sure your IdP is configured to trust this SP's entity ID</li>
+                  <li>The ACS URL is: <code class="bg-yellow-100 px-1 rounded">{{ request.host_url }}attrs/</code></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content Area -->
+        <div class="lg:w-2/3">
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
       </div>
     </div>
   </body>
