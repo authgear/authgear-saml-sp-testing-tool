@@ -1,16 +1,26 @@
 # Authgear Demo SAML SP
 
-Assume you have python3 installed globally on your machine, or
-you are a user of https://github.com/nix-community/nix-direnv
+A SAML Service Provider testing tool for configuring and testing SAML authentication flows with Authgear or any other Identity Provider.
 
-## Development
+## Quick Start
 
 ```sh
 make -C demo-flask setup
 make -C demo-flask start
 ```
 
-## Deploying to Pandawork
+Visit `http://localhost:5001` to access the tool.
+
+## Usage
+
+1. **Configure IdP Settings**: Enter your Identity Provider details (Entity ID, SSO URL, certificate)
+2. **Set SP Configuration**: Configure Service Provider settings (audience, bindings, NameID format)
+3. **Test Authentication**: Click "Login" to initiate SAML authentication flow
+4. **View Results**: Check returned user attributes and authentication status
+
+The tool supports various SAML bindings, NameID formats, and provides detailed error messages for troubleshooting.
+
+## Deploy
 
 ```sh
 make -C demo-flask push-image
