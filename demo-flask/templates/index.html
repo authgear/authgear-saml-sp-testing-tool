@@ -3,186 +3,266 @@
 {% block content %}
 
 {% if errors %}
-  <div class="alert alert-danger" role="alert">
-    <strong>Errors:</strong>
-    <ul class="list-unstyled">
-        {% for err in errors %}
-          <li>{{err}}</li>
-        {% endfor %}
-    </ul>
-    {% if error_reason %}
-        <span>{{error_reason}}</span>
-    {% endif %}
+  <div class="bg-red-50 border border-red-200 rounded-md p-4 mb-6" role="alert">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <h3 class="text-sm font-medium text-red-800">Errors:</h3>
+        <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+            {% for err in errors %}
+              <li>{{err}}</li>
+            {% endfor %}
+        </ul>
+        {% if error_reason %}
+            <p class="mt-2 text-sm text-red-700">{{error_reason}}</p>
+        {% endif %}
+      </div>
+    </div>
   </div>
 {% endif %}
 
 {% if not_auth_warn %}
-  <div class="alert alert-danger" role="alert">Not authenticated</div>
+  <div class="bg-red-50 border border-red-200 rounded-md p-4 mb-6" role="alert">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm text-red-700">Not authenticated</p>
+      </div>
+    </div>
+  </div>
 {% endif %}
 
 {% if success_slo %}
-  <div class="alert alert-success" role="alert">Successfully logged out</div>
+  <div class="bg-green-50 border border-green-200 rounded-md p-4 mb-6" role="alert">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm text-green-700">Successfully logged out</p>
+      </div>
+    </div>
+  </div>
 {% endif %}
 
 {% if paint_logout %}
   {% if attributes %}
-    <table class="table table-striped">
-      <thead>
-        <th>Name</th><th>Values</th>
-      </thead>
-      <tbody>
-        {% for attr in attributes %}
-          <tr><td>{{ attr.0 }}</td>
-          <td><ul class="list-unstyled">
-            {% for val in attr.1 %}
-              <li>{{ val }}</li>
+    <div class="bg-white shadow overflow-hidden sm:rounded-md mb-6">
+      <div class="px-4 py-5 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">User Attributes</h3>
+      </div>
+      <div class="border-t border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Values</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {% for attr in attributes %}
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ attr.0 }}</td>
+                <td class="px-6 py-4 text-sm text-gray-500">
+                  <ul class="list-disc list-inside">
+                    {% for val in attr.1 %}
+                      <li>{{ val }}</li>
+                    {% endfor %}
+                  </ul>
+                </td>
+              </tr>
             {% endfor %}
-          </ul></td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
   {% else %}
-    <div class="alert alert-danger" role="alert">You don't have any attributes</div>
+    <div class="bg-red-50 border border-red-200 rounded-md p-4 mb-6" role="alert">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-red-700">You don't have any attributes</p>
+        </div>
+      </div>
+    </div>
   {% endif %}
-  <a href="?slo" class="btn btn-danger">Logout</a>
+  <a href="?slo" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Logout</a>
 {% else %}
-  <form action="/?sso2" method="POST" id="loginform">
-    <h3>Settings</h3>
-    <div class="form-group">
-      <label for="nameidformat">NameID Format</label>
-      <select name="nameid_format" class="form-control" id="nameidformat">
-        {% for option in login_form.nameid_format_options() %}
-        <option value="{{ option }}"
-          {% if login_form.nameid_format == option %}
-          selected
-          {% endif %}
-        >
-          {{ option }}
-        </option>
-        {% endfor %}
-      </select>
+  <form action="/?sso2" method="POST" id="loginform" class="space-y-6">
+    <div class="bg-gray-50 rounded-lg p-6">
+      <h3 class="text-lg font-medium text-gray-900 mb-4">Settings</h3>
+      
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div>
+          <label for="nameidformat" class="block text-sm font-medium text-gray-700">NameID Format</label>
+          <select name="nameid_format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="nameidformat">
+            {% for option in login_form.nameid_format_options() %}
+            <option value="{{ option }}"
+              {% if login_form.nameid_format == option %}
+              selected
+              {% endif %}
+            >
+              {{ option }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div>
+          <label for="sp_audience" class="block text-sm font-medium text-gray-700">Expected Assertion Audience</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="sp_audience"
+            value="{{ login_form.sp_audience}}"
+            placeholder="{{ login_form.default_sp_audience(request) }}" />
+        </div>
+        
+        <div>
+          <label for="readonly_recipient" class="block text-sm font-medium text-gray-700">Expected Assertion Recipient</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="readonly_recipient"
+            value="{{ login_form.sp_recipient(request) }}"
+            readonly />
+        </div>
+        
+        <div>
+          <label for="readonly_destination" class="block text-sm font-medium text-gray-700">Expected Response Destination</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="readonly_destination"
+            value="{{ login_form.sp_destination(request) }}"
+            readonly />
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="idp_issuer" class="block text-sm font-medium text-gray-700">IdP Entity ID (Response Issuer)</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_issuer"
+            value="{{ login_form.idp_issuer }}"
+            required />
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="idp_sso_url" class="block text-sm font-medium text-gray-700">IdP SSO URL</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_sso_url"
+            value="{{ login_form.idp_sso_url }}"
+            required />
+        </div>
+        
+        <div>
+          <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
+          <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
+            {% for option in login_form.idp_sso_binding_options() %}
+            <option value="{{ option }}"
+              {% if login_form.idp_sso_binding == option %}
+              selected
+              {% endif %}
+            >
+              {{ option }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div>
+          <label for="idp_slo_url" class="block text-sm font-medium text-gray-700">IdP Single Logout URL</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_slo_url"
+            value="{{ login_form.idp_slo_url }}"
+            />
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
+          <textarea
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="idp_cert"
+            rows="4">{{ login_form.idp_cert }}</textarea>
+        </div>
+        
+        <div>
+          <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
+          <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
+            {% for option in login_form.acs_binding_options() %}
+            <option value="{{ option }}"
+              {% if login_form.acs_binding == option %}
+              selected
+              {% endif %}
+            >
+              {{ option }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="sp_audience">Expected Assertion Audience</label>
-      <input
-        type="text"
-        class="form-control"
-        name="sp_audience"
-        value="{{ login_form.sp_audience}}"
-        placeholder="{{ login_form.default_sp_audience(request) }}" />
+    
+    <div class="bg-gray-50 rounded-lg p-6">
+      <h3 class="text-lg font-medium text-gray-900 mb-4">AuthnRequest Parameters</h3>
+      
+      <div class="space-y-4">
+        <div class="flex items-center">
+          <input type="checkbox"
+            name="is_passive"
+            value="true"
+            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+            {% if login_form.is_passive %}checked{% endif %}
+          />
+          <label class="ml-2 block text-sm text-gray-900">IsPassive</label>
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox"
+            name="force_authn"
+            value="true"
+            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+            {% if login_form.force_authn %}checked{% endif %}
+          />
+          <label class="ml-2 block text-sm text-gray-900">ForceAuthn</label>
+        </div>
+        
+        <div>
+          <label for="subject_nameid" class="block text-sm font-medium text-gray-700">Subject NameID</label>
+          <input
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+            name="subject_nameid"
+            value="{{ login_form.subject_nameid }}"
+            />
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="sp_audience">Expected Assertion Recipient</label>
-      <input
-        type="text"
-        class="form-control"
-        name="readonly_recipient"
-        value="{{ login_form.sp_recipient(request) }}"
-        readonly />
+    
+    <div class="flex justify-center">
+      <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+        Login
+      </button>
     </div>
-    <div class="form-group">
-      <label for="sp_audience">Expected Response Destination</label>
-      <input
-        type="text"
-        class="form-control"
-        name="readonly_destination"
-        value="{{ login_form.sp_destination(request) }}"
-        readonly />
-    </div>
-    <div class="form-group">
-      <label for="sp_audience">IdP Entity ID (Response Issuer)</label>
-      <input
-        type="text"
-        class="form-control"
-        name="idp_issuer"
-        value="{{ login_form.idp_issuer }}"
-        required />
-    </div>
-    <div class="form-group">
-      <label for="idp_sso_url">IdP SSO URL</label>
-      <input
-        type="text"
-        class="form-control"
-        name="idp_sso_url"
-        value="{{ login_form.idp_sso_url }}"
-        required />
-    </div>
-    <div class="form-group">
-      <label for="idp_sso_binding">IdP SSO Binding</label>
-      <select name="idp_sso_binding" class="form-control" id="idp_sso_binding">
-        {% for option in login_form.idp_sso_binding_options() %}
-        <option value="{{ option }}"
-          {% if login_form.idp_sso_binding == option %}
-          selected
-          {% endif %}
-        >
-          {{ option }}
-        </option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="idp_slo_url">IdP Single Logout URL</label>
-      <input
-        type="text"
-        class="form-control"
-        name="idp_slo_url"
-        value="{{ login_form.idp_slo_url }}"
-        />
-    </div>
-    <div class="form-group">
-      <label for="idp_cert">IdP Cert (In PEM format)</label>
-      <textarea
-        type="text"
-        class="form-control"
-        name="idp_cert"
-        value="{{ login_form.idp_cert }}">{{ login_form.idp_cert }}</textarea>
-    </div>
-    <div class="form-group">
-      <label for="acs_binding">ACS Binding</label>
-      <select name="acs_binding" class="form-control" id="acs_binding">
-        {% for option in login_form.acs_binding_options() %}
-        <option value="{{ option }}"
-          {% if login_form.acs_binding == option %}
-          selected
-          {% endif %}
-        >
-          {{ option }}
-        </option>
-        {% endfor %}
-      </select>
-    </div>
-    <h3>AuthnRequest Parameters</h3>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"
-          name="is_passive"
-          value="true"
-          {% if login_form.is_passive %}checked{% endif %}
-        />
-        IsPassive
-      </label>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"
-          name="force_authn"
-          value="true"
-          {% if login_form.force_authn %}checked{% endif %}
-        />
-        ForceAuthn
-      </label>
-    </div>
-    <div class="form-group">
-      <label for="subject_nameid">Subject NameID</label>
-      <input
-        type="text"
-        class="form-control"
-        name="subject_nameid"
-        value="{{ login_form.subject_nameid }}"
-        />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
   </form>
 {% endif %}
 
