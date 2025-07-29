@@ -140,7 +140,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
-            {{ tooltip("X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.", "max-w-xs") }}
+            {{ tooltip("X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.") }}
           </div>
           <textarea
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
@@ -153,7 +153,7 @@
         <div>
           <div class="flex items-center">
             <label for="sp_audience" class="block text-sm font-medium text-gray-700">Expected Assertion Audience</label>
-            {{ tooltip("The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.", "max-w-xs") }}
+            {{ tooltip("The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.") }}
           </div>
           <input
             type="text"
@@ -166,7 +166,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="nameidformat" class="block text-sm font-medium text-gray-700">NameID Format</label>
-            {{ tooltip("The format of the user identifier in SAML responses. Choose based on your IdP's configuration.", "max-w-xs") }}
+            {{ tooltip("The format of the user identifier in SAML responses. Choose based on your IdP's configuration.") }}
           </div>
           <select name="nameid_format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="nameidformat">
             {% for option in login_form.nameid_format_options() %}
@@ -185,7 +185,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
-            {{ tooltip("The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.", "max-w-xs") }}
+            {{ tooltip("The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.") }}
           </div>
           <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
             {% for option in login_form.idp_sso_binding_options() %}
@@ -203,7 +203,7 @@
         <div>
           <div class="flex items-center">
             <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
-            {{ tooltip("The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.", "max-w-xs") }}
+            {{ tooltip("The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.") }}
           </div>
           <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
             {% for option in login_form.acs_binding_options() %}
