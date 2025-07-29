@@ -5,11 +5,14 @@ A SAML Service Provider testing tool for configuring and testing SAML authentica
 ## Quick Start
 
 ```sh
-make -C demo-flask setup
-make -C demo-flask start
+cd demo-flask
+make setup
+make start
 ```
 
 Visit `http://localhost:5001` to access the tool.
+
+**Requirements**: Python 3.11
 
 ## Usage
 
