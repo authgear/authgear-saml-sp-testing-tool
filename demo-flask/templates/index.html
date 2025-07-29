@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "components/tooltip.html" import tooltip %}
 
 {% block content %}
 
@@ -111,15 +112,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_issuer" class="block text-sm font-medium text-gray-700">IdP Entity ID (Response Issuer)</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.") }}
           </div>
           <input
             type="text"
@@ -133,15 +126,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_sso_url" class="block text-sm font-medium text-gray-700">IdP SSO URL</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10">
-                The URL where users will be redirected for authentication. This is your IdP's login endpoint.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("The URL where users will be redirected for authentication. This is your IdP's login endpoint.") }}
           </div>
           <input
             type="text"
@@ -155,15 +140,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 max-w-xs">
-                X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.", "max-w-xs") }}
           </div>
           <textarea
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
@@ -176,15 +153,7 @@
         <div>
           <div class="flex items-center">
             <label for="sp_audience" class="block text-sm font-medium text-gray-700">Expected Assertion Audience</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 max-w-xs">
-                The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.", "max-w-xs") }}
           </div>
           <input
             type="text"
@@ -197,15 +166,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="nameidformat" class="block text-sm font-medium text-gray-700">NameID Format</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 max-w-xs">
-                The format of the user identifier in SAML responses. Choose based on your IdP's configuration.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("The format of the user identifier in SAML responses. Choose based on your IdP's configuration.", "max-w-xs") }}
           </div>
           <select name="nameid_format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="nameidformat">
             {% for option in login_form.nameid_format_options() %}
@@ -224,15 +185,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 max-w-xs">
-                The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.", "max-w-xs") }}
           </div>
           <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
             {% for option in login_form.idp_sso_binding_options() %}
@@ -250,15 +203,7 @@
         <div>
           <div class="flex items-center">
             <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
-            <div class="ml-2 relative group">
-              <svg class="w-4 h-4 text-gray-400 cursor-help" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-              </svg>
-              <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-10 max-w-xs">
-                The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.
-                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-              </div>
-            </div>
+            {{ tooltip("The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.", "max-w-xs") }}
           </div>
           <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
             {% for option in login_form.acs_binding_options() %}
