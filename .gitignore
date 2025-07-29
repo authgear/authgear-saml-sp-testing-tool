@@ -166,3 +166,59 @@ cython_debug/
 
 # MacOS
 .DS_Store
+
+
+# Nix
+result
+result-*
+.direnv/
+
+# Helm
+*.tgz
+charts/*.tgz
+
+# Kubernetes
+*.kubeconfig
+kubeconfig
+
+# SAML/XML related
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+metadata.xml
+*.xml.bak
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+.atom/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Local configuration files
+config.local.py
+.env.local
+.env.development
+.env.production
