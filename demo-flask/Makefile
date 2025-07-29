@@ -3,6 +3,8 @@ DOCKER_REGISTRY ?= quay.io/theauthgear
 APP_IMAGE_NAME ?= authgear-demo-saml-sp
 APP_IMAGE ?= $(DOCKER_REGISTRY)/$(APP_IMAGE_NAME):$(GIT_SHA)
 
+.PYTHON_VERSION := 3.11
+
 .PHONY: clean
 clean:
 	rm -rf ./venv
@@ -10,7 +12,7 @@ clean:
 setup: venv
 
 venv:
-	$(shell command -v python3) -m venv venv
+	python$(.PYTHON_VERSION) -m venv venv
 	./venv/bin/pip install -r ./requirements.txt
 
 .PHONY: start
