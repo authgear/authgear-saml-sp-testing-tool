@@ -5,7 +5,7 @@ A SAML Service Provider testing tool for configuring and testing SAML authentica
 ## Quick Start
 
 ```sh
-cd demo-flask
+cd app
 make setup
 make start
 ```
@@ -26,6 +26,17 @@ The tool supports various SAML bindings, NameID formats, and provides detailed e
 ## Deploy
 
 ```sh
-make -C demo-flask push-image
+make -C app push-image
 make -C deploy deploy
 ```
+
+## Dependencies
+
+- [Flask](https://flask.palletsprojects.com/) - Web framework
+- [python3-saml](https://github.com/SAML-Toolkits/python3-saml) - SAML toolkit
+- [python-xmlsec](https://github.com/xmlsec/python-xmlsec) - XML signature verification
+- [lxml](https://lxml.de/) - XML processing
+
+## License
+
+This project is licensed under the MIT License.
