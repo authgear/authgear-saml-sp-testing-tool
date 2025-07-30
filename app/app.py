@@ -96,6 +96,12 @@ def index():
             ),
         )
     elif "slo" in request.args:
+        # Check if IdP supports Single Logout (Logout URL is provided)
+        if not login_form.idp_slo_url:
+            # IdP doesn't support Single Logout, just clear local session
+            session.clear()
+            return redirect(request.url + "?logout_success=1")
+        
         name_id = session_index = nameid_format = name_id_nq = name_id_spnq = None
         if "samlNameId" in session:
             name_id = session["samlNameId"]
@@ -107,15 +113,28 @@ def index():
             name_id_nq = session["samlNameIdNameQualifier"]
         if "samlNameIdSPNameQualifier" in session:
             name_id_spnq = session["samlNameIdSPNameQualifier"]
-        return redirect(
-            auth.logout(
-                name_id=name_id,
-                session_index=session_index,
-                nq=name_id_nq,
-                name_id_format=nameid_format,
-                spnq=name_id_spnq,
+        
+        if auth is None:
+            # Auth object is not available, just clear session
+            session.clear()
+            return redirect(request.url)
+        
+        try:
+            return redirect(
+                auth.logout(
+                    name_id=name_id,
+                    session_index=session_index,
+                    nq=name_id_nq,
+                    name_id_format=nameid_format,
+                    spnq=name_id_spnq,
+                )
             )
-        )
+        except OneLogin_Saml2_Error as e:
+            # Handle logout errors gracefully
+            errors.append(f"Logout failed: {str(e)}")
+            # Clear session anyway
+            session.clear()
+            return redirect(request.url)
     elif "acs" in request.args:
         request_id = None
         if "AuthNRequestID" in session:
@@ -174,6 +193,10 @@ def index():
         if len(session["samlUserdata"]) > 0:
             attributes = session["samlUserdata"].items()
 
+    # Check for logout success parameter
+    if request.args.get('logout_success'):
+        success_slo = True
+    
     login_form = login_form.update_from_query(request)
 
     return render_template(

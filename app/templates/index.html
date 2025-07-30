@@ -54,7 +54,7 @@
         </svg>
       </div>
       <div class="ml-3">
-        <p class="text-sm text-green-700">Successfully logged out</p>
+        <p class="text-sm text-green-700">Successfully logged out{% if not login_form.idp_slo_url %} (local session cleared){% endif %}</p>
       </div>
     </div>
   </div>
@@ -145,7 +145,9 @@
           name="idp_cert",
           label="IdP Cert (In PEM format)",
           value=login_form.idp_cert,
-          placeholder="-----BEGIN CERTIFICATE-----&#10;Your IdP's X.509 certificate in PEM format&#10;-----END CERTIFICATE-----",
+          placeholder="-----BEGIN CERTIFICATE-----
+Your IdP's X.509 certificate in PEM format
+-----END CERTIFICATE-----",
           rows=4,
           tooltip_text="X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.",
           grid_span="md:col-span-2"
