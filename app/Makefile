@@ -17,7 +17,7 @@ venv:
 
 .PHONY: start
 start:
-	FLASK_APP=app ./venv/bin/flask run --host=0.0.0.0 --port=5001
+	FLASK_APP=app ./venv/bin/flask run --host=0.0.0.0 --port=5001 --debug
 
 docker-run: image
 	docker run --rm -p 5001:5001 ${APP_IMAGE}

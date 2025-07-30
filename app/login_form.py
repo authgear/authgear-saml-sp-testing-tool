@@ -76,6 +76,13 @@ class LoginForm:
         return cls.acs_url(request)
 
     @classmethod
+    def sls_url(cls, request: Request) -> str:
+        parsed_uri = parse.urlparse(request.url)
+        return "{scheme}://{uri.netloc}/?sls".format(
+            scheme=get_scheme(), uri=parsed_uri
+        )
+
+    @classmethod
     def default_sp_audience(cls, request: Request) -> str:
         parsed_uri = parse.urlparse(request.url)
         return "{scheme}://{uri.netloc}".format(scheme=get_scheme(), uri=parsed_uri)
@@ -169,7 +176,7 @@ class LoginForm:
                     "binding": self.acs_binding,
                 },
                 "singleLogoutService": {
-                    "url": "http://localhost:5001/?sls",
+                    "url": self.sls_url(request),
                     "binding": "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
                 },
                 "NameIDFormat": self.nameid_format,

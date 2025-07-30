@@ -99,5 +99,23 @@
         </div>
       </div>
     </div>
+    
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+          const button = event.target.closest('button');
+          const icon = button.querySelector('svg');
+          
+          // Show "Copied" feedback
+          icon.classList.add('text-green-600');
+          
+          setTimeout(function() {
+            icon.classList.remove('text-green-600');
+          }, 1000);
+        }).catch(function(err) {
+          console.error('Could not copy text: ', err);
+        });
+      }
+    </script>
   </body>
 </html>
