@@ -116,6 +116,39 @@
           console.error('Could not copy text: ', err);
         });
       }
+
+      function copyToClipboardWithFeedback(text, button) {
+        navigator.clipboard.writeText(text).then(function() {
+          const copyIcon = button.querySelector('.copy-icon');
+          const checkIcon = button.querySelector('.check-icon');
+          
+          // Hide copy icon and show check icon
+          copyIcon.classList.add('hidden');
+          checkIcon.classList.remove('hidden');
+          
+          // Add success animation
+          button.classList.add('scale-110');
+          
+          setTimeout(function() {
+            // Show copy icon and hide check icon
+            copyIcon.classList.remove('hidden');
+            checkIcon.classList.add('hidden');
+            
+            // Remove animation
+            button.classList.remove('scale-110');
+          }, 1500);
+        }).catch(function(err) {
+          console.error('Could not copy text: ', err);
+          
+          // Show error feedback
+          const copyIcon = button.querySelector('.copy-icon');
+          copyIcon.classList.add('text-red-600');
+          
+          setTimeout(function() {
+            copyIcon.classList.remove('text-red-600');
+          }, 1000);
+        });
+      }
     </script>
   </body>
 </html>
