@@ -98,8 +98,11 @@ def index():
     elif "slo" in request.args:
         # Check if IdP supports Single Logout (Logout URL is provided)
         if not login_form.idp_slo_url:
-            # IdP doesn't support Single Logout, just clear local session
+            # IdP doesn't support Single Logout, just clear authentication session data
+            # Preserve form data
+            form_data = session.get(LoginForm.session_key(), {})
             session.clear()
+            session[LoginForm.session_key()] = form_data
             return redirect(request.url + "?logout_success=1")
         
         name_id = session_index = nameid_format = name_id_nq = name_id_spnq = None
@@ -115,8 +118,11 @@ def index():
             name_id_spnq = session["samlNameIdSPNameQualifier"]
         
         if auth is None:
-            # Auth object is not available, just clear session
+            # Auth object is not available, just clear authentication session data
+            # Preserve form data
+            form_data = session.get(LoginForm.session_key(), {})
             session.clear()
+            session[LoginForm.session_key()] = form_data
             return redirect(request.url)
         
         try:
@@ -132,8 +138,10 @@ def index():
         except OneLogin_Saml2_Error as e:
             # Handle logout errors gracefully
             errors.append(f"Logout failed: {str(e)}")
-            # Clear session anyway
+            # Clear authentication session data but preserve form data
+            form_data = session.get(LoginForm.session_key(), {})
             session.clear()
+            session[LoginForm.session_key()] = form_data
             return redirect(request.url)
     elif "acs" in request.args:
         request_id = None
