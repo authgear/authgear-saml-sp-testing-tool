@@ -177,12 +177,17 @@ def index():
             request_id = session["LogoutRequestID"]
 
         def delete_session():
-            del session["samlUserdata"]
-            del session["samlNameId"]
-            del session["samlNameIdFormat"]
-            del session["samlNameIdNameQualifier"]
-            del session["samlNameIdSPNameQualifier"]
-            del session["samlSessionIndex"]
+            # Safely delete session keys that might not exist
+            session_keys = [
+                "samlUserdata",
+                "samlNameId", 
+                "samlNameIdFormat",
+                "samlNameIdNameQualifier",
+                "samlNameIdSPNameQualifier",
+                "samlSessionIndex"
+            ]
+            for key in session_keys:
+                session.pop(key, None)
 
         url = auth.process_slo(request_id=request_id, delete_session_cb=delete_session)
         errors = auth.get_errors()
