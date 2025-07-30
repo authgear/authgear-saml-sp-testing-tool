@@ -101,8 +101,10 @@ class LoginForm:
 
     @classmethod
     def parse(cls, request: Request, form_data: dict) -> Self:
-        is_passive = _parse_strbool_from_dict(form_data, "is_passive")
-        force_authn = _parse_strbool_from_dict(form_data, "force_authn")
+        # Parse auth_behavior radio button
+        auth_behavior = form_data.get("auth_behavior", "default")
+        is_passive = auth_behavior == "passive"
+        force_authn = auth_behavior == "force"
 
         nameid_format = form_data.get("nameid_format", cls.default_nameid_format())
         sp_audience = form_data.get("sp_audience", "") or cls.default_sp_audience(
@@ -132,10 +134,13 @@ class LoginForm:
 
     def update_from_query(self, request: Request) -> Self:
         result = replace(self)
+        # Handle auth_behavior from query parameters (for backward compatibility)
         if request.args.get("is_passive"):
             result.is_passive = _parse_strbool_from_dict(request.args, "is_passive")
+            result.force_authn = False  # Ensure mutual exclusivity
         if request.args.get("force_authn"):
             result.force_authn = _parse_strbool_from_dict(request.args, "force_authn")
+            result.is_passive = False  # Ensure mutual exclusivity
         if request.args.get("nameid_format"):
             result.nameid_format = request.args.get(
                 "nameid_format", self.default_nameid_format()

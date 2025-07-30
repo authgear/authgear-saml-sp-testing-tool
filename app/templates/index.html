@@ -224,33 +224,48 @@ Your IdP's X.509 certificate in PEM format
       
       <div class="space-y-6">
         <div class="border border-gray-200 rounded-md p-4">
-          <div class="flex items-start">
-            <input type="checkbox"
-              id="is_passive"
-              name="is_passive"
-              value="true"
-              class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-0.5"
-              {% if login_form.is_passive %}checked{% endif %}
-            />
-            <div class="ml-3">
-              <label for="is_passive" class="block text-sm font-medium text-gray-900 cursor-pointer">IsPassive</label>
-              <p class="text-sm text-gray-600 mt-1">When checked, the IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks.</p>
+          <label class="block text-sm font-medium text-gray-900 mb-3">Authentication Behavior</label>
+          <div class="space-y-3">
+            <div class="flex items-start">
+              <input type="radio"
+                id="auth_default"
+                name="auth_behavior"
+                value="default"
+                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+                {% if not login_form.is_passive and not login_form.force_authn %}checked{% endif %}
+              />
+              <div class="ml-3">
+                <label for="auth_default" class="block text-sm font-medium text-gray-900 cursor-pointer">Default</label>
+                <p class="text-sm text-gray-600 mt-1">Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate.</p>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <div class="border border-gray-200 rounded-md p-4">
-          <div class="flex items-start">
-            <input type="checkbox"
-              id="force_authn"
-              name="force_authn"
-              value="true"
-              class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-0.5"
-              {% if login_form.force_authn %}checked{% endif %}
-            />
-            <div class="ml-3">
-              <label for="force_authn" class="block text-sm font-medium text-gray-900 cursor-pointer">ForceAuthn</label>
-              <p class="text-sm text-gray-600 mt-1">When checked, the IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication.</p>
+            
+            <div class="flex items-start">
+              <input type="radio"
+                id="auth_passive"
+                name="auth_behavior"
+                value="passive"
+                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+                {% if login_form.is_passive %}checked{% endif %}
+              />
+              <div class="ml-3">
+                <label for="auth_passive" class="block text-sm font-medium text-gray-900 cursor-pointer">IsPassive</label>
+                <p class="text-sm text-gray-600 mt-1">The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <input type="radio"
+                id="auth_force"
+                name="auth_behavior"
+                value="force"
+                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+                {% if login_form.force_authn %}checked{% endif %}
+              />
+              <div class="ml-3">
+                <label for="auth_force" class="block text-sm font-medium text-gray-900 cursor-pointer">ForceAuthn</label>
+                <p class="text-sm text-gray-600 mt-1">The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication.</p>
+              </div>
             </div>
           </div>
         </div>
