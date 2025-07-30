@@ -1,0 +1,33 @@
+{% from "components/tooltip.html" import tooltip %}
+
+{% macro readonly_field(name, label, value, tooltip_text="", tooltip_width="w-96", grid_span="") %}
+<div class="{{ grid_span }}">
+  {% if tooltip_text %}
+    <div class="flex items-center">
+      <label for="{{ name }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
+      {{ tooltip(tooltip_text, tooltip_width) }}
+    </div>
+  {% else %}
+    <label for="{{ name }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
+  {% endif %}
+  
+  <div class="relative">
+    <input
+      type="text"
+      class="mt-1 block w-full pr-10 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+      name="{{ name }}"
+      id="{{ name }}"
+      value="{{ value }}"
+      readonly />
+    <button
+      type="button"
+      class="absolute inset-y-0 right-0 pr-3 flex items-center"
+      onclick="copyToClipboard('{{ value }}')"
+      title="Copy to clipboard">
+      <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+{% endmacro %} 

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% from "components/tooltip.html" import tooltip %}
+{% from "components/text_input.html" import text_input %}
+{% from "components/textarea_input.html" import textarea_input %}
+{% from "components/select_input.html" import select_input %}
+{% from "components/readonly_field.html" import readonly_field %}
 
 {% block content %}
 
@@ -109,116 +113,70 @@
       <p class="text-sm text-gray-600 mb-6">These are the configuration values you need to obtain from your Identity Provider.</p>
       
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <!-- 1. IdP Entity ID (Response Issuer) -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="idp_issuer" class="block text-sm font-medium text-gray-700">Issuer (IdP Entity ID)</label>
-            {{ tooltip("Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.") }}
-          </div>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_issuer"
-            value="{{ login_form.idp_issuer }}"
-            placeholder="e.g., https://your-idp.com or urn:your-idp:entity"
-            required />
-        </div>
+        {{ text_input(
+          name="idp_issuer",
+          label="Issuer (IdP Entity ID)",
+          value=login_form.idp_issuer,
+          placeholder="e.g., https://your-idp.com or urn:your-idp:entity",
+          required=true,
+          tooltip_text="Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 2. IdP SSO URL -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="idp_sso_url" class="block text-sm font-medium text-gray-700">Login URL (IdP SSO URL)</label>
-            {{ tooltip("The URL where users will be redirected for authentication. This is your IdP's login endpoint.") }}
-          </div>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_sso_url"
-            value="{{ login_form.idp_sso_url }}"
-            placeholder="e.g., https://your-idp.com/saml/sso or /saml/login"
-            required />
-        </div>
+        {{ text_input(
+          name="idp_sso_url",
+          label="Login URL (IdP SSO URL)",
+          value=login_form.idp_sso_url,
+          placeholder="e.g., https://your-idp.com/saml/sso or /saml/login",
+          required=true,
+          tooltip_text="The URL where users will be redirected for authentication. This is your IdP's login endpoint.",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 3. IdP Single Logout URL -->
-        <div class="md:col-span-2">
-          <label for="idp_slo_url" class="block text-sm font-medium text-gray-700">Logout URL (IdP Single Logout URL)</label>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_slo_url"
-            value="{{ login_form.idp_slo_url }}"
-            placeholder="e.g., https://your-idp.com/saml/slo (optional)" />
-        </div>
+        {{ text_input(
+          name="idp_slo_url",
+          label="Logout URL (IdP Single Logout URL)",
+          value=login_form.idp_slo_url,
+          placeholder="e.g., https://your-idp.com/saml/slo (optional)",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 4. IdP Cert (In PEM format) -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="idp_cert" class="block text-sm font-medium text-gray-700">IdP Cert (In PEM format)</label>
-            {{ tooltip("X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.") }}
-          </div>
-          <textarea
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="idp_cert"
-            placeholder="-----BEGIN CERTIFICATE-----&#10;Your IdP's X.509 certificate in PEM format&#10;-----END CERTIFICATE-----"
-            rows="4">{{ login_form.idp_cert }}</textarea>
-        </div>
+        {{ textarea_input(
+          name="idp_cert",
+          label="IdP Cert (In PEM format)",
+          value=login_form.idp_cert,
+          placeholder="-----BEGIN CERTIFICATE-----&#10;Your IdP's X.509 certificate in PEM format&#10;-----END CERTIFICATE-----",
+          rows=4,
+          tooltip_text="X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 5. NameID Format -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="nameidformat" class="block text-sm font-medium text-gray-700">NameID Format</label>
-            {{ tooltip("The format of the user identifier in SAML responses. Choose based on your IdP's configuration.") }}
-          </div>
-          <select name="nameid_format" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="nameidformat">
-            {% for option in login_form.nameid_format_options() %}
-            <option value="{{ option }}"
-              {% if login_form.nameid_format == option %}
-              selected
-              {% endif %}
-            >
-              {{ option }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+        {{ select_input(
+          name="nameid_format",
+          label="NameID Format",
+          options=login_form.nameid_format_options(),
+          selected_value=login_form.nameid_format,
+          tooltip_text="The format of the user identifier in SAML responses. Choose based on your IdP's configuration.",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 6. IdP SSO Binding -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="idp_sso_binding" class="block text-sm font-medium text-gray-700">IdP SSO Binding</label>
-            {{ tooltip("The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.") }}
-          </div>
-          <select name="idp_sso_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="idp_sso_binding">
-            {% for option in login_form.idp_sso_binding_options() %}
-            <option value="{{ option }}"
-              {% if login_form.idp_sso_binding == option %}
-              selected
-              {% endif %}
-            >
-              {{ option }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+        {{ select_input(
+          name="idp_sso_binding",
+          label="IdP SSO Binding",
+          options=login_form.idp_sso_binding_options(),
+          selected_value=login_form.idp_sso_binding,
+          tooltip_text="The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.",
+          grid_span="md:col-span-2"
+        ) }}
         
-        <!-- 7. ACS Binding -->
-        <div class="md:col-span-2">
-          <div class="flex items-center">
-            <label for="acs_binding" class="block text-sm font-medium text-gray-700">ACS Binding</label>
-            {{ tooltip("The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.") }}
-          </div>
-          <select name="acs_binding" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="acs_binding">
-            {% for option in login_form.acs_binding_options() %}
-            <option value="{{ option }}"
-              {% if login_form.acs_binding == option %}
-              selected
-              {% endif %}
-            >
-              {{ option }}
-            </option>
-            {% endfor %}
-          </select>
-        </div>
+        {{ select_input(
+          name="acs_binding",
+          label="ACS Binding",
+          options=login_form.acs_binding_options(),
+          selected_value=login_form.acs_binding,
+          tooltip_text="The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.",
+          grid_span="md:col-span-2"
+        ) }}
         
 
       </div>
@@ -229,100 +187,32 @@
       <p class="text-sm text-gray-600 mb-6">These are the values you need to configure in your Identity Provider settings.</p>
       
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <!-- ACS URL -->
-        <div>
-          <div class="flex items-center">
-            <label for="readonly_recipient" class="block text-sm font-medium text-gray-700">ACS URL</label>
-            {{ tooltip("Assertion Consumer Service URL", "w-64") }}
-          </div>
-          <div class="relative">
-            <input
-              type="text"
-              class="mt-1 block w-full pr-10 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-              name="readonly_recipient"
-              value="{{ login_form.sp_recipient(request) }}"
-              readonly />
-            <button
-              type="button"
-              class="absolute inset-y-0 right-0 pr-3 flex items-center"
-              onclick="copyToClipboard('{{ login_form.sp_recipient(request) }}')"
-              title="Copy to clipboard">
-              <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+        {{ readonly_field(
+          name="readonly_recipient",
+          label="ACS URL",
+          value=login_form.sp_recipient(request),
+          tooltip_text="Assertion Consumer Service URL",
+          tooltip_width="w-64"
+        ) }}
         
-        <!-- Assertion Audience -->
-        <div>
-          <div class="flex items-center">
-            <label for="sp_audience" class="block text-sm font-medium text-gray-700">Assertion Audience</label>
-            {{ tooltip("The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.") }}
-          </div>
-          <div class="relative">
-            <input
-              type="text"
-              class="mt-1 block w-full pr-10 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-              name="sp_audience"
-              value="{{ login_form.sp_audience}}"
-              placeholder="e.g., http://localhost:5001 or your SP entity ID"
-              readonly />
-            <button
-              type="button"
-              class="absolute inset-y-0 right-0 pr-3 flex items-center"
-              onclick="copyToClipboard('{{ login_form.sp_audience}}')"
-              title="Copy to clipboard">
-              <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+        {{ readonly_field(
+          name="sp_audience",
+          label="Assertion Audience",
+          value=login_form.sp_audience,
+          tooltip_text="The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+        ) }}
         
-        <!-- Response Destination -->
-        <div>
-          <label for="readonly_destination" class="block text-sm font-medium text-gray-700">Response Destination</label>
-          <div class="relative">
-            <input
-              type="text"
-              class="mt-1 block w-full pr-10 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-              name="readonly_destination"
-              value="{{ login_form.sp_destination(request) }}"
-              readonly />
-            <button
-              type="button"
-              class="absolute inset-y-0 right-0 pr-3 flex items-center"
-              onclick="copyToClipboard('{{ login_form.sp_destination(request) }}')"
-              title="Copy to clipboard">
-              <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+        {{ readonly_field(
+          name="readonly_destination",
+          label="Response Destination",
+          value=login_form.sp_destination(request)
+        ) }}
         
-        <!-- Logout Callback URL -->
-        <div>
-          <label for="readonly_sls_url" class="block text-sm font-medium text-gray-700">Logout Callback URL</label>
-          <div class="relative">
-            <input
-              type="text"
-              class="mt-1 block w-full pr-10 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-              name="readonly_sls_url"
-              value="{{ login_form.sls_url(request) }}"
-              readonly />
-            <button
-              type="button"
-              class="absolute inset-y-0 right-0 pr-3 flex items-center"
-              onclick="copyToClipboard('{{ login_form.sls_url(request) }}')"
-              title="Copy to clipboard">
-              <svg class="h-4 w-4 text-gray-400 hover:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+        {{ readonly_field(
+          name="readonly_sls_url",
+          label="Logout Callback URL",
+          value=login_form.sls_url(request)
+        ) }}
       </div>
     </div>
     

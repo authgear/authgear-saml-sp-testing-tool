@@ -1,0 +1,26 @@
+{% from "components/tooltip.html" import tooltip %}
+
+{% macro select_input(name, label, options, selected_value, tooltip_text="", tooltip_width="w-96", grid_span="") %}
+<div class="{{ grid_span }}">
+  {% if tooltip_text %}
+    <div class="flex items-center">
+      <label for="{{ name }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
+      {{ tooltip(tooltip_text, tooltip_width) }}
+    </div>
+  {% else %}
+    <label for="{{ name }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
+  {% endif %}
+  
+  <select name="{{ name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm" id="{{ name }}">
+    {% for option in options %}
+    <option value="{{ option }}"
+      {% if selected_value == option %}
+      selected
+      {% endif %}
+    >
+      {{ option }}
+    </option>
+    {% endfor %}
+  </select>
+</div>
+{% endmacro %} 
