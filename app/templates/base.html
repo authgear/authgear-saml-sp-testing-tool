@@ -103,6 +103,27 @@
       </div>
     </div>
     
+    <style>
+      /* Custom radio button styling */
+      input[type="radio"]:checked + label .bg-white {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      input[type="radio"]:checked + label .bg-blue-100 {
+        background-color: #dbeafe;
+      }
+      
+      input[type="radio"]:checked + label .bg-green-100 {
+        background-color: #dcfce7;
+      }
+      
+      /* Hover effects */
+      label:hover .bg-white {
+        border-color: #93c5fd;
+      }
+    </style>
+    
     <script>
       function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(function() {
@@ -181,6 +202,14 @@
             if (metadata) {
               fillFormWithMetadata(metadata);
               showMetadataStatus('success', 'Metadata loaded successfully!');
+              
+              // Show configuration fields after successful upload
+              setTimeout(() => {
+                const configurationFields = document.getElementById('configuration_fields');
+                const setupMethodSelection = document.getElementById('setup_method_selection');
+                configurationFields.classList.remove('hidden');
+                setupMethodSelection.classList.add('hidden');
+              }, 1000);
             } else {
               showMetadataStatus('error', 'Could not parse SAML metadata');
             }
@@ -323,12 +352,14 @@
       }
 
       function showMetadataStatus(type, message) {
+        const statusDisplay = document.getElementById('upload_status_display');
         const statusDiv = document.getElementById('metadata_status');
         const successDiv = document.getElementById('metadata_success');
         const errorDiv = document.getElementById('metadata_error');
         const successText = document.getElementById('metadata_success_text');
         const errorText = document.getElementById('metadata_error_text');
         
+        statusDisplay.classList.remove('hidden');
         statusDiv.classList.remove('hidden');
         
         if (type === 'success') {
@@ -343,9 +374,159 @@
         
         // Hide status after 5 seconds
         setTimeout(() => {
-          statusDiv.classList.add('hidden');
+          statusDisplay.classList.add('hidden');
         }, 5000);
       }
+
+      function selectSetupMethod(method) {
+        const setupMethodSelection = document.getElementById('setup_method_selection');
+        const uploadMetadataSection = document.getElementById('upload_metadata_section');
+        const manualSetupSection = document.getElementById('manual_setup_section');
+        const configurationFields = document.getElementById('configuration_fields');
+        
+        // Hide the method selection
+        setupMethodSelection.classList.add('hidden');
+        
+        if (method === 'upload') {
+          // Show upload metadata section
+          uploadMetadataSection.classList.remove('hidden');
+          manualSetupSection.classList.add('hidden');
+        } else if (method === 'manual') {
+          // Show manual setup section and configuration fields
+          manualSetupSection.classList.remove('hidden');
+          uploadMetadataSection.classList.add('hidden');
+          configurationFields.classList.remove('hidden');
+        }
+      }
+
+      function showSetupMethodSelection() {
+        const setupMethodSelection = document.getElementById('setup_method_selection');
+        const uploadMetadataSection = document.getElementById('upload_metadata_section');
+        const manualSetupSection = document.getElementById('manual_setup_section');
+        const configurationFields = document.getElementById('configuration_fields');
+        
+        // Show the method selection
+        setupMethodSelection.classList.remove('hidden');
+        
+        // Hide all other sections
+        uploadMetadataSection.classList.add('hidden');
+        manualSetupSection.classList.add('hidden');
+        configurationFields.classList.add('hidden');
+      }
+
+      function clearParametersAndShowSelection() {
+        // Clear only IdP configuration fields (not SP parameters)
+        const idpFields = [
+          'idp_issuer',
+          'idp_sso_url', 
+          'idp_slo_url',
+          'idp_cert',
+          'nameid_format',
+          'idp_sso_binding',
+          'acs_binding'
+        ];
+        
+        idpFields.forEach(fieldName => {
+          const field = document.getElementById(fieldName);
+          if (field) {
+            if (field.tagName === 'SELECT') {
+              // Reset select elements to first option
+              if (field.options.length > 0) {
+                field.selectedIndex = 0;
+              }
+            } else {
+              // Clear text inputs and textareas
+              field.value = '';
+            }
+          }
+        });
+        
+        // Clear file input
+        const fileInput = document.getElementById('metadata_file');
+        if (fileInput) {
+          fileInput.value = '';
+        }
+        
+        // Hide upload status
+        const uploadStatusDisplay = document.getElementById('upload_status_display');
+        if (uploadStatusDisplay) {
+          uploadStatusDisplay.classList.add('hidden');
+        }
+        
+        // Store cleared state in session storage
+        sessionStorage.setItem('parametersCleared', 'true');
+        
+        // Show setup method selection
+        showSetupMethodSelection();
+      }
+
+      // Initialize drag and drop functionality when DOM is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if parameters were cleared and show setup method selection
+        if (sessionStorage.getItem('parametersCleared') === 'true') {
+          // Clear the flag
+          sessionStorage.removeItem('parametersCleared');
+          
+          // Clear the form fields
+          const idpFields = [
+            'idp_issuer',
+            'idp_sso_url', 
+            'idp_slo_url',
+            'idp_cert',
+            'nameid_format',
+            'idp_sso_binding',
+            'acs_binding'
+          ];
+          
+          idpFields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+              if (field.tagName === 'SELECT') {
+                if (field.options.length > 0) {
+                  field.selectedIndex = 0;
+                }
+              } else {
+                field.value = '';
+              }
+            }
+          });
+          
+          // Show setup method selection
+          showSetupMethodSelection();
+        }
+        
+        const dropZone = document.getElementById('drop_zone');
+        if (dropZone) {
+          dropZone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.add('border-blue-400', 'bg-blue-50');
+          });
+          
+          dropZone.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('border-blue-400', 'bg-blue-50');
+          });
+          
+          dropZone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropZone.classList.remove('border-blue-400', 'bg-blue-50');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+              const file = files[0];
+              if (file.name.endsWith('.xml')) {
+                document.getElementById('metadata_file').files = files;
+                handleMetadataUpload();
+              } else {
+                showMetadataStatus('error', 'Please select an XML file');
+              }
+            }
+          });
+        }
+      });
 
       function toggleManualSetup() {
         const content = document.getElementById('manual_setup_content');

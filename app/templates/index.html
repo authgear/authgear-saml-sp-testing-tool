@@ -115,29 +115,182 @@
       <h3 class="text-lg font-medium text-gray-900 mb-4">Configuration parameters from your IdP</h3>
       <p class="text-sm text-gray-600 mb-6">These are the configuration values you need to obtain from your Identity Provider.</p>
       
-      <!-- Quick Setup -->
-      {{ metadata_upload() }}
-      
-      <!-- Manual Setup -->
-      <div class="mt-6 pt-6 border-t border-gray-200">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h4 class="text-base font-medium text-gray-900">Manual Setup</h4>
-            <p class="text-sm text-gray-600 mt-1">Configure your IdP parameters manually if you prefer not to use the metadata upload.</p>
+      <!-- Setup Method Selection -->
+      <div id="setup_method_selection" class="mb-6">
+        <div class="space-y-4">
+          <!-- Upload Metadata Option -->
+          <div class="relative">
+            <input type="file" id="metadata_file" name="metadata_file" accept=".xml" class="hidden" onchange="handleMetadataUpload()">
+            <div class="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors duration-200 cursor-pointer" onclick="document.getElementById('metadata_file').click()">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-lg font-medium text-gray-900">Upload Metadata</h4>
+                  <p class="text-sm text-gray-600">Quick setup with your IdP's SAML metadata file</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <button
-            type="button"
-            onclick="toggleManualSetup()"
-            class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            <span id="manual_setup_button_text">Show</span>
-            <svg id="manual_setup_icon" class="ml-2 h-4 w-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </button>
+
+          <!-- Manual Setup Option -->
+          <div class="relative">
+            <div class="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-blue-300 transition-colors duration-200 cursor-pointer" onclick="selectSetupMethod('manual')">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <h4 class="text-lg font-medium text-gray-900">Manual Setup</h4>
+                  <p class="text-sm text-gray-600">Configure each parameter individually</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div id="manual_setup_content" class="hidden">
+      </div>
+
+      <!-- Upload Status Display -->
+      <div id="upload_status_display" class="mb-6 hidden">
+        <div id="metadata_status" class="text-sm">
+          <div id="metadata_success" class="hidden">
+            <div class="flex items-center p-3 bg-green-50 border border-green-200 rounded-lg">
+              <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span id="metadata_success_text" class="text-green-800 font-medium">Metadata loaded successfully!</span>
+            </div>
+          </div>
+          <div id="metadata_error" class="hidden">
+            <div class="flex items-center p-3 bg-red-50 border border-red-200 rounded-lg">
+              <svg class="h-5 w-5 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              <span id="metadata_error_text" class="text-red-800 font-medium">Error loading metadata</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Metadata Section -->
+      <div id="upload_metadata_section" class="hidden">
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-1">Upload SAML Metadata</h4>
+              <p class="text-sm text-gray-600">Upload your IdP's SAML metadata file to automatically fill all configuration fields.</p>
+            </div>
+            <button
+              type="button"
+              onclick="showSetupMethodSelection()"
+              class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              Back to Options
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <button
+                type="button"
+                onclick="document.getElementById('metadata_file').click()"
+                class="inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-sm transition-all duration-200 transform hover:scale-105 whitespace-nowrap"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+                Choose XML File
+              </button>
+            </div>
+          </div>
+          
+          <!-- Drop Zone -->
+          <div class="mt-4 p-6 border-2 border-dashed border-gray-300 rounded-lg text-center hover:border-blue-400 transition-colors duration-200" id="drop_zone">
+            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+              <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p class="mt-2 text-sm text-gray-600">
+              <span class="font-medium text-blue-600 hover:text-blue-500 cursor-pointer" onclick="document.getElementById('metadata_file').click()">
+                Click to upload
+              </span>
+              or drag and drop
+            </p>
+            <p class="text-xs text-gray-500">XML files only</p>
+          </div>
+          
+          <div id="metadata_status" class="mt-4 text-sm hidden">
+            <div id="metadata_success" class="hidden">
+              <div class="flex items-center p-3 bg-green-50 border border-green-200 rounded-lg">
+                <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span id="metadata_success_text" class="text-green-800 font-medium">Metadata loaded successfully!</span>
+              </div>
+            </div>
+            <div id="metadata_error" class="hidden">
+              <div class="flex items-center p-3 bg-red-50 border border-red-200 rounded-lg">
+                <svg class="h-5 w-5 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                <span id="metadata_error_text" class="text-red-800 font-medium">Error loading metadata</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manual Setup Section -->
+      <div id="manual_setup_section" class="hidden">
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-xl p-6 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-1">Manual Configuration</h4>
+              <p class="text-sm text-gray-600">Enter your IdP configuration parameters manually.</p>
+            </div>
+            <button
+              type="button"
+              onclick="showSetupMethodSelection()"
+              class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              Back to Options
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Configuration Fields (shown after upload or manual selection) -->
+      <div id="configuration_fields" class="hidden">
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="text-base font-medium text-gray-900">IdP Configuration</h4>
+              <p class="text-sm text-gray-600 mt-1">Review and modify the configuration parameters below.</p>
+            </div>
+            <div class="flex space-x-2">
+              <button
+                type="button"
+                onclick="clearParametersAndShowSelection()"
+                class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+                Clear parameters
+              </button>
+            </div>
+          </div>
+          
           <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
             {{ text_input(
               name="idp_issuer",
