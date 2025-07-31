@@ -152,6 +152,217 @@
           }, 1000);
         });
       }
+
+      function handleMetadataUpload() {
+        const fileInput = document.getElementById('metadata_file');
+        const file = fileInput.files[0];
+        if (!file) {
+          return;
+        }
+
+        if (!file.name.endsWith('.xml')) {
+          showMetadataStatus('error', 'Please select an XML file');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            const xmlContent = e.target.result;
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+            
+            if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
+              showMetadataStatus('error', 'Invalid XML file');
+              return;
+            }
+
+            const metadata = parseSamlMetadata(xmlDoc);
+            if (metadata) {
+              fillFormWithMetadata(metadata);
+              showMetadataStatus('success', 'Metadata loaded successfully!');
+            } else {
+              showMetadataStatus('error', 'Could not parse SAML metadata');
+            }
+          } catch (error) {
+            console.error('Error parsing metadata:', error);
+            showMetadataStatus('error', 'Error parsing metadata file');
+          }
+        };
+        
+        reader.onerror = function() {
+          showMetadataStatus('error', 'Error reading file');
+        };
+        
+        reader.readAsText(file);
+      }
+
+      function parseSamlMetadata(xmlDoc) {
+        const nsResolver = xmlDoc.createNSResolver(xmlDoc.documentElement);
+        
+        // Get Entity ID
+        const entityId = xmlDoc.documentElement.getAttribute('entityID');
+        
+        // Get SSO URLs
+        const ssoServices = xmlDoc.getElementsByTagNameNS('urn:oasis:names:tc:SAML:2.0:metadata', 'SingleSignOnService');
+        let ssoUrl = '';
+        let ssoBinding = '';
+        
+        for (let service of ssoServices) {
+          const binding = service.getAttribute('Binding');
+          const location = service.getAttribute('Location');
+          
+          if (binding.includes('HTTP-Redirect')) {
+            ssoUrl = location;
+            ssoBinding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect';
+            break;
+          } else if (binding.includes('HTTP-POST')) {
+            ssoUrl = location;
+            ssoBinding = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST';
+          }
+        }
+        
+        // Get SLO URLs
+        const sloServices = xmlDoc.getElementsByTagNameNS('urn:oasis:names:tc:SAML:2.0:metadata', 'SingleLogoutService');
+        let sloUrl = '';
+        
+        for (let service of sloServices) {
+          const binding = service.getAttribute('Binding');
+          const location = service.getAttribute('Location');
+          
+          if (binding.includes('HTTP-Redirect')) {
+            sloUrl = location;
+            break;
+          } else if (binding.includes('HTTP-POST')) {
+            sloUrl = location;
+          }
+        }
+        
+        // Get certificate
+        const keyDescriptors = xmlDoc.getElementsByTagNameNS('urn:oasis:names:tc:SAML:2.0:metadata', 'KeyDescriptor');
+        let certificate = '';
+        
+        for (let keyDesc of keyDescriptors) {
+          const use = keyDesc.getAttribute('use');
+          if (!use || use === 'signing') {
+            const x509Cert = keyDesc.querySelector('X509Certificate');
+            if (x509Cert) {
+              certificate = '-----BEGIN CERTIFICATE-----\n' + 
+                           x509Cert.textContent.trim() + 
+                           '\n-----END CERTIFICATE-----';
+              break;
+            }
+          }
+        }
+        
+        // Get NameID Format
+        const nameIdFormats = xmlDoc.getElementsByTagNameNS('urn:oasis:names:tc:SAML:2.0:metadata', 'NameIDFormat');
+        let nameIdFormat = '';
+        
+        if (nameIdFormats.length > 0) {
+          nameIdFormat = nameIdFormats[0].textContent.trim();
+        }
+        
+        return {
+          entityId: entityId,
+          ssoUrl: ssoUrl,
+          sloUrl: sloUrl,
+          certificate: certificate,
+          nameIdFormat: nameIdFormat,
+          ssoBinding: ssoBinding
+        };
+      }
+
+      function fillFormWithMetadata(metadata) {
+        if (metadata.entityId) {
+          document.getElementById('idp_issuer').value = metadata.entityId;
+        }
+        if (metadata.ssoUrl) {
+          document.getElementById('idp_sso_url').value = metadata.ssoUrl;
+        }
+        if (metadata.sloUrl) {
+          document.getElementById('idp_slo_url').value = metadata.sloUrl;
+        }
+        if (metadata.certificate) {
+          document.getElementById('idp_cert').value = metadata.certificate;
+        }
+        if (metadata.nameIdFormat) {
+          const nameIdSelect = document.getElementById('nameid_format');
+          if (nameIdSelect) {
+            // Try to find exact match first
+            let found = false;
+            for (let option of nameIdSelect.options) {
+              if (option.value === metadata.nameIdFormat) {
+                option.selected = true;
+                found = true;
+                break;
+              }
+            }
+            // If no exact match, try to find a similar one
+            if (!found) {
+              for (let option of nameIdSelect.options) {
+                if (option.value.includes('unspecified') || metadata.nameIdFormat.includes('unspecified')) {
+                  option.selected = true;
+                  break;
+                }
+              }
+            }
+          }
+        }
+        if (metadata.ssoBinding) {
+          const bindingSelect = document.getElementById('idp_sso_binding');
+          if (bindingSelect) {
+            for (let option of bindingSelect.options) {
+              if (option.value === metadata.ssoBinding) {
+                option.selected = true;
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      function showMetadataStatus(type, message) {
+        const statusDiv = document.getElementById('metadata_status');
+        const successDiv = document.getElementById('metadata_success');
+        const errorDiv = document.getElementById('metadata_error');
+        const successText = document.getElementById('metadata_success_text');
+        const errorText = document.getElementById('metadata_error_text');
+        
+        statusDiv.classList.remove('hidden');
+        
+        if (type === 'success') {
+          successDiv.classList.remove('hidden');
+          errorDiv.classList.add('hidden');
+          successText.textContent = message;
+        } else {
+          successDiv.classList.add('hidden');
+          errorDiv.classList.remove('hidden');
+          errorText.textContent = message;
+        }
+        
+        // Hide status after 5 seconds
+        setTimeout(() => {
+          statusDiv.classList.add('hidden');
+        }, 5000);
+      }
+
+      function toggleManualSetup() {
+        const content = document.getElementById('manual_setup_content');
+        const buttonText = document.getElementById('manual_setup_button_text');
+        const icon = document.getElementById('manual_setup_icon');
+        
+        if (content.classList.contains('hidden')) {
+          content.classList.remove('hidden');
+          buttonText.textContent = 'Hide';
+          icon.classList.add('rotate-180');
+        } else {
+          content.classList.add('hidden');
+          buttonText.textContent = 'Show';
+          icon.classList.remove('rotate-180');
+        }
+      }
+
     </script>
   </body>
 </html>

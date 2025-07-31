@@ -4,6 +4,7 @@
 {% from "components/textarea_input.html" import textarea_input %}
 {% from "components/select_input.html" import select_input %}
 {% from "components/readonly_field.html" import readonly_field %}
+{% from "components/metadata_upload.html" import metadata_upload %}
 
 {% block content %}
 
@@ -112,75 +113,98 @@
       <h3 class="text-lg font-medium text-gray-900 mb-4">Configuration parameters from your IdP</h3>
       <p class="text-sm text-gray-600 mb-6">These are the configuration values you need to obtain from your Identity Provider.</p>
       
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {{ text_input(
-          name="idp_issuer",
-          label="Issuer (IdP Entity ID)",
-          value=login_form.idp_issuer,
-          placeholder="e.g., https://your-idp.com or urn:your-idp:entity",
-          required=true,
-          tooltip_text="Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.",
-          grid_span="md:col-span-2"
-        ) }}
+      <!-- Quick Setup -->
+      {{ metadata_upload() }}
+      
+      <!-- Manual Setup -->
+      <div class="mt-6 pt-6 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h4 class="text-base font-medium text-gray-900">Manual Setup</h4>
+            <p class="text-sm text-gray-600 mt-1">Configure your IdP parameters manually if you prefer not to use the metadata upload.</p>
+          </div>
+          <button
+            type="button"
+            onclick="toggleManualSetup()"
+            class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            <span id="manual_setup_button_text">Show</span>
+            <svg id="manual_setup_icon" class="ml-2 h-4 w-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+        </div>
         
-        {{ text_input(
-          name="idp_sso_url",
-          label="Login URL (IdP SSO URL)",
-          value=login_form.idp_sso_url,
-          placeholder="e.g., https://your-idp.com/saml/sso or /saml/login",
-          required=true,
-          tooltip_text="The URL where users will be redirected for authentication. This is your IdP's login endpoint.",
-          grid_span="md:col-span-2"
-        ) }}
-        
-        {{ text_input(
-          name="idp_slo_url",
-          label="Logout URL (IdP Single Logout URL)",
-          value=login_form.idp_slo_url,
-          placeholder="e.g., https://your-idp.com/saml/slo (optional)",
-          grid_span="md:col-span-2"
-        ) }}
-        
-        {{ textarea_input(
-          name="idp_cert",
-          label="IdP Cert (In PEM format)",
-          value=login_form.idp_cert,
-          placeholder="-----BEGIN CERTIFICATE-----
+        <div id="manual_setup_content" class="hidden">
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {{ text_input(
+              name="idp_issuer",
+              label="Issuer (IdP Entity ID)",
+              value=login_form.idp_issuer,
+              placeholder="e.g., https://your-idp.com or urn:your-idp:entity",
+              required=true,
+              tooltip_text="Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ text_input(
+              name="idp_sso_url",
+              label="Login URL (IdP SSO URL)",
+              value=login_form.idp_sso_url,
+              placeholder="e.g., https://your-idp.com/saml/sso or /saml/login",
+              required=true,
+              tooltip_text="The URL where users will be redirected for authentication. This is your IdP's login endpoint.",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ text_input(
+              name="idp_slo_url",
+              label="Logout URL (IdP Single Logout URL)",
+              value=login_form.idp_slo_url,
+              placeholder="e.g., https://your-idp.com/saml/slo (optional)",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ textarea_input(
+              name="idp_cert",
+              label="IdP Cert (In PEM format)",
+              value=login_form.idp_cert,
+              placeholder="-----BEGIN CERTIFICATE-----
 Your IdP's X.509 certificate in PEM format
 -----END CERTIFICATE-----",
-          rows=4,
-          tooltip_text="X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.",
-          grid_span="md:col-span-2"
-        ) }}
-        
-        {{ select_input(
-          name="nameid_format",
-          label="NameID Format",
-          options=login_form.nameid_format_options(),
-          selected_value=login_form.nameid_format,
-          tooltip_text="The format of the user identifier in SAML responses. Choose based on your IdP's configuration.",
-          grid_span="md:col-span-2"
-        ) }}
-        
-        {{ select_input(
-          name="idp_sso_binding",
-          label="IdP SSO Binding",
-          options=login_form.idp_sso_binding_options(),
-          selected_value=login_form.idp_sso_binding,
-          tooltip_text="The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.",
-          grid_span="md:col-span-2"
-        ) }}
-        
-        {{ select_input(
-          name="acs_binding",
-          label="ACS Binding",
-          options=login_form.acs_binding_options(),
-          selected_value=login_form.acs_binding,
-          tooltip_text="The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.",
-          grid_span="md:col-span-2"
-        ) }}
-        
-
+              rows=4,
+              tooltip_text="X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ select_input(
+              name="nameid_format",
+              label="NameID Format",
+              options=login_form.nameid_format_options(),
+              selected_value=login_form.nameid_format,
+              tooltip_text="The format of the user identifier in SAML responses. Choose based on your IdP's configuration.",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ select_input(
+              name="idp_sso_binding",
+              label="IdP SSO Binding",
+              options=login_form.idp_sso_binding_options(),
+              selected_value=login_form.idp_sso_binding,
+              tooltip_text="The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.",
+              grid_span="md:col-span-2"
+            ) }}
+            
+            {{ select_input(
+              name="acs_binding",
+              label="ACS Binding",
+              options=login_form.acs_binding_options(),
+              selected_value=login_form.acs_binding,
+              tooltip_text="The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.",
+              grid_span="md:col-span-2"
+            ) }}
+          </div>
+        </div>
       </div>
     </div>
     
