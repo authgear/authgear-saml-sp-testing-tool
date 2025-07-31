@@ -181,6 +181,13 @@
           return;
         }
 
+        // File size validation (5MB limit)
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        if (file.size > maxSize) {
+          showMetadataStatus('error', 'File size too large. Please select a file smaller than 5MB.');
+          return;
+        }
+
         if (!file.name.endsWith('.xml')) {
           showMetadataStatus('error', 'Please select an XML file');
           return;
@@ -198,18 +205,39 @@
               return;
             }
 
+            // Validate SAML metadata structure
+            const entityDescriptor = xmlDoc.querySelector('EntityDescriptor');
+            if (!entityDescriptor) {
+              showMetadataStatus('error', 'This is not a valid SAML metadata file. Missing EntityDescriptor element.');
+              return;
+            }
+
+            // Check if this is an IdP metadata (should contain IdPSSODescriptor)
+            const idpDescriptor = xmlDoc.querySelector('IDPSSODescriptor');
+            if (!idpDescriptor) {
+              showMetadataStatus('error', 'This appears to be a Service Provider (SP) metadata file. Please upload an Identity Provider (IdP) metadata file.');
+              return;
+            }
+
             const metadata = parseSamlMetadata(xmlDoc);
             if (metadata) {
-              fillFormWithMetadata(metadata);
-              showMetadataStatus('success', 'Metadata loaded successfully!');
+              // Validate the metadata
+              const validation = validateMetadata(metadata);
+              if (!validation.isValid) {
+                showMetadataStatus('error', validation.message);
+                return;
+              }
               
-              // Show configuration fields after successful upload
-              setTimeout(() => {
-                const configurationFields = document.getElementById('configuration_fields');
-                const setupMethodSelection = document.getElementById('setup_method_selection');
-                configurationFields.classList.remove('hidden');
-                setupMethodSelection.classList.add('hidden');
-              }, 1000);
+              fillFormWithMetadata(metadata);
+              
+              // Show configuration fields immediately after successful upload
+              const configurationFields = document.getElementById('configuration_fields');
+              const setupMethodSelection = document.getElementById('setup_method_selection');
+              configurationFields.classList.remove('hidden');
+              setupMethodSelection.classList.add('hidden');
+              
+              // Update button text after showing configuration fields
+              updateClearButtonText();
             } else {
               showMetadataStatus('error', 'Could not parse SAML metadata');
             }
@@ -302,6 +330,74 @@
         };
       }
 
+      function validateMetadata(metadata) {
+        const missingFields = [];
+        const invalidFields = [];
+        
+        // Check for missing required fields
+        if (!metadata.entityId || !metadata.entityId.trim()) {
+          missingFields.push('Issuer (Entity ID)');
+        }
+        
+        if (!metadata.ssoUrl || !metadata.ssoUrl.trim()) {
+          missingFields.push('Login URL (SSO URL)');
+        }
+        
+        if (!metadata.certificate || !metadata.certificate.trim()) {
+          missingFields.push('Certificate');
+        }
+        
+        // Check for invalid URL formats
+        if (metadata.ssoUrl && metadata.ssoUrl.trim()) {
+          try {
+            const url = new URL(metadata.ssoUrl);
+            if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+              invalidFields.push('Login URL must be a valid HTTP or HTTPS URL');
+            }
+          } catch (e) {
+            invalidFields.push('Login URL is not a valid URL format');
+          }
+        }
+        
+        if (metadata.sloUrl && metadata.sloUrl.trim()) {
+          try {
+            const url = new URL(metadata.sloUrl);
+            if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+              invalidFields.push('Logout URL must be a valid HTTP or HTTPS URL');
+            }
+          } catch (e) {
+            invalidFields.push('Logout URL is not a valid URL format');
+          }
+        }
+        
+        // Check certificate format
+        if (metadata.certificate && metadata.certificate.trim()) {
+          const cert = metadata.certificate.trim();
+          if (!cert.includes('-----BEGIN CERTIFICATE-----') || !cert.includes('-----END CERTIFICATE-----')) {
+            invalidFields.push('Certificate is not in proper PEM format');
+          }
+        }
+        
+        // Build error message
+        if (missingFields.length > 0 || invalidFields.length > 0) {
+          let message = '';
+          if (missingFields.length > 0) {
+            message += `Missing required information: ${missingFields.join(', ')}. `;
+          }
+          if (invalidFields.length > 0) {
+            message += `Invalid format: ${invalidFields.join(', ')}. `;
+          }
+          message += 'Please check that this is a valid SAML metadata file.';
+          
+          return {
+            isValid: false,
+            message: message
+          };
+        }
+        
+        return { isValid: true };
+      }
+
       function fillFormWithMetadata(metadata) {
         if (metadata.entityId) {
           document.getElementById('idp_issuer').value = metadata.entityId;
@@ -349,6 +445,116 @@
             }
           }
         }
+        
+        // Save form data to localStorage
+        saveFormData();
+      }
+
+      function saveFormData() {
+        const formData = {
+          idp_issuer: document.getElementById('idp_issuer')?.value || '',
+          idp_sso_url: document.getElementById('idp_sso_url')?.value || '',
+          idp_slo_url: document.getElementById('idp_slo_url')?.value || '',
+          idp_cert: document.getElementById('idp_cert')?.value || '',
+          nameid_format: document.getElementById('nameid_format')?.value || '',
+          idp_sso_binding: document.getElementById('idp_sso_binding')?.value || '',
+          acs_binding: document.getElementById('acs_binding')?.value || ''
+        };
+        localStorage.setItem('idp_config_data', JSON.stringify(formData));
+        
+        // Update button text based on whether main fields are filled
+        updateClearButtonText();
+      }
+
+      function loadFormData() {
+        const savedData = localStorage.getItem('idp_config_data');
+        if (savedData) {
+          try {
+            const formData = JSON.parse(savedData);
+            
+            // Load data into form fields
+            if (formData.idp_issuer) {
+              document.getElementById('idp_issuer').value = formData.idp_issuer;
+            }
+            if (formData.idp_sso_url) {
+              document.getElementById('idp_sso_url').value = formData.idp_sso_url;
+            }
+            if (formData.idp_slo_url) {
+              document.getElementById('idp_slo_url').value = formData.idp_slo_url;
+            }
+            if (formData.idp_cert) {
+              document.getElementById('idp_cert').value = formData.idp_cert;
+            }
+            if (formData.nameid_format) {
+              const nameIdSelect = document.getElementById('nameid_format');
+              if (nameIdSelect) {
+                for (let option of nameIdSelect.options) {
+                  if (option.value === formData.nameid_format) {
+                    option.selected = true;
+                    break;
+                  }
+                }
+              }
+            }
+            if (formData.idp_sso_binding) {
+              const bindingSelect = document.getElementById('idp_sso_binding');
+              if (bindingSelect) {
+                for (let option of bindingSelect.options) {
+                  if (option.value === formData.idp_sso_binding) {
+                    option.selected = true;
+                    break;
+                  }
+                }
+              }
+            }
+            if (formData.acs_binding) {
+              const acsSelect = document.getElementById('acs_binding');
+              if (acsSelect) {
+                for (let option of acsSelect.options) {
+                  if (option.value === formData.acs_binding) {
+                    option.selected = true;
+                    break;
+                  }
+                }
+              }
+            }
+            
+            return true; // Data was loaded
+          } catch (error) {
+            console.error('Error loading form data:', error);
+            return false;
+          }
+        }
+        return false; // No data to load
+      }
+
+      function updateClearButtonText() {
+        const clearButton = document.querySelector('button[onclick="clearParametersAndShowSelection()"]');
+        if (clearButton) {
+          const idpIssuer = document.getElementById('idp_issuer')?.value || '';
+          const idpSsoUrl = document.getElementById('idp_sso_url')?.value || '';
+          const idpSloUrl = document.getElementById('idp_slo_url')?.value || '';
+          const idpCert = document.getElementById('idp_cert')?.value || '';
+          
+          // Check if any of the main fields are filled
+          const hasData = idpIssuer.trim() || idpSsoUrl.trim() || idpSloUrl.trim() || idpCert.trim();
+          
+          if (hasData) {
+            clearButton.innerHTML = `
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+              </svg>
+              Clear parameters
+            `;
+          } else {
+            clearButton.innerHTML = `
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+              </svg>
+              Back to options
+            `;
+          }
+        }
       }
 
       function showMetadataStatus(type, message) {
@@ -381,7 +587,6 @@
       function selectSetupMethod(method) {
         const setupMethodSelection = document.getElementById('setup_method_selection');
         const uploadMetadataSection = document.getElementById('upload_metadata_section');
-        const manualSetupSection = document.getElementById('manual_setup_section');
         const configurationFields = document.getElementById('configuration_fields');
         
         // Hide the method selection
@@ -390,19 +595,19 @@
         if (method === 'upload') {
           // Show upload metadata section
           uploadMetadataSection.classList.remove('hidden');
-          manualSetupSection.classList.add('hidden');
         } else if (method === 'manual') {
-          // Show manual setup section and configuration fields
-          manualSetupSection.classList.remove('hidden');
+          // Show configuration fields directly
           uploadMetadataSection.classList.add('hidden');
           configurationFields.classList.remove('hidden');
+          
+          // Update button text immediately
+          updateClearButtonText();
         }
       }
 
       function showSetupMethodSelection() {
         const setupMethodSelection = document.getElementById('setup_method_selection');
         const uploadMetadataSection = document.getElementById('upload_metadata_section');
-        const manualSetupSection = document.getElementById('manual_setup_section');
         const configurationFields = document.getElementById('configuration_fields');
         
         // Show the method selection
@@ -410,7 +615,6 @@
         
         // Hide all other sections
         uploadMetadataSection.classList.add('hidden');
-        manualSetupSection.classList.add('hidden');
         configurationFields.classList.add('hidden');
       }
 
@@ -453,6 +657,9 @@
           uploadStatusDisplay.classList.add('hidden');
         }
         
+        // Clear localStorage data
+        localStorage.removeItem('idp_config_data');
+        
         // Store cleared state in session storage
         sessionStorage.setItem('parametersCleared', 'true');
         
@@ -460,7 +667,7 @@
         showSetupMethodSelection();
       }
 
-      // Initialize drag and drop functionality when DOM is loaded
+      // Initialize functionality when DOM is loaded
       document.addEventListener('DOMContentLoaded', function() {
         // Check if parameters were cleared and show setup method selection
         if (sessionStorage.getItem('parametersCleared') === 'true') {
@@ -493,7 +700,41 @@
           
           // Show setup method selection
           showSetupMethodSelection();
+        } else {
+          // Try to load saved form data
+          const dataLoaded = loadFormData();
+          if (dataLoaded) {
+            // If data was loaded, show configuration fields directly
+            const configurationFields = document.getElementById('configuration_fields');
+            const setupMethodSelection = document.getElementById('setup_method_selection');
+            if (configurationFields && setupMethodSelection) {
+              configurationFields.classList.remove('hidden');
+              setupMethodSelection.classList.add('hidden');
+            }
+            
+            // Update button text after loading data
+            updateClearButtonText();
+          }
         }
+        
+        // Add event listeners to form fields to save data on change
+        const formFields = [
+          'idp_issuer',
+          'idp_sso_url', 
+          'idp_slo_url',
+          'idp_cert',
+          'nameid_format',
+          'idp_sso_binding',
+          'acs_binding'
+        ];
+        
+        formFields.forEach(fieldName => {
+          const field = document.getElementById(fieldName);
+          if (field) {
+            field.addEventListener('input', saveFormData);
+            field.addEventListener('change', saveFormData);
+          }
+        });
         
         const dropZone = document.getElementById('drop_zone');
         if (dropZone) {
