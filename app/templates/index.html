@@ -5,6 +5,8 @@
 {% from "components/select_input.html" import select_input %}
 {% from "components/readonly_field.html" import readonly_field %}
 {% from "components/metadata_upload.html" import metadata_upload %}
+{% from "components/idp_parameters.html" import idp_parameters %}
+{% from "components/authn_request_parameters.html" import authn_request_parameters %}
 
 {% block content %}
 
@@ -208,104 +210,9 @@ Your IdP's X.509 certificate in PEM format
       </div>
     </div>
     
-    <div class="bg-gray-50 rounded-lg p-6">
-      <h3 class="text-lg font-medium text-gray-900 mb-4">Parameters to configure in your IdP</h3>
-      <p class="text-sm text-gray-600 mb-6">These are the values you need to configure in your Identity Provider settings.</p>
-      
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {{ readonly_field(
-          name="readonly_recipient",
-          label="ACS URL",
-          value=login_form.sp_recipient(request),
-          tooltip_text="Assertion Consumer Service URL",
-          tooltip_width="w-64"
-        ) }}
-        
-        {{ readonly_field(
-          name="sp_audience",
-          label="Assertion Audience",
-          value=login_form.sp_audience,
-          tooltip_text="The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
-        ) }}
-        
-        {{ readonly_field(
-          name="readonly_destination",
-          label="Response Destination",
-          value=login_form.sp_destination(request)
-        ) }}
-        
-        {{ readonly_field(
-          name="readonly_sls_url",
-          label="Logout Callback URL",
-          value=login_form.sls_url(request)
-        ) }}
-      </div>
-    </div>
+    {{ idp_parameters(login_form, request) }}
     
-    <div class="bg-gray-50 rounded-lg p-6">
-      <h3 class="text-lg font-medium text-gray-900 mb-4">AuthnRequest Parameters</h3>
-      <p class="text-sm text-gray-600 mb-6">These parameters control how the SAML authentication request is sent to your Identity Provider.</p>
-      
-      <div class="space-y-6">
-        <div class="border border-gray-200 rounded-md p-4">
-          <label class="block text-sm font-medium text-gray-900 mb-3">Authentication Behavior</label>
-          <div class="space-y-3">
-            <div class="flex items-start">
-              <input type="radio"
-                id="auth_default"
-                name="auth_behavior"
-                value="default"
-                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
-                {% if not login_form.is_passive and not login_form.force_authn %}checked{% endif %}
-              />
-              <div class="ml-3">
-                <label for="auth_default" class="block text-sm font-medium text-gray-900 cursor-pointer">Default</label>
-                <p class="text-sm text-gray-600 mt-1">Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate.</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start">
-              <input type="radio"
-                id="auth_passive"
-                name="auth_behavior"
-                value="passive"
-                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
-                {% if login_form.is_passive %}checked{% endif %}
-              />
-              <div class="ml-3">
-                <label for="auth_passive" class="block text-sm font-medium text-gray-900 cursor-pointer">IsPassive</label>
-                <p class="text-sm text-gray-600 mt-1">The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks.</p>
-              </div>
-            </div>
-            
-            <div class="flex items-start">
-              <input type="radio"
-                id="auth_force"
-                name="auth_behavior"
-                value="force"
-                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
-                {% if login_form.force_authn %}checked{% endif %}
-              />
-              <div class="ml-3">
-                <label for="auth_force" class="block text-sm font-medium text-gray-900 cursor-pointer">ForceAuthn</label>
-                <p class="text-sm text-gray-600 mt-1">The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="border border-gray-200 rounded-md p-4">
-          <label for="subject_nameid" class="block text-sm font-medium text-gray-900 mb-2">Subject NameID</label>
-          <input
-            type="text"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-            name="subject_nameid"
-            value="{{ login_form.subject_nameid }}"
-            placeholder="e.g., user@example.com (optional, for specific user testing)" />
-          <p class="text-sm text-gray-600 mt-2">Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection.</p>
-        </div>
-      </div>
-    </div>
+    {{ authn_request_parameters(login_form) }}
     
     <div class="flex justify-center">
       <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">

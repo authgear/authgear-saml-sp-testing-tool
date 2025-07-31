@@ -1,0 +1,37 @@
+{% from "components/readonly_field.html" import readonly_field %}
+
+{% macro idp_parameters(login_form, request) %}
+<div class="bg-gray-50 rounded-lg p-6">
+  <h3 class="text-lg font-medium text-gray-900 mb-4">Parameters to configure in your IdP</h3>
+  <p class="text-sm text-gray-600 mb-6">These are the values you need to configure in your Identity Provider settings.</p>
+  
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    {{ readonly_field(
+      name="readonly_recipient",
+      label="ACS URL",
+      value=login_form.sp_recipient(request),
+      tooltip_text="Assertion Consumer Service URL",
+      tooltip_width="w-64"
+    ) }}
+    
+    {{ readonly_field(
+      name="sp_audience",
+      label="Assertion Audience",
+      value=login_form.sp_audience,
+      tooltip_text="The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+    ) }}
+    
+    {{ readonly_field(
+      name="readonly_destination",
+      label="Response Destination",
+      value=login_form.sp_destination(request)
+    ) }}
+    
+    {{ readonly_field(
+      name="readonly_sls_url",
+      label="Logout Callback URL",
+      value=login_form.sls_url(request)
+    ) }}
+  </div>
+</div>
+{% endmacro %} 

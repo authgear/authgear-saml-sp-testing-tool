@@ -1,0 +1,66 @@
+{% macro authn_request_parameters(login_form) %}
+<div class="bg-gray-50 rounded-lg p-6">
+  <h3 class="text-lg font-medium text-gray-900 mb-4">AuthnRequest Parameters</h3>
+  <p class="text-sm text-gray-600 mb-6">These parameters control how the SAML authentication request is sent to your Identity Provider.</p>
+  
+  <div class="space-y-6">
+    <div class="border border-gray-200 rounded-md p-4">
+      <label class="block text-sm font-medium text-gray-900 mb-3">Authentication Behavior</label>
+      <div class="space-y-3">
+        <div class="flex items-start">
+          <input type="radio"
+            id="auth_default"
+            name="auth_behavior"
+            value="default"
+            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+            {% if not login_form.is_passive and not login_form.force_authn %}checked{% endif %}
+          />
+          <div class="ml-3">
+            <label for="auth_default" class="block text-sm font-medium text-gray-900 cursor-pointer">Default</label>
+            <p class="text-sm text-gray-600 mt-1">Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start">
+          <input type="radio"
+            id="auth_passive"
+            name="auth_behavior"
+            value="passive"
+            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+            {% if login_form.is_passive %}checked{% endif %}
+          />
+          <div class="ml-3">
+            <label for="auth_passive" class="block text-sm font-medium text-gray-900 cursor-pointer">IsPassive</label>
+            <p class="text-sm text-gray-600 mt-1">The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start">
+          <input type="radio"
+            id="auth_force"
+            name="auth_behavior"
+            value="force"
+            class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 mt-0.5"
+            {% if login_form.force_authn %}checked{% endif %}
+          />
+          <div class="ml-3">
+            <label for="auth_force" class="block text-sm font-medium text-gray-900 cursor-pointer">ForceAuthn</label>
+            <p class="text-sm text-gray-600 mt-1">The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="border border-gray-200 rounded-md p-4">
+      <label for="subject_nameid" class="block text-sm font-medium text-gray-900 mb-2">Subject NameID</label>
+      <input
+        type="text"
+        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+        name="subject_nameid"
+        value="{{ login_form.subject_nameid }}"
+        placeholder="e.g., user@example.com (optional, for specific user testing)" />
+      <p class="text-sm text-gray-600 mt-2">Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection.</p>
+    </div>
+  </div>
+</div>
+{% endmacro %} 
