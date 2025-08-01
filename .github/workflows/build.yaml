@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   builds:
-    if: ${{ github.repository == 'authgear/authgear-saml-sp-testing-tool }}
+    if: ${{ github.repository == 'authgear/authgear-saml-sp-testing-tool' }}
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
