@@ -1,22 +1,22 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: authgear-demo-saml-sp-ingress
+  name: authgear-saml-sp-testing-tool-ingress
   annotations:
     kubernetes.io/tls-acme: "true"
 spec:
   rules:
-    - host: authgear-demo-saml-sp.pandawork.com
+    - host: authgear-saml-sp-testing-tool.pandawork.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: authgear-demo-saml-sp
+                name: authgear-saml-sp-testing-tool
                 port:
                   number: 80
   tls:
     - hosts:
-        - authgear-demo-saml-sp.pandawork.com
-      secretName: authgear-demo-saml-sp.pandawork.com
+        - authgear-saml-sp-testing-tool.pandawork.com
+      secretName: authgear-saml-sp-testing-tool.pandawork.com

@@ -3,7 +3,7 @@ K8S_NAMESPACE ?= authgear-demo
 
 .PHONY: deploy
 deploy:
-	helm upgrade authgear-demo-saml-sp ./helm --install \
+	helm upgrade authgear-saml-sp-testing-tool ./helm --install \
 		--wait --wait-for-jobs --cleanup-on-fail \
 		-n $(K8S_NAMESPACE) \
 		--set-string appVersion="$(GIT_SHA)"

@@ -1,2 +1,2 @@
 images:
-  app: "quay.io/theauthgear/authgear-demo-saml-sp"
+  app: "quay.io/theauthgear/authgear-saml-sp-testing-tool"

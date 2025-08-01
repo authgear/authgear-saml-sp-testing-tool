@@ -1,6 +1,6 @@
 GIT_SHA ?= git-$(shell git rev-parse --short=12 HEAD)
 DOCKER_REGISTRY ?= quay.io/theauthgear
-APP_IMAGE_NAME ?= authgear-demo-saml-sp
+APP_IMAGE_NAME ?= authgear-saml-sp-testing-tool
 APP_IMAGE ?= $(DOCKER_REGISTRY)/$(APP_IMAGE_NAME):$(GIT_SHA)
 
 .PYTHON_VERSION := 3.11

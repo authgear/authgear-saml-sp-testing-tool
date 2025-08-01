@@ -1,6 +1,6 @@
 apiVersion: v2
-name: authgear-demo-saml-sp
-description: A SAML Service Provider Demo
+name: authgear-saml-sp-testing-tool
+description: A SAML Service Provider Testing Tool
 
 # A chart can be either an 'application' or a 'library' chart.
 #
