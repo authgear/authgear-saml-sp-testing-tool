@@ -1,0 +1,14 @@
+name: Deploy to pandawork
+
+on:
+  push:
+    branches:
+    - 'main'
+
+jobs:
+  deploy:
+    if: ${{ github.repository == 'oursky/authgear-saml-sp-testing-tool' }}
+    runs-on: [self-hosted, linux, x64, v1]
+    steps:
+    - uses: actions/checkout@v4
+    - run: make -C deploy deploy
