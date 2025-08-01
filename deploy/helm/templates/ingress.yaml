@@ -16,7 +16,20 @@ spec:
                 name: authgear-saml-sp-testing-tool
                 port:
                   number: 80
+    - host: samlsp.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: authgear-saml-sp-testing-tool
+                port:
+                  number: 80
   tls:
     - hosts:
         - authgear-saml-sp-testing-tool.pandawork.com
       secretName: authgear-saml-sp-testing-tool.pandawork.com
+    - hosts:
+        - samlsp.com
+      secretName: samlsp.com
