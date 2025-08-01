@@ -1,0 +1,28 @@
+name: Build Image
+
+on:
+  push:
+    branches:
+    - 'main'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  builds:
+    if: ${{ github.repository == 'authgear/authgear-saml-sp-testing-tool }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: docker login
+        env:
+          DOCKER_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.QUAY_ROBOT_TOKEN }}
+        run: |
+          printf "$DOCKER_PASSWORD" | docker login --password-stdin --username "$DOCKER_USERNAME" quay.io
+      - run: make -C app push-image
+      - name: docker logout
+        if: ${{ always() }}
+        run: |
+          docker logout quay.io
