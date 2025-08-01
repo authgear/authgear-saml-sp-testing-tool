@@ -27,6 +27,15 @@
     <!-- Plausible Analytics -->
     <script defer data-domain="samlsp.com" src="https://plausible.io/js/script.js"></script>
 
+    <!-- Google Tag Manager -->
+    {% if gtm_id %}
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ gtm_id }}');</script>
+    {% endif %}
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -46,6 +55,13 @@
     </script>
   </head>
   <body class="bg-gray-50 min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    {% if gtm_id %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_id }}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
+    <!-- End Google Tag Manager (noscript) -->
+    
     <div class="container mx-auto px-4 py-8 max-w-7xl">
       <div class="flex flex-col md:flex-row gap-8">
         <!-- Left Sidebar - SAML Explanation -->

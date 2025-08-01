@@ -48,3 +48,5 @@ spec:
           env:
             - name: USE_HTTPS
               value: "true"
+            - name: GTM_ID
+              value: "{{ .Values.gtmId | default "" }}"

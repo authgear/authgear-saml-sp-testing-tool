@@ -1,2 +1,7 @@
 images:
   app: "quay.io/theauthgear/authgear-saml-sp-testing-tool"
+
+# Google Tag Manager ID (optional)
+# Set this to your GTM container ID (e.g., "GTM-XXXXXXX")
+# Leave empty or comment out to disable GTM
+gtmId: ""

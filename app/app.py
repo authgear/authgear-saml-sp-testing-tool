@@ -15,7 +15,7 @@ from flask import (
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from onelogin.saml2.errors import OneLogin_Saml2_Error
-from .config import USE_HTTPS
+from .config import USE_HTTPS, GTM_ID
 
 
 app = Flask(__name__)
@@ -30,6 +30,12 @@ app.config["SAML_PATH"] = os.path.join(
 @app.before_request
 def make_session_permanent():
     session.permanent = True
+
+
+@app.context_processor
+def inject_gtm_id():
+    """Inject GTM_ID into all templates"""
+    return dict(gtm_id=GTM_ID)
 
 
 def init_saml_auth(req, request: Request, login_form: LoginForm):
