@@ -7,5 +7,5 @@ deploy:
 		--wait --wait-for-jobs --cleanup-on-fail \
 		-n $(K8S_NAMESPACE) \
 		--set-string appVersion="$(GIT_SHA)" \
-		-f deploy/helm/values.yaml \
-		-f deploy/helm/values.secret.yaml
+		-f ./helm/values.yaml \
+		-f ./helm/values.secret.yaml
