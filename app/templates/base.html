@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SAML Testing Tool by Authgear</title>
+    <title>SAML Testing Tool | Mock SP | SAML Flow</title>
 
     <!-- Open Graph meta tags -->
-    <meta property="og:title" content="SAML Testing Tool by Authgear">
+    <meta property="og:title" content="SAML Testing Tool | Mock SP | SAML Flow">
     <meta property="og:description" content="Test SAML authentication flows with Authgear or any other Identity Provider. Configure and validate SAML SSO integration.">
     <meta property="og:image" content="{{ url_for('static', filename='og-image.png', _external=True) }}">
     <meta property="og:url" content="{{ request.url }}">
@@ -17,7 +17,7 @@
     
     <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SAML Testing Tool by Authgear">
+    <meta name="twitter:title" content="SAML Testing Tool | Mock SP | SAML Flow">
     <meta name="twitter:description" content="Test SAML authentication flows with Authgear or any other Identity Provider. Configure and validate SAML SSO integration.">
     <meta name="twitter:image" content="{{ url_for('static', filename='og-image.png', _external=True) }}">
 
@@ -35,6 +35,17 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','{{ gtm_id }}');</script>
     {% endif %}
+
+    <!-- WebSite Structured Data for Site Name -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "SAML Testing Tool",
+      "alternateName": ["SAML SP Testing Tool", "samlsp.com"],
+      "url": "{{ request.url_root.rstrip('/') }}"
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
