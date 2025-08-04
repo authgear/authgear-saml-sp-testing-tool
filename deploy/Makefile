@@ -6,4 +6,6 @@ deploy:
 	helm upgrade authgear-saml-sp-testing-tool ./helm --install \
 		--wait --wait-for-jobs --cleanup-on-fail \
 		-n $(K8S_NAMESPACE) \
-		--set-string appVersion="$(GIT_SHA)"
+		--set-string appVersion="$(GIT_SHA)" \
+		-f deploy/helm/values.yaml \
+		-f deploy/helm/values.secret.yaml
