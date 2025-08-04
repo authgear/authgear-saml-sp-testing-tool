@@ -222,3 +222,6 @@ config.local.py
 .env.local
 .env.development
 .env.production
+/.blackbox/pubring.gpg~
+/.blackbox/pubring.kbx~
+/.blackbox/secring.gpg
