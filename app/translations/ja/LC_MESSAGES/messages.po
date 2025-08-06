@@ -1,0 +1,326 @@
+# Japanese translations for authgear-demo-saml-sp.
+# Copyright (C) 2025 Authgear
+# This file is distributed under the same license as the authgear-demo-saml-sp project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-08-06 12:33+0100\n"
+"PO-Revision-Date: 2025-08-06 12:33+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ja <LL@li.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: templates/base.html:7
+msgid "SAML Testing Tool | Mock SP | SAML Flow"
+msgstr "SAML テストツール | モック SP | SAML フロー"
+
+#: templates/base.html:80
+msgid "SAML Testing Tool"
+msgstr "SAML テストツール"
+
+#: templates/base.html:86
+msgid "Presented by"
+msgstr "提供："
+
+#: templates/base.html:93
+msgid "What is this tool?"
+msgstr "このツールとは？"
+
+#: templates/base.html:100
+msgid "How to use it:"
+msgstr "使用方法："
+
+#: templates/base.html:102
+msgid "Configure your IdP settings"
+msgstr "IdP 設定を構成する"
+
+#: templates/base.html:103
+msgid "Set up your SP"
+msgstr "SP を設定する"
+
+#: templates/base.html:104
+msgid "Test authentication"
+msgstr "認証をテストする"
+
+#: templates/base.html:105
+msgid "View results"
+msgstr "結果を表示する"
+
+#: templates/base.html:110
+msgid "Key Features:"
+msgstr "主な機能："
+
+#: templates/base.html:112
+msgid "Test SAML 2.0 authentication flows"
+msgstr "SAML 2.0 認証フローをテストする"
+
+#: templates/base.html:113
+msgid "View user attributes and claims"
+msgstr "ユーザー属性とクレームを表示する"
+
+#: templates/base.html:114
+msgid "Configure various SAML bindings"
+msgstr "様々な SAML バインディングを構成する"
+
+#: templates/base.html:115
+msgid "Test different NameID formats"
+msgstr "異なる NameID 形式をテストする"
+
+#: templates/base.html:116
+msgid "Validate SAML responses"
+msgstr "SAML レスポンスを検証する"
+
+#: templates/base.html:134
+msgid "Get Started with SAML SSO"
+msgstr "SAML SSO を始める"
+
+#: templates/invalid.html:4
+msgid "Configuration Error"
+msgstr "設定エラー"
+
+#: templates/invalid.html:14
+msgid "Invalid Configuration"
+msgstr "無効な設定"
+
+#: templates/attrs.html:7
+msgid "User Information"
+msgstr "ユーザー情報"
+
+#: templates/attrs.html:14
+msgid "NameID"
+msgstr "NameID"
+
+#: templates/attrs.html:24
+msgid "NameID Format"
+msgstr "NameID 形式"
+
+#: templates/attrs.html:40
+msgid "User Attributes"
+msgstr "ユーザー属性"
+
+#: templates/attrs.html:41
+msgid "You have the following attributes:"
+msgstr "以下の属性があります："
+
+#: templates/attrs.html:47
+msgid "Name"
+msgstr "名前"
+
+#: templates/attrs.html:48
+msgid "Values"
+msgstr "値"
+
+#: templates/attrs.html:77
+msgid "You don't have any attributes"
+msgstr "属性がありません"
+
+#: templates/attrs.html:84
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/components/metadata_upload.html:6
+msgid "Quick Setup"
+msgstr "クイックセットアップ"
+
+#: templates/components/metadata_upload.html:7
+msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
+msgstr "IdP の SAML メタデータファイルをアップロードして、すべての設定フィールドを自動的に入力します。"
+
+#: templates/components/metadata_upload.html:34
+msgid "Metadata loaded successfully!"
+msgstr "メタデータの読み込みに成功しました！"
+
+#: templates/components/metadata_upload.html:42
+msgid "Error loading metadata"
+msgstr "メタデータの読み込みエラー"
+
+#: templates/components/authn_request_parameters.html:2
+msgid "AuthnRequest Parameters"
+msgstr "AuthnRequest パラメータ"
+
+#: templates/components/authn_request_parameters.html:3
+msgid "These parameters control how the SAML authentication request is sent to your Identity Provider."
+msgstr "これらのパラメータは、SAML 認証リクエストが Identity Provider に送信される方法を制御します。"
+
+#: templates/components/authn_request_parameters.html:7
+msgid "Authentication Behavior"
+msgstr "認証動作"
+
+#: templates/components/authn_request_parameters.html:18
+msgid "Default"
+msgstr "デフォルト"
+
+#: templates/components/authn_request_parameters.html:19
+msgid "Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate."
+msgstr "IdP のデフォルト認証動作を使用します。IdP は既存のセッションを使用するか、適切に認証を求める場合があります。"
+
+#: templates/components/authn_request_parameters.html:32
+msgid "IsPassive"
+msgstr "IsPassive"
+
+#: templates/components/authn_request_parameters.html:33
+msgid "The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks."
+msgstr "ユーザーが既に有効なセッションを持っている場合、IdP は認証を求めません。サイレント認証チェックに便利です。"
+
+#: templates/components/authn_request_parameters.html:46
+msgid "ForceAuthn"
+msgstr "ForceAuthn"
+
+#: templates/components/authn_request_parameters.html:47
+msgid "The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication."
+msgstr "ユーザーが既存のセッションを持っていても、IdP は常に新しい認証を要求します。再認証を強制します。"
+
+#: templates/components/authn_request_parameters.html:54
+msgid "Subject NameID"
+msgstr "Subject NameID"
+
+#: templates/components/authn_request_parameters.html:61
+msgid "Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection."
+msgstr "特定のユーザーの認証をテストするために、特定のユーザー識別子を指定します。空のままにすると、IdP のデフォルトユーザー選択が使用されます。"
+
+#: templates/components/idp_parameters.html:4
+msgid "Parameters to configure in your IdP"
+msgstr "IdP で設定するパラメータ"
+
+#: templates/components/idp_parameters.html:5
+msgid "These are the values you need to configure in your Identity Provider settings."
+msgstr "これらは Identity Provider 設定で構成する必要がある値です。"
+
+#: templates/index.html:21
+msgid "Errors:"
+msgstr "エラー："
+
+#: templates/index.html:44
+msgid "Not authenticated"
+msgstr "認証されていません"
+
+#: templates/index.html:59
+msgid "Successfully logged out"
+msgstr "正常にログアウトしました"
+
+#: templates/index.html:59
+msgid "local session cleared"
+msgstr "ローカルセッションがクリアされました"
+
+#: templates/index.html:69
+msgid "User Attributes"
+msgstr "ユーザー属性"
+
+#: templates/index.html:75
+msgid "Name"
+msgstr "名前"
+
+#: templates/index.html:76
+msgid "Values"
+msgstr "値"
+
+#: templates/index.html:105
+msgid "You don't have any attributes"
+msgstr "属性がありません"
+
+#: templates/index.html:110
+msgid "Logout"
+msgstr "ログアウト"
+
+#: templates/index.html:114
+msgid "Configuration parameters from your IdP"
+msgstr "IdP からの設定パラメータ"
+
+#: templates/index.html:115
+msgid "These are the configuration values you need to obtain from your Identity Provider."
+msgstr "これらは Identity Provider から取得する必要がある設定値です。"
+
+#: templates/index.html:131
+msgid "Upload Metadata"
+msgstr "メタデータをアップロード"
+
+#: templates/index.html:132
+msgid "Quick setup with your IdP's SAML metadata file"
+msgstr "IdP の SAML メタデータファイルでクイックセットアップ"
+
+#: templates/index.html:148
+msgid "Manual Setup"
+msgstr "手動設定"
+
+#: templates/index.html:149
+msgid "Configure each parameter individually"
+msgstr "各パラメータを個別に設定"
+
+#: templates/index.html:165
+msgid "Metadata loaded successfully!"
+msgstr "メタデータの読み込みに成功しました！"
+
+#: templates/index.html:173
+msgid "Error loading metadata"
+msgstr "メタデータの読み込みエラー"
+
+#: templates/index.html:184
+msgid "Upload SAML Metadata"
+msgstr "SAML メタデータをアップロード"
+
+#: templates/index.html:185
+msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
+msgstr "IdP の SAML メタデータファイルをアップロードして、すべての設定フィールドを自動的に入力します。"
+
+#: templates/index.html:225
+msgid "XML files only"
+msgstr "XML ファイルのみ"
+
+#: templates/index.html:234
+msgid "Metadata loaded successfully!"
+msgstr "メタデータの読み込みに成功しました！"
+
+#: templates/index.html:242
+msgid "Error loading metadata"
+msgstr "メタデータの読み込みエラー"
+
+#: templates/index.html:347
+msgid "Login"
+msgstr "ログイン"
+
+#: templates/base.html:137
+msgid "View source code on GitHub"
+msgstr "GitHub でソースコードを表示"
+
+#: templates/base.html:611
+msgid "Clear parameters"
+msgstr "パラメータをクリア"
+
+#: templates/base.html:615
+msgid "Back to options"
+msgstr "オプションに戻る"
+
+#: templates/base.html:145
+msgid "Experience seamless, secure, and scalable identity management with Authgear."
+msgstr "Authgear によるシームレスで安全でスケーラブルなアイデンティティ管理を体験してください。"
+
+#: templates/base.html:151
+msgid "Get started for free"
+msgstr "無料で始める"
+
+#: templates/base.html:105
+msgid "This is a SAML testing tool acting as a Service Provider (SP) that allows you to configure and test SAML authentication flows with Authgear, Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
+msgstr "これはサービスプロバイダー（SP）として機能する SAML テストツールで、Authgear、Auth0、Okta、Entra ID またはその他の Identity Provider（IdP）との SAML 認証フローを設定およびテストできます。"
+
+#: templates/base.html:111
+msgid "Enter your Authgear or other Identity Provider's details in the form"
+msgstr "フォームに Authgear またはその他の Identity Provider の詳細を入力"
+
+#: templates/base.html:112
+msgid "Configure your Service Provider settings"
+msgstr "サービスプロバイダー設定を構成"
+
+#: templates/base.html:114
+msgid "Check the attributes and user information returned"
+msgstr "返された属性とユーザー情報を確認"
+
+#: templates/base.html:113
+msgid "Click \"Login\" to initiate SAML authentication"
+msgstr "「ログイン」をクリックして SAML 認証を開始" 

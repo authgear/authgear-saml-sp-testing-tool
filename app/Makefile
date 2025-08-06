@@ -29,3 +29,15 @@ image:
 .PHONY: push-image
 push-image: image
 	docker push ${APP_IMAGE}
+
+.PHONY: compile-translations
+compile-translations:
+	source venv/bin/activate && pybabel compile -d translations
+
+.PHONY: restart-app
+restart-app: compile-translations
+	pkill -f "flask run" || true
+	FLASK_APP=app ./venv/bin/flask run --host=0.0.0.0 --port=5001 --debug &
+
+.PHONY: update-translations
+update-translations: compile-translations restart-app
