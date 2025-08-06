@@ -23,7 +23,7 @@ from .structured_data import structured_data_bp
 
 
 # Supported languages
-SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar']
+SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar', 'de']
 
 # RTL languages
 RTL_LANGUAGES = ['ar']

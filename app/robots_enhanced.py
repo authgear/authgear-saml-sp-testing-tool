@@ -15,6 +15,7 @@ Allow: /
 Allow: /en/
 Allow: /es/
 Allow: /fr/
+Allow: /de/
 Allow: /pt/
 Allow: /ru/
 Allow: /ko/
@@ -44,6 +45,7 @@ Sitemap: {request.url_root.rstrip('/')}/sitemap.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_en.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_es.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_fr.xml
+Sitemap: {request.url_root.rstrip('/')}/sitemap_de.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_pt.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_ru.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_ko.xml

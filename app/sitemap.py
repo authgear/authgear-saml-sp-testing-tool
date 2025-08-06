@@ -5,13 +5,14 @@ import xml.etree.ElementTree as ET
 sitemap_bp = Blueprint('sitemap', __name__)
 
 # Supported languages - should match app.py SUPPORTED_LANGUAGES
-LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar']
+LANGUAGES = ['en', 'es', 'fr', 'de', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar']
 
 # Language names for hreflang
 LANGUAGE_NAMES = {
     'en': 'en',
     'es': 'es', 
     'fr': 'fr',
+    'de': 'de',
     'pt': 'pt',
     'ru': 'ru',
     'ko': 'ko',

@@ -1,0 +1,370 @@
+# German translations for authgear-demo-saml-sp.
+# Copyright (C) 2025 Authgear
+# This file is distributed under the same license as the
+# authgear-demo-saml-sp project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-08-06 14:29+0100\n"
+"PO-Revision-Date: 2025-08-06 12:33+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/attrs.html:8
+msgid "User Information"
+msgstr "Benutzerinformationen"
+
+#: templates/attrs.html:15
+msgid "NameID"
+msgstr "NameID"
+
+#: templates/attrs.html:25
+msgid "NameID Format"
+msgstr "NameID-Format"
+
+#: templates/attrs.html:41 templates/index.html:70
+msgid "User Attributes"
+msgstr "Benutzerattribute"
+
+#: templates/attrs.html:42
+msgid "You have the following attributes:"
+msgstr "Sie haben die folgenden Attribute:"
+
+#: templates/attrs.html:48 templates/index.html:76
+msgid "Name"
+msgstr "Name"
+
+#: templates/attrs.html:49 templates/index.html:77
+msgid "Values"
+msgstr "Werte"
+
+#: templates/attrs.html:78 templates/index.html:106
+msgid "You don't have any attributes"
+msgstr "Sie haben keine Attribute"
+
+#: templates/attrs.html:85 templates/index.html:111
+msgid "Logout"
+msgstr "Abmelden"
+
+#: templates/base.html:9
+msgid "SAML Testing Tool | Mock SP | SAML Flow"
+msgstr "SAML-Testtool | Mock SP | SAML-Flow"
+
+#: templates/base.html:161
+msgid "SAML Testing Tool"
+msgstr "SAML-Testtool"
+
+#: templates/base.html:167
+msgid "Presented by"
+msgstr "Präsentiert von"
+
+#: templates/base.html:189
+msgid "What is this tool?"
+msgstr "Was ist dieses Tool?"
+
+#: templates/base.html:191
+msgid ""
+"This is a SAML testing tool acting as a Service Provider (SP) that allows"
+" you to configure and test SAML authentication flows with Authgear, "
+"Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
+msgstr ""
+"Dies ist ein SAML-Testtool, das als Service Provider (SP) fungiert und es"
+" Ihnen ermöglicht, SAML-Authentifizierungsflows mit Authgear, Auth0, "
+"Okta, Entra ID oder jedem anderen Identity Provider (IdP) zu konfigurieren"
+" und zu testen."
+
+#: templates/base.html:196
+msgid "How to use it:"
+msgstr "So verwenden Sie es:"
+
+#: templates/base.html:198
+msgid "Configure your IdP settings"
+msgstr "Konfigurieren Sie Ihre IdP-Einstellungen"
+
+#: templates/base.html:198
+msgid "Enter your Authgear or other Identity Provider's details in the form"
+msgstr ""
+"Geben Sie die Details Ihres Authgear oder anderen Identity Providers in "
+"das Formular ein"
+
+#: templates/base.html:199
+msgid "Set up your SP"
+msgstr "Richten Sie Ihren SP ein"
+
+#: templates/base.html:199
+msgid "Configure your Service Provider settings"
+msgstr "Konfigurieren Sie Ihre Service Provider-Einstellungen"
+
+#: templates/base.html:200
+msgid "Test authentication"
+msgstr "Authentifizierung testen"
+
+#: templates/base.html:200
+msgid "Click \"Login\" to initiate SAML authentication"
+msgstr "Klicken Sie auf \"Anmelden\", um die SAML-Authentifizierung zu starten"
+
+#: templates/base.html:201
+msgid "View results"
+msgstr "Ergebnisse anzeigen"
+
+#: templates/base.html:201
+msgid "Check the attributes and user information returned"
+msgstr "Überprüfen Sie die zurückgegebenen Attribute und Benutzerinformationen"
+
+#: templates/base.html:206
+msgid "Key Features:"
+msgstr "Hauptfunktionen:"
+
+#: templates/base.html:208
+msgid "Test SAML 2.0 authentication flows"
+msgstr "SAML 2.0-Authentifizierungsflows testen"
+
+#: templates/base.html:209
+msgid "View user attributes and claims"
+msgstr "Benutzerattribute und Claims anzeigen"
+
+#: templates/base.html:210
+msgid "Configure various SAML bindings"
+msgstr "Verschiedene SAML-Bindings konfigurieren"
+
+#: templates/base.html:211
+msgid "Test different NameID formats"
+msgstr "Verschiedene NameID-Formate testen"
+
+#: templates/base.html:212
+msgid "Validate SAML responses"
+msgstr "SAML-Antworten validieren"
+
+#: templates/base.html:224
+msgid "View source code on GitHub"
+msgstr "Quellcode auf GitHub anzeigen"
+
+#: templates/base.html:230
+msgid "Get Started with SAML SSO"
+msgstr "Erste Schritte mit SAML SSO"
+
+#: templates/base.html:232
+msgid ""
+"Experience seamless, secure, and scalable identity management with "
+"Authgear."
+msgstr ""
+"Erleben Sie nahtloses, sicheres und skalierbares Identitätsmanagement "
+"mit Authgear."
+
+#: templates/base.html:238
+msgid "Get started for free"
+msgstr "Kostenlos starten"
+
+#: templates/base.html:698
+msgid "Clear parameters"
+msgstr "Parameter löschen"
+
+#: templates/base.html:705
+msgid "Back to options"
+msgstr "Zurück zu den Optionen"
+
+#: templates/index.html:22
+msgid "Errors:"
+msgstr "Fehler:"
+
+#: templates/index.html:45
+msgid "Not authenticated"
+msgstr "Nicht authentifiziert"
+
+#: templates/index.html:60
+msgid "Successfully logged out"
+msgstr "Erfolgreich abgemeldet"
+
+#: templates/index.html:60
+msgid "local session cleared"
+msgstr "lokale Sitzung gelöscht"
+
+#: templates/index.html:115
+msgid "Configuration parameters from your IdP"
+msgstr "Konfigurationsparameter von Ihrem IdP"
+
+#: templates/index.html:116
+msgid ""
+"These are the configuration values you need to obtain from your Identity "
+"Provider."
+msgstr ""
+"Dies sind die Konfigurationswerte, die Sie von Ihrem Identity Provider "
+"erhalten müssen."
+
+#: templates/index.html:132
+msgid "Upload Metadata"
+msgstr "Metadaten hochladen"
+
+#: templates/index.html:133
+msgid "Quick setup with your IdP's SAML metadata file"
+msgstr "Schnelle Einrichtung mit der SAML-Metadatendatei Ihres IdP"
+
+#: templates/index.html:149
+msgid "Manual Setup"
+msgstr "Manuelle Einrichtung"
+
+#: templates/index.html:150
+msgid "Configure each parameter individually"
+msgstr "Jeden Parameter einzeln konfigurieren"
+
+#: templates/components/metadata_upload.html:35 templates/index.html:166
+#: templates/index.html:235
+msgid "Metadata loaded successfully!"
+msgstr "Metadaten erfolgreich geladen!"
+
+#: templates/components/metadata_upload.html:43 templates/index.html:174
+#: templates/index.html:243
+msgid "Error loading metadata"
+msgstr "Fehler beim Laden der Metadaten"
+
+#: templates/index.html:185
+msgid "Upload SAML Metadata"
+msgstr "SAML-Metadaten hochladen"
+
+#: templates/components/metadata_upload.html:8 templates/index.html:186
+msgid ""
+"Upload your IdP's SAML metadata file to automatically fill all "
+"configuration fields."
+msgstr ""
+"Laden Sie die SAML-Metadatendatei Ihres IdP hoch, um alle "
+"Konfigurationsfelder automatisch auszufüllen."
+
+#: templates/index.html:226
+msgid "XML files only"
+msgstr "Nur XML-Dateien"
+
+#: templates/index.html:348
+msgid "Login"
+msgstr "Anmelden"
+
+#: templates/invalid.html:5
+msgid "Configuration Error"
+msgstr "Konfigurationsfehler"
+
+#: templates/invalid.html:15
+msgid "Invalid Configuration"
+msgstr "Ungültige Konfiguration"
+
+#: templates/index.html:276
+msgid "Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP."
+msgstr "Eindeutiger Bezeichner für Ihren Identity Provider. Normalerweise eine URL oder URN, die Ihren IdP identifiziert."
+
+#: templates/index.html:286
+msgid "The URL where users will be redirected for authentication. This is your IdP's login endpoint."
+msgstr "Die URL, zu der Benutzer für die Authentifizierung weitergeleitet werden. Dies ist der Login-Endpunkt Ihres IdP."
+
+#: templates/index.html:306
+msgid "X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers."
+msgstr "X.509-Zertifikat zur Überprüfung von SAML-Antworten von Ihrem IdP. Muss im PEM-Format mit BEGIN/END-Markierungen vorliegen."
+
+#: templates/index.html:315
+msgid "The format of the user identifier in SAML responses. Choose based on your IdP's configuration."
+msgstr "Das Format des Benutzerbezeichners in SAML-Antworten. Wählen Sie basierend auf der Konfiguration Ihres IdP."
+
+#: templates/index.html:324
+msgid "The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common."
+msgstr "Die Protokollbindung für SAML-Anfragen an Ihren IdP. HTTP-Redirect ist am häufigsten."
+
+#: templates/index.html:333
+msgid "The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs."
+msgstr "Die Protokollbindung zum Empfangen von SAML-Antworten. HTTP-POST ist für SPs am häufigsten."
+
+#: templates/components/idp_parameters.html:12
+msgid "Assertion Consumer Service URL"
+msgstr "Assertion Consumer Service URL"
+
+#: templates/components/idp_parameters.html:20
+msgid "The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+msgstr "Der Audience-Wert, der in SAML-Assertions vorhanden sein sollte. Normalerweise die Entity-ID oder URL Ihres SP."
+
+#: templates/components/authn_request_parameters.html:3
+msgid "AuthnRequest Parameters"
+msgstr "AuthnRequest-Parameter"
+
+#: templates/components/authn_request_parameters.html:4
+msgid ""
+"These parameters control how the SAML authentication request is sent to "
+"your Identity Provider."
+msgstr ""
+"Diese Parameter steuern, wie die SAML-Authentifizierungsanfrage an Ihren "
+"Identity Provider gesendet wird."
+
+#: templates/components/authn_request_parameters.html:8
+msgid "Authentication Behavior"
+msgstr "Authentifizierungsverhalten"
+
+#: templates/components/authn_request_parameters.html:19
+msgid "Default"
+msgstr "Standard"
+
+#: templates/components/authn_request_parameters.html:20
+msgid ""
+"Use the IdP's default authentication behavior. The IdP may use existing "
+"sessions or prompt for authentication as appropriate."
+msgstr ""
+"Verwenden Sie das Standard-Authentifizierungsverhalten des IdP. Der IdP "
+"kann bestehende Sitzungen verwenden oder bei Bedarf zur Authentifizierung "
+"auffordern."
+
+#: templates/components/authn_request_parameters.html:33
+msgid "IsPassive"
+msgstr "IsPassive"
+
+#: templates/components/authn_request_parameters.html:34
+msgid ""
+"The IdP will not prompt the user for authentication if they already have "
+"a valid session. Useful for silent authentication checks."
+msgstr ""
+"Der IdP wird den Benutzer nicht zur Authentifizierung auffordern, wenn "
+"er bereits eine gültige Sitzung hat. Nützlich für stille "
+"Authentifizierungsprüfungen."
+
+#: templates/components/authn_request_parameters.html:47
+msgid "ForceAuthn"
+msgstr "ForceAuthn"
+
+#: templates/components/authn_request_parameters.html:48
+msgid ""
+"The IdP will always require fresh authentication, even if the user has an"
+" existing session. Forces re-authentication."
+msgstr ""
+"Der IdP wird immer eine neue Authentifizierung erfordern, auch wenn der "
+"Benutzer eine bestehende Sitzung hat. Erzwingt eine erneute "
+"Authentifizierung."
+
+#: templates/components/authn_request_parameters.html:55
+msgid "Subject NameID"
+msgstr "Subject NameID"
+
+#: templates/components/authn_request_parameters.html:62
+msgid ""
+"Specify a particular user identifier to test authentication for a "
+"specific user. Leave empty to use the IdP's default user selection."
+msgstr ""
+"Geben Sie einen bestimmten Benutzerbezeichner an, um die "
+"Authentifizierung für einen bestimmten Benutzer zu testen. Lassen Sie "
+"leer, um die Standard-Benutzerauswahl des IdP zu verwenden."
+
+#: templates/components/idp_parameters.html:5
+msgid "Parameters to configure in your IdP"
+msgstr "Parameter zur Konfiguration in Ihrem IdP"
+
+#: templates/components/idp_parameters.html:6
+msgid ""
+"These are the values you need to configure in your Identity Provider "
+"settings."
+msgstr ""
+"Dies sind die Werte, die Sie in den Einstellungen Ihres Identity "
+"Providers konfigurieren müssen."
+
+#: templates/components/metadata_upload.html:7
+msgid "Quick Setup"
+msgstr "Schnelle Einrichtung" 
