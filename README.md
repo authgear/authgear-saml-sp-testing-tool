@@ -14,9 +14,16 @@ Visit `http://localhost:5001` to access the tool.
 
 **Requirements**: Python 3.11
 
+## Features
+
+- **Multilingual Support**: Available in 9 languages (English, Spanish, French, Portuguese, Russian, Korean, Japanese, Traditional Chinese, Simplified Chinese)
+- **SAML 2.0 Testing**: Complete authentication flow testing with various bindings and NameID formats
+- **Metadata Upload**: Drag-and-drop SAML metadata file parsing
+- **User Attributes**: View and analyze returned user attributes and claims
+
 ## Usage
 
-1. **Configure IdP Settings**: Enter your Identity Provider details (Entity ID, SSO URL, certificate)
+1. **Configure IdP Settings**: Enter your Identity Provider details (Entity ID, SSO URL, certificate) or upload metadata file
 2. **Set SP Configuration**: Configure Service Provider settings (audience, bindings, NameID format)
 3. **Test Authentication**: Click "Login" to initiate SAML authentication flow
 4. **View Results**: Check returned user attributes and authentication status
