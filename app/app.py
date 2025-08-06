@@ -148,6 +148,12 @@ def prepare_flask_request(request: Request):
     }
 
 
+@app.route("/health")
+def health():
+    """Health check endpoint for monitoring and liveness probes"""
+    return "OK", 200
+
+
 @app.route("/")
 def root_redirect():
     """Redirect root to default language (English)"""
