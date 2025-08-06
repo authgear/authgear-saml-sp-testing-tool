@@ -59,6 +59,13 @@ def inject_gettext():
     return dict(_=_)
 
 
+@app.route('/language/<lang>')
+def set_language(lang):
+    """Set the language for the session"""
+    session['lang'] = lang
+    return redirect(request.referrer or url_for('index'))
+
+
 def init_saml_auth(req, request: Request, login_form: LoginForm):
     auth = OneLogin_Saml2_Auth(
         req,
@@ -86,6 +93,10 @@ def prepare_flask_request(request: Request):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    # Handle language selection from query parameter
+    if request.args.get('lang'):
+        session['lang'] = request.args.get('lang')
+    
     req = prepare_flask_request(request)
     errors = []
     error_reason = None
