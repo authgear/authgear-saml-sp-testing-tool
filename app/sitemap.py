@@ -4,8 +4,8 @@ import xml.etree.ElementTree as ET
 
 sitemap_bp = Blueprint('sitemap', __name__)
 
-# Supported languages
-LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']
+# Supported languages - should match app.py SUPPORTED_LANGUAGES
+LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar']
 
 # Language names for hreflang
 LANGUAGE_NAMES = {
@@ -17,7 +17,8 @@ LANGUAGE_NAMES = {
     'ko': 'ko',
     'ja': 'ja',
     'zh_Hant': 'zh-Hant',
-    'zh_Hans': 'zh-Hans'
+    'zh_Hans': 'zh-Hans',
+    'ar': 'ar'
 }
 
 def create_sitemap_index():

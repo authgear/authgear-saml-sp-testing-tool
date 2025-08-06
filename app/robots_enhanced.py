@@ -21,6 +21,7 @@ Allow: /ko/
 Allow: /ja/
 Allow: /zh_Hant/
 Allow: /zh_Hans/
+Allow: /ar/
 
 # Allow important pages
 Allow: /attrs/
@@ -49,6 +50,7 @@ Sitemap: {request.url_root.rstrip('/')}/sitemap_ko.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_ja.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_zh_Hant.xml
 Sitemap: {request.url_root.rstrip('/')}/sitemap_zh_Hans.xml
+Sitemap: {request.url_root.rstrip('/')}/sitemap_ar.xml
 
 # Google-specific directives
 User-agent: Googlebot

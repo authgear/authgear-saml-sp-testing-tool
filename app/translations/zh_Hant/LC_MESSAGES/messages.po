@@ -1,326 +1,507 @@
 # Traditional Chinese translations for authgear-demo-saml-sp.
 # Copyright (C) 2025 Authgear
-# This file is distributed under the same license as the authgear-demo-saml-sp project.
+# This file is distributed under the same license as the
+# authgear-demo-saml-sp project.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-06 12:33+0100\n"
+"POT-Creation-Date: 2025-08-06 14:29+0100\n"
 "PO-Revision-Date: 2025-08-06 12:33+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: zh_Hant <LL@li.org>\n"
 "Language: zh_Hant\n"
+"Language-Team: zh_Hant <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
-#: templates/base.html:7
-msgid "SAML Testing Tool | Mock SP | SAML Flow"
-msgstr "SAML 測試工具 | 模擬 SP | SAML 流程"
-
-#: templates/base.html:80
-msgid "SAML Testing Tool"
-msgstr "SAML 測試工具"
-
-#: templates/base.html:86
-msgid "Presented by"
-msgstr "由"
-
-#: templates/base.html:93
-msgid "What is this tool?"
-msgstr "這是什麼工具？"
-
-#: templates/base.html:100
-msgid "How to use it:"
-msgstr "如何使用："
-
-#: templates/base.html:102
-msgid "Configure your IdP settings"
-msgstr "配置您的 IdP 設定"
-
-#: templates/base.html:103
-msgid "Set up your SP"
-msgstr "設定您的 SP"
-
-#: templates/base.html:104
-msgid "Test authentication"
-msgstr "測試認證"
-
-#: templates/base.html:105
-msgid "View results"
-msgstr "查看結果"
-
-#: templates/base.html:110
-msgid "Key Features:"
-msgstr "主要功能："
-
-#: templates/base.html:112
-msgid "Test SAML 2.0 authentication flows"
-msgstr "測試 SAML 2.0 認證流程"
-
-#: templates/base.html:113
-msgid "View user attributes and claims"
-msgstr "查看使用者屬性和聲明"
-
-#: templates/base.html:114
-msgid "Configure various SAML bindings"
-msgstr "配置各種 SAML 綁定"
-
-#: templates/base.html:115
-msgid "Test different NameID formats"
-msgstr "測試不同的 NameID 格式"
-
-#: templates/base.html:116
-msgid "Validate SAML responses"
-msgstr "驗證 SAML 回應"
-
-#: templates/base.html:134
-msgid "Get Started with SAML SSO"
-msgstr "開始使用 SAML SSO"
-
-#: templates/invalid.html:4
-msgid "Configuration Error"
-msgstr "配置錯誤"
-
-#: templates/invalid.html:14
-msgid "Invalid Configuration"
-msgstr "無效配置"
-
-#: templates/attrs.html:7
+#: templates/attrs.html:8
 msgid "User Information"
 msgstr "使用者資訊"
 
-#: templates/attrs.html:14
+#: templates/attrs.html:15
 msgid "NameID"
 msgstr "NameID"
 
-#: templates/attrs.html:24
+#: templates/attrs.html:25
 msgid "NameID Format"
 msgstr "NameID 格式"
 
-#: templates/attrs.html:40
+#: templates/attrs.html:41 templates/index.html:70
 msgid "User Attributes"
 msgstr "使用者屬性"
 
-#: templates/attrs.html:41
+#: templates/attrs.html:42
 msgid "You have the following attributes:"
 msgstr "您有以下屬性："
 
-#: templates/attrs.html:47
+#: templates/attrs.html:48 templates/index.html:76
 msgid "Name"
 msgstr "名稱"
 
-#: templates/attrs.html:48
+#: templates/attrs.html:49 templates/index.html:77
 msgid "Values"
 msgstr "值"
 
-#: templates/attrs.html:77
+#: templates/attrs.html:78 templates/index.html:106
 msgid "You don't have any attributes"
 msgstr "您沒有任何屬性"
 
-#: templates/attrs.html:84
+#: templates/attrs.html:85 templates/index.html:111
 msgid "Logout"
 msgstr "登出"
 
-#: templates/components/metadata_upload.html:6
-msgid "Quick Setup"
-msgstr "快速設定"
+#: templates/base.html:9
+msgid "SAML Testing Tool | Mock SP | SAML Flow"
+msgstr "SAML 測試工具 | 模擬 SP | SAML 流程"
 
-#: templates/components/metadata_upload.html:7
-msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
-msgstr "上傳您的 IdP SAML metadata 檔案以自動填寫所有配置欄位。"
+#: templates/base.html:161
+msgid "SAML Testing Tool"
+msgstr "SAML 測試工具"
 
-#: templates/components/metadata_upload.html:34
-msgid "Metadata loaded successfully!"
-msgstr "Metadata 載入成功！"
+#: templates/base.html:167
+msgid "Presented by"
+msgstr "由"
 
-#: templates/components/metadata_upload.html:42
-msgid "Error loading metadata"
-msgstr "載入 metadata 時發生錯誤"
+#: templates/base.html:189
+msgid "What is this tool?"
+msgstr "這是什麼工具？"
 
-#: templates/components/authn_request_parameters.html:2
-msgid "AuthnRequest Parameters"
-msgstr "AuthnRequest 參數"
+#: templates/base.html:191
+msgid ""
+"This is a SAML testing tool acting as a Service Provider (SP) that allows"
+" you to configure and test SAML authentication flows with Authgear, "
+"Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
+msgstr ""
+"這是一個 SAML 測試工具，作為服務提供者 (SP)，讓您可以配置和測試與 Authgear、Auth0、Okta、Entra ID "
+"或任何其他身份提供者 (IdP) 的 SAML 認證流程。"
 
-#: templates/components/authn_request_parameters.html:3
-msgid "These parameters control how the SAML authentication request is sent to your Identity Provider."
-msgstr "這些參數控制 SAML 認證請求如何發送到您的 Identity Provider。"
+#: templates/base.html:196
+msgid "How to use it:"
+msgstr "如何使用："
 
-#: templates/components/authn_request_parameters.html:7
-msgid "Authentication Behavior"
-msgstr "認證行為"
+#: templates/base.html:198
+msgid "Configure your IdP settings"
+msgstr "配置您的 IdP 設定"
 
-#: templates/components/authn_request_parameters.html:18
-msgid "Default"
-msgstr "預設"
-
-#: templates/components/authn_request_parameters.html:19
-msgid "Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate."
-msgstr "使用 IdP 的預設認證行為。IdP 可能會使用現有 sessions 或根據需要提示認證。"
-
-#: templates/components/authn_request_parameters.html:32
-msgid "IsPassive"
-msgstr "IsPassive"
-
-#: templates/components/authn_request_parameters.html:33
-msgid "The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks."
-msgstr "如果使用者已有有效 session，IdP 不會提示使用者進行認證。適用於靜默認證檢查。"
-
-#: templates/components/authn_request_parameters.html:46
-msgid "ForceAuthn"
-msgstr "ForceAuthn"
-
-#: templates/components/authn_request_parameters.html:47
-msgid "The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication."
-msgstr "即使使用者有現有 session，IdP 也始終需要重新認證。強制重新認證。"
-
-#: templates/components/authn_request_parameters.html:54
-msgid "Subject NameID"
-msgstr "Subject NameID"
-
-#: templates/components/authn_request_parameters.html:61
-msgid "Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection."
-msgstr "指定特定使用者識別碼以測試特定使用者的認證。留空以使用 IdP 的預設使用者選擇。"
-
-#: templates/components/idp_parameters.html:4
-msgid "Parameters to configure in your IdP"
-msgstr "在您的 IdP 中配置的參數"
-
-#: templates/components/idp_parameters.html:5
-msgid "These are the values you need to configure in your Identity Provider settings."
-msgstr "這些是您需要在 Identity Provider 設定中配置的值。"
-
-#: templates/index.html:21
-msgid "Errors:"
-msgstr "錯誤："
-
-#: templates/index.html:44
-msgid "Not authenticated"
-msgstr "未認證"
-
-#: templates/index.html:59
-msgid "Successfully logged out"
-msgstr "成功登出"
-
-#: templates/index.html:59
-msgid "local session cleared"
-msgstr "本地 session 已清除"
-
-#: templates/index.html:69
-msgid "User Attributes"
-msgstr "使用者屬性"
-
-#: templates/index.html:75
-msgid "Name"
-msgstr "名稱"
-
-#: templates/index.html:76
-msgid "Values"
-msgstr "值"
-
-#: templates/index.html:105
-msgid "You don't have any attributes"
-msgstr "您沒有任何屬性"
-
-#: templates/index.html:110
-msgid "Logout"
-msgstr "登出"
-
-#: templates/index.html:114
-msgid "Configuration parameters from your IdP"
-msgstr "來自您 IdP 的配置參數"
-
-#: templates/index.html:115
-msgid "These are the configuration values you need to obtain from your Identity Provider."
-msgstr "這些是您需要從 Identity Provider 獲得的配置值。"
-
-#: templates/index.html:131
-msgid "Upload Metadata"
-msgstr "上傳 Metadata"
-
-#: templates/index.html:132
-msgid "Quick setup with your IdP's SAML metadata file"
-msgstr "使用您 IdP 的 SAML metadata 檔案快速設定"
-
-#: templates/index.html:148
-msgid "Manual Setup"
-msgstr "手動設定"
-
-#: templates/index.html:149
-msgid "Configure each parameter individually"
-msgstr "個別配置每個參數"
-
-#: templates/index.html:165
-msgid "Metadata loaded successfully!"
-msgstr "Metadata 載入成功！"
-
-#: templates/index.html:173
-msgid "Error loading metadata"
-msgstr "載入 metadata 時發生錯誤"
-
-#: templates/index.html:184
-msgid "Upload SAML Metadata"
-msgstr "上傳 SAML Metadata"
-
-#: templates/index.html:185
-msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
-msgstr "上傳您 IdP 的 SAML metadata 檔案以自動填寫所有配置欄位。"
-
-#: templates/index.html:225
-msgid "XML files only"
-msgstr "僅限 XML 檔案"
-
-#: templates/index.html:234
-msgid "Metadata loaded successfully!"
-msgstr "Metadata 載入成功！"
-
-#: templates/index.html:242
-msgid "Error loading metadata"
-msgstr "載入 metadata 時發生錯誤"
-
-#: templates/index.html:347
-msgid "Login"
-msgstr "登入"
-
-#: templates/base.html:137
-msgid "View source code on GitHub"
-msgstr "在 GitHub 上查看原始碼"
-
-#: templates/base.html:611
-msgid "Clear parameters"
-msgstr "清除參數"
-
-#: templates/base.html:615
-msgid "Back to options"
-msgstr "返回選項"
-
-#: templates/base.html:145
-msgid "Experience seamless, secure, and scalable identity management with Authgear."
-msgstr "體驗 Authgear 提供的無縫、安全且可擴展的身份管理。"
-
-#: templates/base.html:151
-msgid "Get started for free"
-msgstr "免費開始使用"
-
-#: templates/base.html:105
-msgid "This is a SAML testing tool acting as a Service Provider (SP) that allows you to configure and test SAML authentication flows with Authgear, Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
-msgstr "這是一個 SAML 測試工具，作為服務提供者 (SP)，讓您可以配置和測試與 Authgear、Auth0、Okta、Entra ID 或任何其他身份提供者 (IdP) 的 SAML 認證流程。"
-
-#: templates/base.html:111
+#: templates/base.html:198
 msgid "Enter your Authgear or other Identity Provider's details in the form"
 msgstr "在表單中輸入您的 Authgear 或其他身份提供者的詳細資訊"
 
-#: templates/base.html:112
+#: templates/base.html:199
+msgid "Set up your SP"
+msgstr "設定您的 SP"
+
+#: templates/base.html:199
 msgid "Configure your Service Provider settings"
 msgstr "配置您的服務提供者設定"
 
-#: templates/base.html:114
+#: templates/base.html:200
+msgid "Test authentication"
+msgstr "測試認證"
+
+#: templates/base.html:200
+msgid "Click \"Login\" to initiate SAML authentication"
+msgstr "點擊「登入」開始 SAML 認證"
+
+#: templates/base.html:201
+msgid "View results"
+msgstr "查看結果"
+
+#: templates/base.html:201
 msgid "Check the attributes and user information returned"
 msgstr "檢查返回的屬性和使用者資訊"
 
-#: templates/base.html:113
-msgid "Click \"Login\" to initiate SAML authentication"
-msgstr "點擊「登入」開始 SAML 認證" 
+#: templates/base.html:206
+msgid "Key Features:"
+msgstr "主要功能："
+
+#: templates/base.html:208
+msgid "Test SAML 2.0 authentication flows"
+msgstr "測試 SAML 2.0 認證流程"
+
+#: templates/base.html:209
+msgid "View user attributes and claims"
+msgstr "查看使用者屬性和聲明"
+
+#: templates/base.html:210
+msgid "Configure various SAML bindings"
+msgstr "配置各種 SAML 綁定"
+
+#: templates/base.html:211
+msgid "Test different NameID formats"
+msgstr "測試不同的 NameID 格式"
+
+#: templates/base.html:212
+msgid "Validate SAML responses"
+msgstr "驗證 SAML 回應"
+
+#: templates/base.html:224
+msgid "View source code on GitHub"
+msgstr "在 GitHub 上查看原始碼"
+
+#: templates/base.html:230
+msgid "Get Started with SAML SSO"
+msgstr "開始使用 SAML SSO"
+
+#: templates/base.html:232
+msgid ""
+"Experience seamless, secure, and scalable identity management with "
+"Authgear."
+msgstr "體驗 Authgear 提供的無縫、安全且可擴展的身份管理。"
+
+#: templates/base.html:238
+msgid "Get started for free"
+msgstr "免費開始使用"
+
+#: templates/base.html:698
+msgid "Clear parameters"
+msgstr "清除參數"
+
+#: templates/base.html:705
+msgid "Back to options"
+msgstr "返回選項"
+
+#: templates/index.html:22
+msgid "Errors:"
+msgstr "錯誤："
+
+#: templates/index.html:45
+msgid "Not authenticated"
+msgstr "未認證"
+
+#: templates/index.html:60
+msgid "Successfully logged out"
+msgstr "成功登出"
+
+#: templates/index.html:60
+msgid "local session cleared"
+msgstr "本地 session 已清除"
+
+#: templates/index.html:115
+msgid "Configuration parameters from your IdP"
+msgstr "來自您 IdP 的配置參數"
+
+#: templates/index.html:116
+msgid ""
+"These are the configuration values you need to obtain from your Identity "
+"Provider."
+msgstr "這些是您需要從 Identity Provider 獲得的配置值。"
+
+#: templates/index.html:132
+msgid "Upload Metadata"
+msgstr "上傳 Metadata"
+
+#: templates/index.html:133
+msgid "Quick setup with your IdP's SAML metadata file"
+msgstr "使用您 IdP 的 SAML metadata 檔案快速設定"
+
+#: templates/index.html:149
+msgid "Manual Setup"
+msgstr "手動設定"
+
+#: templates/index.html:150
+msgid "Configure each parameter individually"
+msgstr "個別配置每個參數"
+
+#: templates/components/metadata_upload.html:35 templates/index.html:166
+#: templates/index.html:235
+msgid "Metadata loaded successfully!"
+msgstr "Metadata 載入成功！"
+
+#: templates/components/metadata_upload.html:43 templates/index.html:174
+#: templates/index.html:243
+msgid "Error loading metadata"
+msgstr "載入 metadata 時發生錯誤"
+
+#: templates/index.html:185
+msgid "Upload SAML Metadata"
+msgstr "上傳 SAML Metadata"
+
+#: templates/components/metadata_upload.html:8 templates/index.html:186
+msgid ""
+"Upload your IdP's SAML metadata file to automatically fill all "
+"configuration fields."
+msgstr "上傳您的 IdP SAML metadata 檔案以自動填寫所有配置欄位。"
+
+#: templates/index.html:226
+msgid "XML files only"
+msgstr "僅限 XML 檔案"
+
+#: templates/index.html:348
+msgid "Login"
+msgstr "登入"
+
+#: templates/invalid.html:5
+msgid "Configuration Error"
+msgstr "配置錯誤"
+
+#: templates/invalid.html:15
+msgid "Invalid Configuration"
+msgstr "無效配置"
+
+#: templates/components/authn_request_parameters.html:3
+msgid "AuthnRequest Parameters"
+msgstr "AuthnRequest 參數"
+
+#: templates/components/authn_request_parameters.html:4
+msgid ""
+"These parameters control how the SAML authentication request is sent to "
+"your Identity Provider."
+msgstr "這些參數控制 SAML 認證請求如何發送到您的 Identity Provider。"
+
+#: templates/components/authn_request_parameters.html:8
+msgid "Authentication Behavior"
+msgstr "認證行為"
+
+#: templates/components/authn_request_parameters.html:19
+msgid "Default"
+msgstr "預設"
+
+#: templates/components/authn_request_parameters.html:20
+msgid ""
+"Use the IdP's default authentication behavior. The IdP may use existing "
+"sessions or prompt for authentication as appropriate."
+msgstr "使用 IdP 的預設認證行為。IdP 可能會使用現有 sessions 或根據需要提示認證。"
+
+#: templates/components/authn_request_parameters.html:33
+msgid "IsPassive"
+msgstr "IsPassive"
+
+#: templates/components/authn_request_parameters.html:34
+msgid ""
+"The IdP will not prompt the user for authentication if they already have "
+"a valid session. Useful for silent authentication checks."
+msgstr "如果使用者已有有效 session，IdP 不會提示使用者進行認證。適用於靜默認證檢查。"
+
+#: templates/components/authn_request_parameters.html:47
+msgid "ForceAuthn"
+msgstr "ForceAuthn"
+
+#: templates/components/authn_request_parameters.html:48
+msgid ""
+"The IdP will always require fresh authentication, even if the user has an"
+" existing session. Forces re-authentication."
+msgstr "即使使用者有現有 session，IdP 也始終需要重新認證。強制重新認證。"
+
+#: templates/components/authn_request_parameters.html:55
+msgid "Subject NameID"
+msgstr "Subject NameID"
+
+#: templates/components/authn_request_parameters.html:62
+msgid ""
+"Specify a particular user identifier to test authentication for a "
+"specific user. Leave empty to use the IdP's default user selection."
+msgstr "指定特定使用者識別碼以測試特定使用者的認證。留空以使用 IdP 的預設使用者選擇。"
+
+#: templates/components/idp_parameters.html:5
+msgid "Parameters to configure in your IdP"
+msgstr "在您的 IdP 中配置的參數"
+
+#: templates/components/idp_parameters.html:6
+msgid ""
+"These are the values you need to configure in your Identity Provider "
+"settings."
+msgstr "這些是您需要在 Identity Provider 設定中配置的值。"
+
+#: templates/components/metadata_upload.html:7
+msgid "Quick Setup"
+msgstr "快速設定"
+
+#~ msgid "{editor}: Editing failed"
+#~ msgstr ""
+
+#~ msgid "{editor}: Editing failed: {e}"
+#~ msgstr ""
+
+#~ msgid "{text} {deprecated_message}"
+#~ msgstr ""
+
+#~ msgid "Options"
+#~ msgstr "返回選項"
+
+#~ msgid "Got unexpected extra argument ({args})"
+#~ msgid_plural "Got unexpected extra arguments ({args})"
+#~ msgstr[0] ""
+
+#~ msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "Aborted!"
+#~ msgstr ""
+
+#~ msgid "Commands"
+#~ msgstr ""
+
+#~ msgid "Missing command."
+#~ msgstr ""
+
+#~ msgid "No such command {name!r}."
+#~ msgstr ""
+
+#~ msgid "Value must be an iterable."
+#~ msgstr ""
+
+#~ msgid "Takes {nargs} values but 1 was given."
+#~ msgid_plural "Takes {nargs} values but {len} were given."
+#~ msgstr[0] ""
+
+#~ msgid ""
+#~ "DeprecationWarning: The {param_type} {name!r} "
+#~ "is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "env var: {var}"
+#~ msgstr ""
+
+#~ msgid "default: {default}"
+#~ msgstr ""
+
+#~ msgid "required"
+#~ msgstr ""
+
+#~ msgid "(dynamic)"
+#~ msgstr ""
+
+#~ msgid "%(prog)s, version %(version)s"
+#~ msgstr ""
+
+#~ msgid "Show the version and exit."
+#~ msgstr ""
+
+#~ msgid "Show this message and exit."
+#~ msgstr ""
+
+#~ msgid "Error: {message}"
+#~ msgstr ""
+
+#~ msgid "Try '{command} {option}' for help."
+#~ msgstr ""
+
+#~ msgid "Invalid value: {message}"
+#~ msgstr ""
+
+#~ msgid "Invalid value for {param_hint}: {message}"
+#~ msgstr ""
+
+#~ msgid "Missing argument"
+#~ msgstr ""
+
+#~ msgid "Missing option"
+#~ msgstr ""
+
+#~ msgid "Missing parameter"
+#~ msgstr "清除參數"
+
+#~ msgid "Missing {param_type}"
+#~ msgstr ""
+
+#~ msgid "Missing parameter: {param_name}"
+#~ msgstr ""
+
+#~ msgid "No such option: {name}"
+#~ msgstr ""
+
+#~ msgid "Did you mean {possibility}?"
+#~ msgid_plural "(Possible options: {possibilities})"
+#~ msgstr[0] ""
+
+#~ msgid "unknown error"
+#~ msgstr ""
+
+#~ msgid "Could not open file {filename!r}: {message}"
+#~ msgstr ""
+
+#~ msgid "Argument {name!r} takes {nargs} values."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} does not take a value."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} requires an argument."
+#~ msgid_plural "Option {name!r} requires {nargs} arguments."
+#~ msgstr[0] ""
+
+#~ msgid "Shell completion is not supported for Bash versions older than 4.4."
+#~ msgstr ""
+
+#~ msgid "Couldn't detect Bash version, shell completion is not supported."
+#~ msgstr ""
+
+#~ msgid "Repeat for confirmation"
+#~ msgstr "使用者資訊"
+
+#~ msgid "Error: The value you entered was invalid."
+#~ msgstr ""
+
+#~ msgid "Error: {e.message}"
+#~ msgstr ""
+
+#~ msgid "Error: The two entered values do not match."
+#~ msgstr ""
+
+#~ msgid "Error: invalid input"
+#~ msgstr ""
+
+#~ msgid "Press any key to continue..."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Choose from:\n"
+#~ "\t{choices}"
+#~ msgstr ""
+
+#~ msgid "{value!r} is not {choice}."
+#~ msgid_plural "{value!r} is not one of {choices}."
+#~ msgstr[0] ""
+
+#~ msgid "{value!r} does not match the format {format}."
+#~ msgid_plural "{value!r} does not match the formats {formats}."
+#~ msgstr[0] ""
+
+#~ msgid "{value!r} is not a valid {number_type}."
+#~ msgstr ""
+
+#~ msgid "{value} is not in the range {range}."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid boolean."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid UUID."
+#~ msgstr ""
+
+#~ msgid "file"
+#~ msgstr ""
+
+#~ msgid "directory"
+#~ msgstr ""
+
+#~ msgid "path"
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} does not exist."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a file."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a directory."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not readable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not writable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not executable."
+#~ msgstr ""
+
+#~ msgid "{len_type} values are required, but {len_value} was given."
+#~ msgid_plural "{len_type} values are required, but {len_value} were given."
+#~ msgstr[0] ""
+

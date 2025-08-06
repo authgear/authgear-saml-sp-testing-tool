@@ -22,6 +22,10 @@ from .robots_enhanced import robots_bp
 from .structured_data import structured_data_bp
 
 
+# Supported languages
+SUPPORTED_LANGUAGES = ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans', 'ar']
+
+
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "authgeardemosamlsp"
 app.config["SESSION_COOKIE_NAME"] = "authgeardemosamlspsession"
@@ -33,7 +37,7 @@ app.config["SAML_PATH"] = os.path.join(
 def get_locale():
     # Try to get locale from URL path first
     path_parts = request.path.strip('/').split('/')
-    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if path_parts and path_parts[0] in SUPPORTED_LANGUAGES:
         return path_parts[0]
     # Try to get locale from session
     if 'lang' in session:
@@ -43,6 +47,11 @@ def get_locale():
         return request.args.get('lang')
     # Try to get locale from Accept-Language header
     return request.accept_languages.best_match(['en'])
+
+
+def validate_language(lang):
+    """Validate if the given language is supported"""
+    return lang in SUPPORTED_LANGUAGES
 
 
 # Babel configuration
@@ -76,7 +85,7 @@ def inject_current_language():
     # Get language from URL path
     path_parts = request.path.strip('/').split('/')
     current_lang = 'en'  # default
-    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if path_parts and path_parts[0] in SUPPORTED_LANGUAGES:
         current_lang = path_parts[0]
     return dict(current_language=current_lang)
 
@@ -112,7 +121,7 @@ def set_language(lang):
     
     # Remove any existing language prefix
     path_parts = current_path.strip('/').split('/')
-    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if path_parts and path_parts[0] in SUPPORTED_LANGUAGES:
         path_parts = path_parts[1:]
     
     # Build new path with language prefix
@@ -162,7 +171,7 @@ def root_redirect():
 @app.route("/<lang>/", methods=["GET", "POST"])
 def index(lang):
     # Validate language
-    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if not validate_language(lang):
         return redirect("/en/")
     
     # Handle language selection from query parameter (for backward compatibility)
@@ -338,7 +347,7 @@ def index(lang):
 @app.route("/<lang>/attrs/")
 def attrs(lang):
     # Validate language
-    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if not validate_language(lang):
         return redirect("/en/attrs/")
     
     paint_logout = False
@@ -366,7 +375,7 @@ def attrs(lang):
 @app.route("/<lang>/metadata/")
 def metadata(lang):
     # Validate language
-    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+    if not validate_language(lang):
         return redirect("/en/metadata/")
     
     req = prepare_flask_request(request)

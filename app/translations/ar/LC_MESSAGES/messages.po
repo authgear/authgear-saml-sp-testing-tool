@@ -1,0 +1,749 @@
+# Arabic translations for authgear-demo-saml-sp.
+# Copyright (C) 2025 Authgear
+# This file is distributed under the same license as the
+# authgear-demo-saml-sp project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-08-06 14:29+0100\n"
+"PO-Revision-Date: 2025-08-06 12:33+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: templates/attrs.html:8
+msgid "User Information"
+msgstr "معلومات المستخدم"
+
+#: templates/attrs.html:15
+msgid "NameID"
+msgstr "معرف الاسم"
+
+#: templates/attrs.html:25
+msgid "NameID Format"
+msgstr "تنسيق معرف الاسم"
+
+#: templates/attrs.html:41 templates/index.html:70
+msgid "User Attributes"
+msgstr "سمات المستخدم"
+
+#: templates/attrs.html:42
+msgid "You have the following attributes:"
+msgstr ""
+
+#: templates/attrs.html:48 templates/index.html:76
+msgid "Name"
+msgstr "الاسم"
+
+#: templates/attrs.html:49 templates/index.html:77
+msgid "Values"
+msgstr "القيم"
+
+#: templates/attrs.html:78 templates/index.html:106
+msgid "You don't have any attributes"
+msgstr ""
+
+#: templates/attrs.html:85 templates/index.html:111
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: templates/base.html:9
+msgid "SAML Testing Tool | Mock SP | SAML Flow"
+msgstr "أداة اختبار SAML | مزود الخدمة المحاكي | تدفق SAML"
+
+#: templates/base.html:161
+msgid "SAML Testing Tool"
+msgstr "أداة اختبار SAML"
+
+#: templates/base.html:167
+msgid "Presented by"
+msgstr "مقدم من"
+
+#: templates/base.html:189
+msgid "What is this tool?"
+msgstr "ما هي هذه الأداة؟"
+
+#: templates/base.html:191
+msgid ""
+"This is a SAML testing tool acting as a Service Provider (SP) that allows"
+" you to configure and test SAML authentication flows with Authgear, "
+"Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
+msgstr ""
+"هذه أداة اختبار SAML تعمل كمزود خدمة (SP) تسمح لك بتكوين واختبار "
+"تدفقات مصادقة SAML مع Authgear و Auth0 و Okta و Entra ID أو أي "
+"مزود هوية آخر (IdP)."
+
+#: templates/base.html:196
+msgid "How to use it:"
+msgstr "كيفية استخدامها:"
+
+#: templates/base.html:198
+msgid "Configure your IdP settings"
+msgstr "قم بتكوين إعدادات مزود الهوية الخاص بك"
+
+#: templates/base.html:198
+msgid "Enter your Authgear or other Identity Provider's details in the form"
+msgstr "أدخل تفاصيل Authgear أو مزود الهوية الآخر في النموذج"
+
+#: templates/base.html:199
+msgid "Set up your SP"
+msgstr "قم بإعداد مزود الخدمة الخاص بك"
+
+#: templates/base.html:199
+#, fuzzy
+msgid "Configure your Service Provider settings"
+msgstr "قم بتكوين إعدادات مزود الهوية الخاص بك"
+
+#: templates/base.html:200
+msgid "Test authentication"
+msgstr "اختبر المصادقة"
+
+#: templates/base.html:200
+msgid "Click \"Login\" to initiate SAML authentication"
+msgstr "انقر على \"تسجيل الدخول\" لبدء مصادقة SAML"
+
+#: templates/base.html:201
+msgid "View results"
+msgstr "عرض النتائج"
+
+#: templates/base.html:201
+msgid "Check the attributes and user information returned"
+msgstr "تحقق من السمات ومعلومات المستخدم المُرجعة"
+
+#: templates/base.html:206
+msgid "Key Features:"
+msgstr "الميزات الرئيسية:"
+
+#: templates/base.html:208
+msgid "Test SAML 2.0 authentication flows"
+msgstr "اختبر تدفقات مصادقة SAML 2.0"
+
+#: templates/base.html:209
+msgid "View user attributes and claims"
+msgstr "عرض سمات المستخدم والمطالبات"
+
+#: templates/base.html:210
+msgid "Configure various SAML bindings"
+msgstr "تكوين روابط SAML المختلفة"
+
+#: templates/base.html:211
+msgid "Test different NameID formats"
+msgstr "اختبر تنسيقات NameID المختلفة"
+
+#: templates/base.html:212
+msgid "Validate SAML responses"
+msgstr "التحقق من صحة استجابات SAML"
+
+#: templates/base.html:224
+msgid "View source code on GitHub"
+msgstr "عرض الكود المصدري على GitHub"
+
+#: templates/base.html:230
+msgid "Get Started with SAML SSO"
+msgstr "ابدأ مع SAML SSO"
+
+#: templates/base.html:232
+msgid ""
+"Experience seamless, secure, and scalable identity management with "
+"Authgear."
+msgstr "اختبر إدارة الهوية السلسة والآمنة والقابلة للتطوير مع Authgear."
+
+#: templates/base.html:238
+msgid "Get started for free"
+msgstr "ابدأ مجاناً"
+
+#: templates/base.html:698
+msgid "Clear parameters"
+msgstr "مسح المعاملات"
+
+#: templates/base.html:705
+msgid "Back to options"
+msgstr "العودة إلى الخيارات"
+
+#: templates/index.html:22
+msgid "Errors:"
+msgstr "الأخطاء:"
+
+#: templates/index.html:45
+msgid "Not authenticated"
+msgstr "غير مصادق عليه"
+
+#: templates/index.html:60
+msgid "Successfully logged out"
+msgstr "تم تسجيل الخروج بنجاح"
+
+#: templates/index.html:60
+msgid "local session cleared"
+msgstr "تم مسح الجلسة المحلية"
+
+#: templates/index.html:115
+msgid "Configuration parameters from your IdP"
+msgstr "معاملات التكوين من مزود الهوية"
+
+#: templates/index.html:116
+msgid ""
+"These are the configuration values you need to obtain from your Identity "
+"Provider."
+msgstr "هذه هي قيم التكوين التي تحتاج إلى الحصول عليها من مزود الهوية."
+
+#: templates/index.html:132
+msgid "Upload Metadata"
+msgstr "رفع البيانات الوصفية"
+
+#: templates/index.html:133
+msgid "Quick setup with your IdP's SAML metadata file"
+msgstr "إعداد سريع مع ملف البيانات الوصفية SAML لمزود الهوية"
+
+#: templates/index.html:149
+msgid "Manual Setup"
+msgstr "الإعداد اليدوي"
+
+#: templates/index.html:150
+msgid "Configure each parameter individually"
+msgstr "قم بتكوين كل معامل على حدة"
+
+#: templates/components/metadata_upload.html:35 templates/index.html:166
+#: templates/index.html:235
+#, fuzzy
+msgid "Metadata loaded successfully!"
+msgstr "تم رفع البيانات الوصفية بنجاح"
+
+#: templates/components/metadata_upload.html:43 templates/index.html:174
+#: templates/index.html:243
+#, fuzzy
+msgid "Error loading metadata"
+msgstr "خطأ في تحليل ملف البيانات الوصفية"
+
+#: templates/index.html:185
+msgid "Upload SAML Metadata"
+msgstr "رفع بيانات SAML الوصفية"
+
+#: templates/components/metadata_upload.html:8 templates/index.html:186
+msgid ""
+"Upload your IdP's SAML metadata file to automatically fill all "
+"configuration fields."
+msgstr "قم برفع ملف البيانات الوصفية SAML لمزود الهوية لملء جميع حقول التكوين تلقائياً."
+
+#: templates/index.html:226
+msgid "XML files only"
+msgstr "ملفات XML فقط"
+
+#: templates/index.html:348
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: templates/invalid.html:5
+msgid "Configuration Error"
+msgstr "خطأ في التكوين"
+
+#: templates/invalid.html:15
+msgid "Invalid Configuration"
+msgstr "تكوين غير صالح"
+
+#: templates/components/authn_request_parameters.html:3
+#, fuzzy
+msgid "AuthnRequest Parameters"
+msgstr "معاملات طلب المصادقة"
+
+#: templates/components/authn_request_parameters.html:4
+msgid ""
+"These parameters control how the SAML authentication request is sent to "
+"your Identity Provider."
+msgstr "تتحكم هذه المعاملات في كيفية إرسال طلب مصادقة SAML إلى مزود الهوية الخاص بك."
+
+#: templates/components/authn_request_parameters.html:8
+msgid "Authentication Behavior"
+msgstr "سلوك المصادقة"
+
+#: templates/components/authn_request_parameters.html:19
+msgid "Default"
+msgstr "افتراضي"
+
+#: templates/components/authn_request_parameters.html:20
+msgid ""
+"Use the IdP's default authentication behavior. The IdP may use existing "
+"sessions or prompt for authentication as appropriate."
+msgstr "استخدم سلوك المصادقة الافتراضي لمزود الهوية. قد يستخدم مزود الهوية الجلسات الموجودة أو يطلب المصادقة حسب الاقتضاء."
+
+#: templates/components/authn_request_parameters.html:33
+#, fuzzy
+msgid "IsPassive"
+msgstr "سلبي"
+
+#: templates/components/authn_request_parameters.html:34
+msgid ""
+"The IdP will not prompt the user for authentication if they already have "
+"a valid session. Useful for silent authentication checks."
+msgstr "لن يطلب مزود الهوية من المستخدم المصادقة إذا كان لديه جلسة صالحة بالفعل. مفيد لفحوصات المصادقة الصامتة."
+
+#: templates/components/authn_request_parameters.html:47
+#, fuzzy
+msgid "ForceAuthn"
+msgstr "إجبار المصادقة"
+
+#: templates/components/authn_request_parameters.html:48
+msgid ""
+"The IdP will always require fresh authentication, even if the user has an"
+" existing session. Forces re-authentication."
+msgstr "سيطلب مزود الهوية دائماً مصادقة جديدة، حتى لو كان لدى المستخدم جلسة موجودة. يجبر إعادة المصادقة."
+
+#: templates/components/authn_request_parameters.html:55
+#, fuzzy
+msgid "Subject NameID"
+msgstr "معرف الاسم للموضوع (اختياري)"
+
+#: templates/components/authn_request_parameters.html:62
+msgid ""
+"Specify a particular user identifier to test authentication for a "
+"specific user. Leave empty to use the IdP's default user selection."
+msgstr "حدد معرف مستخدم معين لاختبار المصادقة لمستخدم محدد. اتركه فارغاً لاستخدام اختيار المستخدم الافتراضي لمزود الهوية."
+
+#: templates/components/idp_parameters.html:5
+msgid "Parameters to configure in your IdP"
+msgstr "المعاملات لتكوينها في مزود الهوية"
+
+#: templates/components/idp_parameters.html:6
+msgid ""
+"These are the values you need to configure in your Identity Provider "
+"settings."
+msgstr "هذه هي القيم التي تحتاج إلى تكوينها في إعدادات مزود الهوية."
+
+#: templates/components/metadata_upload.html:7
+#, fuzzy
+msgid "Quick Setup"
+msgstr "الإعداد اليدوي"
+
+#~ msgid "No attributes found"
+#~ msgstr "لم يتم العثور على سمات"
+
+#~ msgid "Setup Method"
+#~ msgstr "طريقة الإعداد"
+
+#~ msgid "Manually configure IdP settings"
+#~ msgstr "تكوين إعدادات مزود الهوية يدوياً"
+
+#~ msgid "Upload Metadata File"
+#~ msgstr "رفع ملف البيانات الوصفية"
+
+#~ msgid "Drag and drop your SAML metadata XML file here, or click to browse"
+#~ msgstr "اسحب وأفلت ملف XML للبيانات الوصفية SAML هنا، أو انقر للتصفح"
+
+#~ msgid "Choose File"
+#~ msgstr "اختر ملف"
+
+#~ msgid "No file chosen"
+#~ msgstr "لم يتم اختيار ملف"
+
+#~ msgid "Upload and Parse"
+#~ msgstr "رفع وتحليل"
+
+#~ msgid "Show"
+#~ msgstr "عرض"
+
+#~ msgid "Hide"
+#~ msgstr "إخفاء"
+
+#~ msgid "Identity Provider (IdP) Settings"
+#~ msgstr "إعدادات مزود الهوية (IdP)"
+
+#~ msgid "Issuer (Entity ID)"
+#~ msgstr "المصدر (معرف الكيان)"
+
+#~ msgid "The Entity ID of your Identity Provider"
+#~ msgstr "معرف الكيان لمزود الهوية الخاص بك"
+
+#~ msgid "Login URL (SSO URL)"
+#~ msgstr "رابط تسجيل الدخول (رابط SSO)"
+
+#~ msgid "The Single Sign-On URL of your Identity Provider"
+#~ msgstr "رابط تسجيل الدخول الموحد لمزود الهوية الخاص بك"
+
+#~ msgid "Logout URL (SLO URL)"
+#~ msgstr "رابط تسجيل الخروج (رابط SLO)"
+
+#~ msgid "The Single Logout URL of your Identity Provider (optional)"
+#~ msgstr "رابط تسجيل الخروج الموحد لمزود الهوية الخاص بك (اختياري)"
+
+#~ msgid "Certificate"
+#~ msgstr "الشهادة"
+
+#~ msgid "The X.509 certificate of your Identity Provider"
+#~ msgstr "شهادة X.509 لمزود الهوية الخاص بك"
+
+#~ msgid "SSO Binding"
+#~ msgstr "رابط SSO"
+
+#~ msgid "The binding type for Single Sign-On"
+#~ msgstr "نوع الرابط لتسجيل الدخول الموحد"
+
+#~ msgid "HTTP-Redirect"
+#~ msgstr "HTTP-Redirect"
+
+#~ msgid "HTTP-POST"
+#~ msgstr "HTTP-POST"
+
+#~ msgid "Service Provider (SP) Settings"
+#~ msgstr "إعدادات مزود الخدمة (SP)"
+
+#~ msgid "Audience (Entity ID)"
+#~ msgstr "الجمهور (معرف الكيان)"
+
+#~ msgid "The Entity ID of this Service Provider"
+#~ msgstr "معرف الكيان لمزود الخدمة هذا"
+
+#~ msgid "ACS Binding"
+#~ msgstr "رابط ACS"
+
+#~ msgid "The binding type for Assertion Consumer Service"
+#~ msgstr "نوع الرابط لخدمة مستهلك التأكيد"
+
+#~ msgid "The format of the NameID to request"
+#~ msgstr "تنسيق معرف الاسم المطلوب"
+
+#~ msgid "Unspecified"
+#~ msgstr "غير محدد"
+
+#~ msgid "Email Address"
+#~ msgstr "عنوان البريد الإلكتروني"
+
+#~ msgid "The NameID value to request (for testing specific scenarios)"
+#~ msgstr "قيمة معرف الاسم المطلوبة (لاختبار سيناريوهات محددة)"
+
+#~ msgid "Metadata"
+#~ msgstr "البيانات الوصفية"
+
+#~ msgid "View SAML metadata for this Service Provider"
+#~ msgstr "عرض بيانات SAML الوصفية لمزود الخدمة هذا"
+
+#~ msgid "Copy"
+#~ msgstr "نسخ"
+
+#~ msgid "Copied!"
+#~ msgstr "تم النسخ!"
+
+#~ msgid "Error copying"
+#~ msgstr "خطأ في النسخ"
+
+#~ msgid "Download"
+#~ msgstr "تحميل"
+
+#~ msgid "Download SAML metadata as XML file"
+#~ msgstr "تحميل بيانات SAML الوصفية كملف XML"
+
+#~ msgid "Upload Status"
+#~ msgstr "حالة الرفع"
+
+#~ msgid "Success"
+#~ msgstr "نجح"
+
+#~ msgid "Error"
+#~ msgstr "خطأ"
+
+#~ msgid "Invalid metadata file"
+#~ msgstr "ملف بيانات وصفية غير صالح"
+
+#~ msgid "File size too large. Please select a file smaller than 5MB."
+#~ msgstr "حجم الملف كبير جداً. يرجى اختيار ملف أصغر من 5 ميجابايت."
+
+#~ msgid "Please select an XML file"
+#~ msgstr "يرجى اختيار ملف XML"
+
+#~ msgid ""
+#~ "This is not a valid SAML metadata"
+#~ " file. Missing EntityDescriptor element."
+#~ msgstr "هذا ليس ملف بيانات وصفية SAML صالح. عنصر EntityDescriptor مفقود."
+
+#~ msgid ""
+#~ "This appears to be a Service "
+#~ "Provider (SP) metadata file. Please "
+#~ "upload an Identity Provider (IdP) "
+#~ "metadata file."
+#~ msgstr ""
+#~ "يبدو أن هذا ملف بيانات وصفية لمزود"
+#~ " الخدمة (SP). يرجى رفع ملف بيانات "
+#~ "وصفية لمزود الهوية (IdP)."
+
+#~ msgid "Could not parse SAML metadata"
+#~ msgstr "تعذر تحليل بيانات SAML الوصفية"
+
+#~ msgid ""
+#~ "Missing required information: {missing_fields}. "
+#~ "Invalid format: {invalid_fields}. Please check"
+#~ " that this is a valid SAML "
+#~ "metadata file."
+#~ msgstr ""
+#~ "معلومات مطلوبة مفقودة: {missing_fields}. تنسيق"
+#~ " غير صالح: {invalid_fields}. يرجى التحقق"
+#~ " من أن هذا ملف بيانات وصفية "
+#~ "SAML صالح."
+
+#~ msgid "Certificate is not in proper PEM format"
+#~ msgstr "الشهادة ليست بالتنسيق الصحيح PEM"
+
+#~ msgid "Login URL must be a valid HTTP or HTTPS URL"
+#~ msgstr "رابط تسجيل الدخول يجب أن يكون رابط HTTP أو HTTPS صالح"
+
+#~ msgid "Logout URL must be a valid HTTP or HTTPS URL"
+#~ msgstr "رابط تسجيل الخروج يجب أن يكون رابط HTTP أو HTTPS صالح"
+
+#~ msgid "Logout URL is not a valid URL format"
+#~ msgstr "رابط تسجيل الخروج ليس بتنسيق رابط صالح"
+
+#~ msgid "Missing required information: Issuer (Entity ID). "
+#~ msgstr "معلومات مطلوبة مفقودة: المصدر (معرف الكيان). "
+
+#~ msgid "Missing required information: Login URL (SSO URL). "
+#~ msgstr "معلومات مطلوبة مفقودة: رابط تسجيل الدخول (رابط SSO). "
+
+#~ msgid "Missing required information: Certificate. "
+#~ msgstr "معلومات مطلوبة مفقودة: الشهادة. "
+
+#~ msgid "Invalid format: {invalid_fields}. "
+#~ msgstr "تنسيق غير صالح: {invalid_fields}. "
+
+#~ msgid "Please check that this is a valid SAML metadata file."
+#~ msgstr "يرجى التحقق من أن هذا ملف بيانات وصفية SAML صالح."
+
+#~ msgid "Home"
+#~ msgstr "الرئيسية"
+
+#~ msgid "SAML Metadata"
+#~ msgstr "بيانات SAML الوصفية"
+
+#~ msgid "{editor}: Editing failed"
+#~ msgstr "خطأ في قراءة الملف"
+
+#~ msgid "{editor}: Editing failed: {e}"
+#~ msgstr ""
+
+#~ msgid "{text} {deprecated_message}"
+#~ msgstr ""
+
+#~ msgid "Options"
+#~ msgstr "العودة إلى الخيارات"
+
+#~ msgid "Got unexpected extra argument ({args})"
+#~ msgid_plural "Got unexpected extra arguments ({args})"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "Aborted!"
+#~ msgstr ""
+
+#~ msgid "Commands"
+#~ msgstr ""
+
+#~ msgid "Missing command."
+#~ msgstr ""
+
+#~ msgid "No such command {name!r}."
+#~ msgstr ""
+
+#~ msgid "Value must be an iterable."
+#~ msgstr ""
+
+#~ msgid "Takes {nargs} values but 1 was given."
+#~ msgid_plural "Takes {nargs} values but {len} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid ""
+#~ "DeprecationWarning: The {param_type} {name!r} "
+#~ "is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "env var: {var}"
+#~ msgstr ""
+
+#~ msgid "default: {default}"
+#~ msgstr ""
+
+#~ msgid "required"
+#~ msgstr ""
+
+#~ msgid "(dynamic)"
+#~ msgstr ""
+
+#~ msgid "%(prog)s, version %(version)s"
+#~ msgstr ""
+
+#~ msgid "Show the version and exit."
+#~ msgstr ""
+
+#~ msgid "Show this message and exit."
+#~ msgstr ""
+
+#~ msgid "Error: {message}"
+#~ msgstr ""
+
+#~ msgid "Try '{command} {option}' for help."
+#~ msgstr ""
+
+#~ msgid "Invalid value: {message}"
+#~ msgstr ""
+
+#~ msgid "Invalid value for {param_hint}: {message}"
+#~ msgstr ""
+
+#~ msgid "Missing argument"
+#~ msgstr ""
+
+#~ msgid "Missing option"
+#~ msgstr ""
+
+#~ msgid "Missing parameter"
+#~ msgstr "مسح المعاملات"
+
+#~ msgid "Missing {param_type}"
+#~ msgstr ""
+
+#~ msgid "Missing parameter: {param_name}"
+#~ msgstr ""
+
+#~ msgid "No such option: {name}"
+#~ msgstr ""
+
+#~ msgid "Did you mean {possibility}?"
+#~ msgid_plural "(Possible options: {possibilities})"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid "unknown error"
+#~ msgstr ""
+
+#~ msgid "Could not open file {filename!r}: {message}"
+#~ msgstr ""
+
+#~ msgid "Argument {name!r} takes {nargs} values."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} does not take a value."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} requires an argument."
+#~ msgid_plural "Option {name!r} requires {nargs} arguments."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid "Shell completion is not supported for Bash versions older than 4.4."
+#~ msgstr ""
+
+#~ msgid "Couldn't detect Bash version, shell completion is not supported."
+#~ msgstr ""
+
+#~ msgid "Repeat for confirmation"
+#~ msgstr "تكوين SAML"
+
+#~ msgid "Error: The value you entered was invalid."
+#~ msgstr ""
+
+#~ msgid "Error: {e.message}"
+#~ msgstr ""
+
+#~ msgid "Error: The two entered values do not match."
+#~ msgstr ""
+
+#~ msgid "Error: invalid input"
+#~ msgstr ""
+
+#~ msgid "Press any key to continue..."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Choose from:\n"
+#~ "\t{choices}"
+#~ msgstr ""
+
+#~ msgid "{value!r} is not {choice}."
+#~ msgid_plural "{value!r} is not one of {choices}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid "{value!r} does not match the format {format}."
+#~ msgid_plural "{value!r} does not match the formats {formats}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+
+#~ msgid "{value!r} is not a valid {number_type}."
+#~ msgstr ""
+
+#~ msgid "{value} is not in the range {range}."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid boolean."
+#~ msgstr "رابط تسجيل الدخول ليس بتنسيق رابط صالح"
+
+#~ msgid "{value!r} is not a valid UUID."
+#~ msgstr "رابط تسجيل الدخول ليس بتنسيق رابط صالح"
+
+#~ msgid "file"
+#~ msgstr ""
+
+#~ msgid "directory"
+#~ msgstr ""
+
+#~ msgid "path"
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} does not exist."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a file."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a directory."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not readable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not writable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not executable."
+#~ msgstr ""
+
+#~ msgid "{len_type} values are required, but {len_value} was given."
+#~ msgid_plural "{len_type} values are required, but {len_value} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+#~ msgstr[2] ""
+#~ msgstr[3] ""
+#~ msgstr[4] ""
+#~ msgstr[5] ""
+

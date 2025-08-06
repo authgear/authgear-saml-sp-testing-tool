@@ -7,278 +7,524 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-08-06 12:33+0100\n"
+"POT-Creation-Date: 2025-08-06 14:29+0100\n"
 "PO-Revision-Date: 2025-08-06 12:33+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: en <LL@li.org>\n"
 "Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/base.html:7
-msgid "SAML Testing Tool | Mock SP | SAML Flow"
-msgstr "SAML Testing Tool | Mock SP | SAML Flow"
-
-#: templates/base.html:80
-msgid "SAML Testing Tool"
-msgstr "SAML Testing Tool"
-
-#: templates/base.html:86
-msgid "Presented by"
-msgstr "Presented by"
-
-#: templates/base.html:93
-msgid "What is this tool?"
-msgstr "What is this tool?"
-
-#: templates/base.html:100
-msgid "How to use it:"
-msgstr "How to use it:"
-
-#: templates/base.html:102
-msgid "Configure your IdP settings"
-msgstr "Configure your IdP settings"
-
-#: templates/base.html:103
-msgid "Set up your SP"
-msgstr "Set up your SP"
-
-#: templates/base.html:104
-msgid "Test authentication"
-msgstr "Test authentication"
-
-#: templates/base.html:105
-msgid "View results"
-msgstr "View results"
-
-#: templates/base.html:110
-msgid "Key Features:"
-msgstr "Key Features:"
-
-#: templates/base.html:112
-msgid "Test SAML 2.0 authentication flows"
-msgstr "Test SAML 2.0 authentication flows"
-
-#: templates/base.html:113
-msgid "View user attributes and claims"
-msgstr "View user attributes and claims"
-
-#: templates/base.html:114
-msgid "Configure various SAML bindings"
-msgstr "Configure various SAML bindings"
-
-#: templates/base.html:115
-msgid "Test different NameID formats"
-msgstr "Test different NameID formats"
-
-#: templates/base.html:116
-msgid "Validate SAML responses"
-msgstr "Validate SAML responses"
-
-#: templates/base.html:134
-msgid "Get Started with SAML SSO"
-msgstr "Get Started with SAML SSO"
-
-#: templates/invalid.html:4
-msgid "Configuration Error"
-msgstr "Configuration Error"
-
-#: templates/invalid.html:14
-msgid "Invalid Configuration"
-msgstr "Invalid Configuration"
-
-#: templates/attrs.html:7
+#: templates/attrs.html:8
 msgid "User Information"
 msgstr "User Information"
 
-#: templates/attrs.html:14
+#: templates/attrs.html:15
 msgid "NameID"
 msgstr "NameID"
 
-#: templates/attrs.html:24
+#: templates/attrs.html:25
 msgid "NameID Format"
 msgstr "NameID Format"
 
-#: templates/attrs.html:40
+#: templates/attrs.html:41 templates/index.html:70
 msgid "User Attributes"
 msgstr "User Attributes"
 
-#: templates/attrs.html:41
+#: templates/attrs.html:42
 msgid "You have the following attributes:"
 msgstr "You have the following attributes:"
 
-#: templates/attrs.html:47
+#: templates/attrs.html:48 templates/index.html:76
 msgid "Name"
 msgstr "Name"
 
-#: templates/attrs.html:48
+#: templates/attrs.html:49 templates/index.html:77
 msgid "Values"
 msgstr "Values"
 
-#: templates/attrs.html:77
+#: templates/attrs.html:78 templates/index.html:106
 msgid "You don't have any attributes"
 msgstr "You don't have any attributes"
 
-#: templates/attrs.html:84
+#: templates/attrs.html:85 templates/index.html:111
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/components/metadata_upload.html:6
-msgid "Quick Setup"
-msgstr "Quick Setup"
+#: templates/base.html:9
+msgid "SAML Testing Tool | Mock SP | SAML Flow"
+msgstr "SAML Testing Tool | Mock SP | SAML Flow"
 
-#: templates/components/metadata_upload.html:7
-msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
-msgstr "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
+#: templates/base.html:161
+msgid "SAML Testing Tool"
+msgstr "SAML Testing Tool"
 
-#: templates/components/metadata_upload.html:34
-msgid "Metadata loaded successfully!"
-msgstr "Metadata loaded successfully!"
+#: templates/base.html:167
+msgid "Presented by"
+msgstr "Presented by"
 
-#: templates/components/metadata_upload.html:42
-msgid "Error loading metadata"
-msgstr "Error loading metadata"
+#: templates/base.html:189
+msgid "What is this tool?"
+msgstr "What is this tool?"
 
-#: templates/components/authn_request_parameters.html:2
-msgid "AuthnRequest Parameters"
+#: templates/base.html:191
+msgid ""
+"This is a SAML testing tool acting as a Service Provider (SP) that allows"
+" you to configure and test SAML authentication flows with Authgear, "
+"Auth0, Okta, Entra ID or any other Identity Provider (IdP)."
+msgstr ""
+
+#: templates/base.html:196
+msgid "How to use it:"
+msgstr "How to use it:"
+
+#: templates/base.html:198
+msgid "Configure your IdP settings"
+msgstr "Configure your IdP settings"
+
+#: templates/base.html:198
+msgid "Enter your Authgear or other Identity Provider's details in the form"
+msgstr ""
+
+#: templates/base.html:199
+msgid "Set up your SP"
+msgstr "Set up your SP"
+
+#: templates/base.html:199
+#, fuzzy
+msgid "Configure your Service Provider settings"
+msgstr "Configure your IdP settings"
+
+#: templates/base.html:200
+msgid "Test authentication"
+msgstr "Test authentication"
+
+#: templates/base.html:200
+msgid "Click \"Login\" to initiate SAML authentication"
+msgstr ""
+
+#: templates/base.html:201
+msgid "View results"
+msgstr "View results"
+
+#: templates/base.html:201
+msgid "Check the attributes and user information returned"
+msgstr ""
+
+#: templates/base.html:206
+msgid "Key Features:"
+msgstr "Key Features:"
+
+#: templates/base.html:208
+msgid "Test SAML 2.0 authentication flows"
+msgstr "Test SAML 2.0 authentication flows"
+
+#: templates/base.html:209
+msgid "View user attributes and claims"
+msgstr "View user attributes and claims"
+
+#: templates/base.html:210
+msgid "Configure various SAML bindings"
+msgstr "Configure various SAML bindings"
+
+#: templates/base.html:211
+msgid "Test different NameID formats"
+msgstr "Test different NameID formats"
+
+#: templates/base.html:212
+msgid "Validate SAML responses"
+msgstr "Validate SAML responses"
+
+#: templates/base.html:224
+msgid "View source code on GitHub"
+msgstr ""
+
+#: templates/base.html:230
+msgid "Get Started with SAML SSO"
+msgstr "Get Started with SAML SSO"
+
+#: templates/base.html:232
+msgid ""
+"Experience seamless, secure, and scalable identity management with "
+"Authgear."
+msgstr ""
+
+#: templates/base.html:238
+msgid "Get started for free"
+msgstr ""
+
+#: templates/base.html:698
+#, fuzzy
+msgid "Clear parameters"
 msgstr "AuthnRequest Parameters"
 
-#: templates/components/authn_request_parameters.html:3
-msgid "These parameters control how the SAML authentication request is sent to your Identity Provider."
-msgstr "These parameters control how the SAML authentication request is sent to your Identity Provider."
+#: templates/base.html:705
+msgid "Back to options"
+msgstr ""
 
-#: templates/components/authn_request_parameters.html:7
-msgid "Authentication Behavior"
-msgstr "Authentication Behavior"
-
-#: templates/components/authn_request_parameters.html:18
-msgid "Default"
-msgstr "Default"
-
-#: templates/components/authn_request_parameters.html:19
-msgid "Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate."
-msgstr "Use the IdP's default authentication behavior. The IdP may use existing sessions or prompt for authentication as appropriate."
-
-#: templates/components/authn_request_parameters.html:32
-msgid "IsPassive"
-msgstr "IsPassive"
-
-#: templates/components/authn_request_parameters.html:33
-msgid "The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks."
-msgstr "The IdP will not prompt the user for authentication if they already have a valid session. Useful for silent authentication checks."
-
-#: templates/components/authn_request_parameters.html:46
-msgid "ForceAuthn"
-msgstr "ForceAuthn"
-
-#: templates/components/authn_request_parameters.html:47
-msgid "The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication."
-msgstr "The IdP will always require fresh authentication, even if the user has an existing session. Forces re-authentication."
-
-#: templates/components/authn_request_parameters.html:54
-msgid "Subject NameID"
-msgstr "Subject NameID"
-
-#: templates/components/authn_request_parameters.html:61
-msgid "Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection."
-msgstr "Specify a particular user identifier to test authentication for a specific user. Leave empty to use the IdP's default user selection."
-
-#: templates/components/idp_parameters.html:4
-msgid "Parameters to configure in your IdP"
-msgstr "Parameters to configure in your IdP"
-
-#: templates/components/idp_parameters.html:5
-msgid "These are the values you need to configure in your Identity Provider settings."
-msgstr "These are the values you need to configure in your Identity Provider settings."
-
-#: templates/index.html:21
+#: templates/index.html:22
 msgid "Errors:"
 msgstr "Errors:"
 
-#: templates/index.html:44
+#: templates/index.html:45
 msgid "Not authenticated"
 msgstr "Not authenticated"
 
-#: templates/index.html:59
+#: templates/index.html:60
 msgid "Successfully logged out"
 msgstr "Successfully logged out"
 
-#: templates/index.html:59
+#: templates/index.html:60
 msgid "local session cleared"
 msgstr "local session cleared"
 
-#: templates/index.html:69
-msgid "User Attributes"
-msgstr "User Attributes"
-
-#: templates/index.html:75
-msgid "Name"
-msgstr "Name"
-
-#: templates/index.html:76
-msgid "Values"
-msgstr "Values"
-
-#: templates/index.html:105
-msgid "You don't have any attributes"
-msgstr "You don't have any attributes"
-
-#: templates/index.html:110
-msgid "Logout"
-msgstr "Logout"
-
-#: templates/index.html:114
+#: templates/index.html:115
 msgid "Configuration parameters from your IdP"
 msgstr "Configuration parameters from your IdP"
 
-#: templates/index.html:115
-msgid "These are the configuration values you need to obtain from your Identity Provider."
-msgstr "These are the configuration values you need to obtain from your Identity Provider."
+#: templates/index.html:116
+msgid ""
+"These are the configuration values you need to obtain from your Identity "
+"Provider."
+msgstr ""
+"These are the configuration values you need to obtain from your Identity "
+"Provider."
 
-#: templates/index.html:131
+#: templates/index.html:132
 msgid "Upload Metadata"
 msgstr "Upload Metadata"
 
-#: templates/index.html:132
+#: templates/index.html:133
 msgid "Quick setup with your IdP's SAML metadata file"
 msgstr "Quick setup with your IdP's SAML metadata file"
 
-#: templates/index.html:148
+#: templates/index.html:149
 msgid "Manual Setup"
 msgstr "Manual Setup"
 
-#: templates/index.html:149
+#: templates/index.html:150
 msgid "Configure each parameter individually"
 msgstr "Configure each parameter individually"
 
-#: templates/index.html:165
+#: templates/components/metadata_upload.html:35 templates/index.html:166
+#: templates/index.html:235
 msgid "Metadata loaded successfully!"
 msgstr "Metadata loaded successfully!"
 
-#: templates/index.html:173
+#: templates/components/metadata_upload.html:43 templates/index.html:174
+#: templates/index.html:243
 msgid "Error loading metadata"
 msgstr "Error loading metadata"
 
-#: templates/index.html:184
+#: templates/index.html:185
 msgid "Upload SAML Metadata"
 msgstr "Upload SAML Metadata"
 
-#: templates/index.html:185
-msgid "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
-msgstr "Upload your IdP's SAML metadata file to automatically fill all configuration fields."
+#: templates/components/metadata_upload.html:8 templates/index.html:186
+msgid ""
+"Upload your IdP's SAML metadata file to automatically fill all "
+"configuration fields."
+msgstr ""
+"Upload your IdP's SAML metadata file to automatically fill all "
+"configuration fields."
 
-#: templates/index.html:225
+#: templates/index.html:226
 msgid "XML files only"
 msgstr "XML files only"
 
-#: templates/index.html:234
-msgid "Metadata loaded successfully!"
-msgstr "Metadata loaded successfully!"
+#: templates/index.html:348
+msgid "Login"
+msgstr ""
 
-#: templates/index.html:242
-msgid "Error loading metadata"
-msgstr "Error loading metadata"
+#: templates/invalid.html:5
+msgid "Configuration Error"
+msgstr "Configuration Error"
+
+#: templates/invalid.html:15
+msgid "Invalid Configuration"
+msgstr "Invalid Configuration"
+
+#: templates/components/authn_request_parameters.html:3
+msgid "AuthnRequest Parameters"
+msgstr "AuthnRequest Parameters"
+
+#: templates/components/authn_request_parameters.html:4
+msgid ""
+"These parameters control how the SAML authentication request is sent to "
+"your Identity Provider."
+msgstr ""
+"These parameters control how the SAML authentication request is sent to "
+"your Identity Provider."
+
+#: templates/components/authn_request_parameters.html:8
+msgid "Authentication Behavior"
+msgstr "Authentication Behavior"
+
+#: templates/components/authn_request_parameters.html:19
+msgid "Default"
+msgstr "Default"
+
+#: templates/components/authn_request_parameters.html:20
+msgid ""
+"Use the IdP's default authentication behavior. The IdP may use existing "
+"sessions or prompt for authentication as appropriate."
+msgstr ""
+"Use the IdP's default authentication behavior. The IdP may use existing "
+"sessions or prompt for authentication as appropriate."
+
+#: templates/components/authn_request_parameters.html:33
+msgid "IsPassive"
+msgstr "IsPassive"
+
+#: templates/components/authn_request_parameters.html:34
+msgid ""
+"The IdP will not prompt the user for authentication if they already have "
+"a valid session. Useful for silent authentication checks."
+msgstr ""
+"The IdP will not prompt the user for authentication if they already have "
+"a valid session. Useful for silent authentication checks."
+
+#: templates/components/authn_request_parameters.html:47
+msgid "ForceAuthn"
+msgstr "ForceAuthn"
+
+#: templates/components/authn_request_parameters.html:48
+msgid ""
+"The IdP will always require fresh authentication, even if the user has an"
+" existing session. Forces re-authentication."
+msgstr ""
+"The IdP will always require fresh authentication, even if the user has an"
+" existing session. Forces re-authentication."
+
+#: templates/components/authn_request_parameters.html:55
+msgid "Subject NameID"
+msgstr "Subject NameID"
+
+#: templates/components/authn_request_parameters.html:62
+msgid ""
+"Specify a particular user identifier to test authentication for a "
+"specific user. Leave empty to use the IdP's default user selection."
+msgstr ""
+"Specify a particular user identifier to test authentication for a "
+"specific user. Leave empty to use the IdP's default user selection."
+
+#: templates/components/idp_parameters.html:5
+msgid "Parameters to configure in your IdP"
+msgstr "Parameters to configure in your IdP"
+
+#: templates/components/idp_parameters.html:6
+msgid ""
+"These are the values you need to configure in your Identity Provider "
+"settings."
+msgstr ""
+"These are the values you need to configure in your Identity Provider "
+"settings."
+
+#: templates/components/metadata_upload.html:7
+msgid "Quick Setup"
+msgstr "Quick Setup"
+
+#~ msgid "{editor}: Editing failed"
+#~ msgstr ""
+
+#~ msgid "{editor}: Editing failed: {e}"
+#~ msgstr ""
+
+#~ msgid "{text} {deprecated_message}"
+#~ msgstr ""
+
+#~ msgid "Options"
+#~ msgstr ""
+
+#~ msgid "Got unexpected extra argument ({args})"
+#~ msgid_plural "Got unexpected extra arguments ({args})"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "Aborted!"
+#~ msgstr ""
+
+#~ msgid "Commands"
+#~ msgstr ""
+
+#~ msgid "Missing command."
+#~ msgstr ""
+
+#~ msgid "No such command {name!r}."
+#~ msgstr ""
+
+#~ msgid "Value must be an iterable."
+#~ msgstr ""
+
+#~ msgid "Takes {nargs} values but 1 was given."
+#~ msgid_plural "Takes {nargs} values but {len} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid ""
+#~ "DeprecationWarning: The {param_type} {name!r} "
+#~ "is deprecated.{extra_message}"
+#~ msgstr ""
+
+#~ msgid "env var: {var}"
+#~ msgstr ""
+
+#~ msgid "default: {default}"
+#~ msgstr ""
+
+#~ msgid "required"
+#~ msgstr ""
+
+#~ msgid "(dynamic)"
+#~ msgstr ""
+
+#~ msgid "%(prog)s, version %(version)s"
+#~ msgstr ""
+
+#~ msgid "Show the version and exit."
+#~ msgstr ""
+
+#~ msgid "Show this message and exit."
+#~ msgstr ""
+
+#~ msgid "Error: {message}"
+#~ msgstr ""
+
+#~ msgid "Try '{command} {option}' for help."
+#~ msgstr ""
+
+#~ msgid "Invalid value: {message}"
+#~ msgstr ""
+
+#~ msgid "Invalid value for {param_hint}: {message}"
+#~ msgstr ""
+
+#~ msgid "Missing argument"
+#~ msgstr ""
+
+#~ msgid "Missing option"
+#~ msgstr ""
+
+#~ msgid "Missing parameter"
+#~ msgstr ""
+
+#~ msgid "Missing {param_type}"
+#~ msgstr ""
+
+#~ msgid "Missing parameter: {param_name}"
+#~ msgstr ""
+
+#~ msgid "No such option: {name}"
+#~ msgstr ""
+
+#~ msgid "Did you mean {possibility}?"
+#~ msgid_plural "(Possible options: {possibilities})"
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "unknown error"
+#~ msgstr ""
+
+#~ msgid "Could not open file {filename!r}: {message}"
+#~ msgstr ""
+
+#~ msgid "Argument {name!r} takes {nargs} values."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} does not take a value."
+#~ msgstr ""
+
+#~ msgid "Option {name!r} requires an argument."
+#~ msgid_plural "Option {name!r} requires {nargs} arguments."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "Shell completion is not supported for Bash versions older than 4.4."
+#~ msgstr ""
+
+#~ msgid "Couldn't detect Bash version, shell completion is not supported."
+#~ msgstr ""
+
+#~ msgid "Repeat for confirmation"
+#~ msgstr "User Information"
+
+#~ msgid "Error: The value you entered was invalid."
+#~ msgstr ""
+
+#~ msgid "Error: {e.message}"
+#~ msgstr ""
+
+#~ msgid "Error: The two entered values do not match."
+#~ msgstr ""
+
+#~ msgid "Error: invalid input"
+#~ msgstr ""
+
+#~ msgid "Press any key to continue..."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Choose from:\n"
+#~ "\t{choices}"
+#~ msgstr ""
+
+#~ msgid "{value!r} is not {choice}."
+#~ msgid_plural "{value!r} is not one of {choices}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "{value!r} does not match the format {format}."
+#~ msgid_plural "{value!r} does not match the formats {formats}."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
+
+#~ msgid "{value!r} is not a valid {number_type}."
+#~ msgstr ""
+
+#~ msgid "{value} is not in the range {range}."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid boolean."
+#~ msgstr ""
+
+#~ msgid "{value!r} is not a valid UUID."
+#~ msgstr ""
+
+#~ msgid "file"
+#~ msgstr ""
+
+#~ msgid "directory"
+#~ msgstr ""
+
+#~ msgid "path"
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} does not exist."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a file."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is a directory."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not readable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not writable."
+#~ msgstr ""
+
+#~ msgid "{name} {filename!r} is not executable."
+#~ msgstr ""
+
+#~ msgid "{len_type} values are required, but {len_value} was given."
+#~ msgid_plural "{len_type} values are required, but {len_value} were given."
+#~ msgstr[0] ""
+#~ msgstr[1] ""
 

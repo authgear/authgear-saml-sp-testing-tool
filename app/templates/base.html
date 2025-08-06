@@ -26,6 +26,7 @@
     <link rel="alternate" hreflang="zh-Hant" href="{{ request.url_root.rstrip('/') }}/zh_Hant/">
     <link rel="alternate" hreflang="zh-Hans" href="{{ request.url_root.rstrip('/') }}/zh_Hans/">
     <link rel="alternate" hreflang="ko" href="{{ request.url_root.rstrip('/') }}/ko/">
+    <link rel="alternate" hreflang="ar" href="{{ request.url_root.rstrip('/') }}/ar/">
     <link rel="alternate" hreflang="x-default" href="{{ request.url_root.rstrip('/') }}/en/">
     
     <!-- Canonical URL -->
@@ -61,7 +62,7 @@
       "alternateName": ["SAML SP Testing Tool", "samlsp.com"],
       "url": "{{ request.url_root.rstrip('/') }}",
       "description": "Test SAML authentication flows with Authgear or any other Identity Provider. Configure and validate SAML SSO integration.",
-      "inLanguage": ["en", "es", "fr", "pt", "ru", "ko", "ja", "zh-Hant", "zh-Hans"],
+      "inLanguage": ["en", "es", "fr", "pt", "ru", "ko", "ja", "zh-Hant", "zh-Hans", "ar"],
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -178,7 +179,8 @@
               <a href="/ja/" class="hover:text-primary-600 transition-colors {% if current_language == 'ja' %}text-primary-600 font-medium{% endif %}">日本語</a> | 
               <a href="/zh_Hant/" class="hover:text-primary-600 transition-colors {% if current_language == 'zh_Hant' %}text-primary-600 font-medium{% endif %}">正體中文</a> | 
               <a href="/zh_Hans/" class="hover:text-primary-600 transition-colors {% if current_language == 'zh_Hans' %}text-primary-600 font-medium{% endif %}">简体中文</a> | 
-              <a href="/ko/" class="hover:text-primary-600 transition-colors {% if current_language == 'ko' %}text-primary-600 font-medium{% endif %}">한국어</a>
+              <a href="/ko/" class="hover:text-primary-600 transition-colors {% if current_language == 'ko' %}text-primary-600 font-medium{% endif %}">한국어</a> | 
+              <a href="/ar/" class="hover:text-primary-600 transition-colors {% if current_language == 'ar' %}text-primary-600 font-medium{% endif %}">العربية</a>
             </div>
           </div>
           

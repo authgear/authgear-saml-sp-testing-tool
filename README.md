@@ -16,7 +16,7 @@ Visit `http://localhost:5001` to access the tool.
 
 ## Features
 
-- **Multilingual Support**: Available in 9 languages (English, Spanish, French, Portuguese, Russian, Korean, Japanese, Traditional Chinese, Simplified Chinese)
+- **Multilingual Support**: Available in 10 languages (English, Spanish, French, Portuguese, Russian, Korean, Japanese, Traditional Chinese, Simplified Chinese, Arabic)
 - **SAML 2.0 Testing**: Complete authentication flow testing with various bindings and NameID formats
 - **Metadata Upload**: Drag-and-drop SAML metadata file parsing
 - **User Attributes**: View and analyze returned user attributes and claims
