@@ -17,6 +17,9 @@ from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from onelogin.saml2.errors import OneLogin_Saml2_Error
 from .config import USE_HTTPS, GTM_ID
+from .sitemap import sitemap_bp
+from .robots_enhanced import robots_bp
+from .structured_data import structured_data_bp
 
 
 app = Flask(__name__)
@@ -28,10 +31,14 @@ app.config["SAML_PATH"] = os.path.join(
 )
 
 def get_locale():
+    # Try to get locale from URL path first
+    path_parts = request.path.strip('/').split('/')
+    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        return path_parts[0]
     # Try to get locale from session
     if 'lang' in session:
         return session['lang']
-    # Try to get locale from request args
+    # Try to get locale from request args (for backward compatibility)
     if request.args.get('lang'):
         return request.args.get('lang')
     # Try to get locale from Accept-Language header
@@ -40,6 +47,11 @@ def get_locale():
 
 # Babel configuration
 babel = Babel(app, locale_selector=get_locale)
+
+# Register blueprints
+app.register_blueprint(sitemap_bp)
+app.register_blueprint(robots_bp)
+app.register_blueprint(structured_data_bp)
 
 
 @app.before_request
@@ -58,12 +70,37 @@ def inject_gettext():
     """Inject gettext function into all templates"""
     return dict(_=_)
 
+@app.context_processor
+def inject_current_language():
+    """Inject current language from URL path into all templates"""
+    # Get language from URL path
+    path_parts = request.path.strip('/').split('/')
+    current_lang = 'en'  # default
+    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        current_lang = path_parts[0]
+    return dict(current_language=current_lang)
+
 
 @app.route('/language/<lang>')
 def set_language(lang):
-    """Set the language for the session"""
+    """Set the language for the session and redirect to language-specific URL"""
     session['lang'] = lang
-    return redirect(request.referrer or url_for('index'))
+    # Get the current path without language prefix
+    current_path = request.referrer or '/'
+    if current_path.startswith(request.host_url):
+        current_path = current_path[len(request.host_url):]
+    
+    # Remove any existing language prefix
+    path_parts = current_path.strip('/').split('/')
+    if path_parts and path_parts[0] in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        path_parts = path_parts[1:]
+    
+    # Build new path with language prefix
+    new_path = f'/{lang}/'
+    if path_parts:
+        new_path += '/'.join(path_parts)
+    
+    return redirect(new_path)
 
 
 def init_saml_auth(req, request: Request, login_form: LoginForm):
@@ -91,9 +128,18 @@ def prepare_flask_request(request: Request):
     }
 
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    # Handle language selection from query parameter
+@app.route("/")
+def root_redirect():
+    """Redirect root to default language (English)"""
+    return redirect("/en/")
+
+@app.route("/<lang>/", methods=["GET", "POST"])
+def index(lang):
+    # Validate language
+    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        return redirect("/en/")
+    
+    # Handle language selection from query parameter (for backward compatibility)
     if request.args.get('lang'):
         session['lang'] = request.args.get('lang')
     
@@ -206,7 +252,7 @@ def index():
                 if request.form["RelayState"]:
                     return redirect(auth.redirect_to(request.form["RelayState"]))
                 else:
-                    return redirect("./attrs/")
+                    return redirect(f"/{lang}/attrs/")
         elif auth.get_settings().is_debug_active():
             error_reason = auth.get_last_error_reason()
     elif "sls" in request.args:
@@ -263,8 +309,12 @@ def index():
     )
 
 
-@app.route("/attrs/")
-def attrs():
+@app.route("/<lang>/attrs/")
+def attrs(lang):
+    # Validate language
+    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        return redirect("/en/attrs/")
+    
     paint_logout = False
     attributes = False
     nameid = None
@@ -287,8 +337,12 @@ def attrs():
     )
 
 
-@app.route("/metadata/")
-def metadata():
+@app.route("/<lang>/metadata/")
+def metadata(lang):
+    # Validate language
+    if lang not in ['en', 'es', 'fr', 'pt', 'ru', 'ko', 'ja', 'zh_Hant', 'zh_Hans']:
+        return redirect("/en/metadata/")
+    
     req = prepare_flask_request(request)
     login_form = LoginForm.parse(request, session.get(LoginForm.session_key(), dict()))
     auth = init_saml_auth(req, request, login_form)
@@ -302,3 +356,14 @@ def metadata():
     else:
         resp = make_response(", ".join(errors), 500)
     return resp
+
+# Backward compatibility routes
+@app.route("/attrs/")
+def attrs_legacy():
+    """Legacy route - redirect to English version"""
+    return redirect("/en/attrs/")
+
+@app.route("/metadata/")
+def metadata_legacy():
+    """Legacy route - redirect to English version"""
+    return redirect("/en/metadata/")
