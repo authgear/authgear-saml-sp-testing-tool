@@ -81,6 +81,26 @@ def inject_current_language():
     return dict(current_language=current_lang)
 
 
+@app.after_request
+def add_security_headers(response):
+    """Add security headers to all responses"""
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://plausible.io https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://plausible.io;"
+    
+    # Add cache headers
+    if request.path.startswith('/static/'):
+        response.headers['Cache-Control'] = 'public, max-age=31536000'  # 1 year
+    elif request.path.endswith('.xml'):
+        response.headers['Cache-Control'] = 'public, max-age=3600'  # 1 hour
+    else:
+        response.headers['Cache-Control'] = 'public, max-age=300'  # 5 minutes
+    
+    return response
+
+
 @app.route('/language/<lang>')
 def set_language(lang):
     """Set the language for the session and redirect to language-specific URL"""

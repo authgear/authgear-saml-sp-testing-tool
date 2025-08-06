@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ session.get('lang', 'en') }}">
+<html lang="{{ current_language }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Test SAML authentication flows with Authgear or any other Identity Provider. Configure and validate SAML SSO integration.">
 
     <title>{{ _('SAML Testing Tool | Mock SP | SAML Flow') }}</title>
 
@@ -26,6 +27,9 @@
     <link rel="alternate" hreflang="zh-Hans" href="{{ request.url_root.rstrip('/') }}/zh_Hans/">
     <link rel="alternate" hreflang="ko" href="{{ request.url_root.rstrip('/') }}/ko/">
     <link rel="alternate" hreflang="x-default" href="{{ request.url_root.rstrip('/') }}/en/">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ request.url_root.rstrip('/') }}{{ request.path }}">
     
     <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image">
