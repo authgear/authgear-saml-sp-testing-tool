@@ -2,8 +2,8 @@
 
 {% macro idp_parameters(login_form, request) %}
 <div class="bg-gray-50 rounded-lg p-6">
-  <h3 class="text-lg font-medium text-gray-900 mb-4">Parameters to configure in your IdP</h3>
-  <p class="text-sm text-gray-600 mb-6">These are the values you need to configure in your Identity Provider settings.</p>
+  <h3 class="text-lg font-medium text-gray-900 mb-4">{{ _('Parameters to configure in your IdP') }}</h3>
+  <p class="text-sm text-gray-600 mb-6">{{ _('These are the values you need to configure in your Identity Provider settings.') }}</p>
   
   <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     {{ readonly_field(

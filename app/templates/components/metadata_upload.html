@@ -4,8 +4,8 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-4">
         <div>
-          <h4 class="text-sm font-semibold text-gray-900 mb-1">Quick Setup</h4>
-          <p class="text-sm text-gray-600">Upload your IdP's SAML metadata file to automatically fill all configuration fields.</p>
+          <h4 class="text-sm font-semibold text-gray-900 mb-1">{{ _('Quick Setup') }}</h4>
+          <p class="text-sm text-gray-600">{{ _('Upload your IdP\'s SAML metadata file to automatically fill all configuration fields.') }}</p>
         </div>
       </div>
       
@@ -32,7 +32,7 @@
           <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
           </svg>
-          <span id="metadata_success_text" class="text-green-800 font-medium">Metadata loaded successfully!</span>
+          <span id="metadata_success_text" class="text-green-800 font-medium">{{ _('Metadata loaded successfully!') }}</span>
         </div>
       </div>
       <div id="metadata_error" class="hidden">
@@ -40,7 +40,7 @@
           <svg class="h-5 w-5 text-red-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
-          <span id="metadata_error_text" class="text-red-800 font-medium">Error loading metadata</span>
+          <span id="metadata_error_text" class="text-red-800 font-medium">{{ _('Error loading metadata') }}</span>
         </div>
       </div>
     </div>

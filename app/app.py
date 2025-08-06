@@ -12,6 +12,7 @@ from flask import (
     make_response,
 )
 
+from flask_babel import Babel, gettext as _
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 from onelogin.saml2.utils import OneLogin_Saml2_Utils
 from onelogin.saml2.errors import OneLogin_Saml2_Error
@@ -26,6 +27,20 @@ app.config["SAML_PATH"] = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "saml"
 )
 
+def get_locale():
+    # Try to get locale from session
+    if 'lang' in session:
+        return session['lang']
+    # Try to get locale from request args
+    if request.args.get('lang'):
+        return request.args.get('lang')
+    # Try to get locale from Accept-Language header
+    return request.accept_languages.best_match(['en'])
+
+
+# Babel configuration
+babel = Babel(app, locale_selector=get_locale)
+
 
 @app.before_request
 def make_session_permanent():
@@ -36,6 +51,12 @@ def make_session_permanent():
 def inject_gtm_id():
     """Inject GTM_ID into all templates"""
     return dict(gtm_id=GTM_ID)
+
+
+@app.context_processor
+def inject_gettext():
+    """Inject gettext function into all templates"""
+    return dict(_=_)
 
 
 def init_saml_auth(req, request: Request, login_form: LoginForm):

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SAML Testing Tool | Mock SP | SAML Flow</title>
+    <title>{{ _('SAML Testing Tool | Mock SP | SAML Flow') }}</title>
 
     <!-- Open Graph meta tags -->
     <meta property="og:title" content="SAML Testing Tool | Mock SP | SAML Flow">
@@ -78,43 +78,43 @@
         <!-- Left Sidebar - SAML Explanation -->
         <div class="md:w-1/3">
                   <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 sticky top-8">
-          <h1 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">SAML Testing Tool</h1>
+          <h1 class="text-xl md:text-2xl font-bold text-gray-900 mb-2">{{ _('SAML Testing Tool') }}</h1>
           <div class="mb-4 md:mb-6">
             <a href="https://www.authgear.com?utm_source=mini-tool&utm_medium=logo&utm_campaign=saml-tool" 
                target="_blank" 
                rel="noopener" 
                class="inline-flex items-center text-sm text-gray-600 hover:text-primary-600 transition-colors">
-              <span>Presented by</span>
+              <span>{{ _('Presented by') }}</span>
               <img src="{{ url_for('static', filename='authgear-logo.svg') }}" alt="Authgear" class="ml-1 h-4 w-auto">
             </a>
           </div>
           
           <div class="space-y-4 md:space-y-6">
             <div>
-              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">What is this tool?</h3>
+              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">{{ _('What is this tool?') }}</h3>
               <p class="text-gray-600 text-xs md:text-sm leading-relaxed">
                 This is a SAML testing tool acting as a Service Provider (SP) that allows you to configure and test SAML authentication flows with Authgear, Auth0, Okta, Entra ID or any other Identity Provider (IdP).
               </p>
             </div>
 
             <div>
-              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">How to use it:</h3>
+              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">{{ _('How to use it:') }}</h3>
               <ol class="text-gray-600 text-xs md:text-sm space-y-1 md:space-y-2 list-decimal list-inside">
-                <li><strong>Configure your IdP settings</strong> - Enter your Authgear or other Identity Provider's details in the form</li>
-                <li><strong>Set up your SP</strong> - Configure your Service Provider settings</li>
-                <li><strong>Test authentication</strong> - Click "Login" to initiate SAML authentication</li>
-                <li><strong>View results</strong> - Check the attributes and user information returned</li>
+                                  <li><strong>{{ _('Configure your IdP settings') }}</strong> - Enter your Authgear or other Identity Provider's details in the form</li>
+                  <li><strong>{{ _('Set up your SP') }}</strong> - Configure your Service Provider settings</li>
+                  <li><strong>{{ _('Test authentication') }}</strong> - Click "Login" to initiate SAML authentication</li>
+                  <li><strong>{{ _('View results') }}</strong> - Check the attributes and user information returned</li>
               </ol>
             </div>
 
             <div>
-              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">Key Features:</h3>
+              <h3 class="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-3">{{ _('Key Features:') }}</h3>
               <ul class="text-gray-600 text-xs md:text-sm space-y-1 md:space-y-2 list-disc list-inside">
-                <li>Test SAML 2.0 authentication flows</li>
-                <li>View user attributes and claims</li>
-                <li>Configure various SAML bindings</li>
-                <li>Test different NameID formats</li>
-                <li>Validate SAML responses</li>
+                                  <li>{{ _('Test SAML 2.0 authentication flows') }}</li>
+                  <li>{{ _('View user attributes and claims') }}</li>
+                  <li>{{ _('Configure various SAML bindings') }}</li>
+                  <li>{{ _('Test different NameID formats') }}</li>
+                  <li>{{ _('Validate SAML responses') }}</li>
               </ul>
             </div>
 
@@ -132,7 +132,7 @@
 
             <div class="bg-gradient-to-br from-primary-50 to-blue-50 rounded-xl p-6 border border-primary-100 shadow-sm">
               <div class="text-center">
-                <h3 class="text-lg font-semibold text-gray-900 mb-3">Get Started with SAML SSO</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ _('Get Started with SAML SSO') }}</h3>
                 <p class="text-gray-600 text-sm leading-relaxed mb-6">
                   Experience seamless, secure, and scalable identity management with Authgear.
                 </p>

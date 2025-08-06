@@ -5,14 +5,14 @@
 {% if paint_logout %}
   <div class="bg-white shadow overflow-hidden sm:rounded-md mb-6">
     <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">User Information</h3>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">{{ _('User Information') }}</h3>
     </div>
     <div class="border-t border-gray-200">
       <table class="min-w-full divide-y divide-gray-200">
         <tbody class="bg-white divide-y divide-gray-200">
           {% if nameid %}
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">NameID</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ _('NameID') }}</td>
               <td class="px-6 py-4 text-sm text-gray-500">
                 <ul class="list-disc list-inside">
                   <li>{{ nameid }}</li>
@@ -22,7 +22,7 @@
           {% endif %}
           {% if nameid %}
             <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">NameID Format</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ _('NameID Format') }}</td>
               <td class="px-6 py-4 text-sm text-gray-500">
                 <ul class="list-disc list-inside">
                   <li>{{ nameid_format }}</li>
@@ -38,15 +38,15 @@
   {% if attributes %}
     <div class="bg-white shadow overflow-hidden sm:rounded-md mb-6">
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg leading-6 font-medium text-gray-900">User Attributes</h3>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">You have the following attributes:</p>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">{{ _('User Attributes') }}</h3>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ _('You have the following attributes:') }}</p>
       </div>
       <div class="border-t border-gray-200">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Values</th>
+                          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ _('Name') }}</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ _('Values') }}</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
@@ -75,14 +75,14 @@
           </svg>
         </div>
         <div class="ml-3">
-          <p class="text-sm text-red-700">You don't have any attributes</p>
+          <p class="text-sm text-red-700">{{ _('You don\'t have any attributes') }}</p>
         </div>
       </div>
     </div>
   {% endif %}
   
   <div class="flex justify-center">
-    <a href="/?slo" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Logout</a>
+    <a href="/?slo" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">{{ _('Logout') }}</a>
   </div>
 {% else %}
   <div class="text-center">
