@@ -253,6 +253,38 @@ msgstr "Error de Configuración"
 msgid "Invalid Configuration"
 msgstr "Configuración Inválida"
 
+#: templates/index.html:276
+msgid "Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP."
+msgstr "Identificador único de tu Proveedor de Identidad. Generalmente una URL o URN que identifica tu IdP."
+
+#: templates/index.html:286
+msgid "The URL where users will be redirected for authentication. This is your IdP's login endpoint."
+msgstr "La URL donde los usuarios serán redirigidos para la autenticación. Este es el punto de conexión de inicio de sesión de tu IdP."
+
+#: templates/index.html:306
+msgid "X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers."
+msgstr "Certificado X.509 utilizado para verificar las respuestas SAML de tu IdP. Debe estar en formato PEM con marcadores BEGIN/END."
+
+#: templates/index.html:315
+msgid "The format of the user identifier in SAML responses. Choose based on your IdP's configuration."
+msgstr "El formato del identificador de usuario en las respuestas SAML. Elige basándote en la configuración de tu IdP."
+
+#: templates/index.html:324
+msgid "The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common."
+msgstr "La vinculación de protocolo para las solicitudes SAML a tu IdP. HTTP-Redirect es la más común."
+
+#: templates/index.html:333
+msgid "The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs."
+msgstr "La vinculación de protocolo para recibir respuestas SAML. HTTP-POST es la más común para SPs."
+
+#: templates/components/idp_parameters.html:12
+msgid "Assertion Consumer Service URL"
+msgstr "URL del Servicio Consumidor de Aserciones"
+
+#: templates/components/idp_parameters.html:20
+msgid "The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+msgstr "El valor de audiencia que debe estar presente en las aserciones SAML. Generalmente el ID de entidad o URL de tu SP."
+
 #: templates/components/authn_request_parameters.html:3
 msgid "AuthnRequest Parameters"
 msgstr "Parámetros AuthnRequest"

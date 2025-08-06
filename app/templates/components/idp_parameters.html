@@ -10,7 +10,7 @@
       name="readonly_recipient",
       label="ACS URL",
       value=login_form.sp_recipient(request),
-      tooltip_text="Assertion Consumer Service URL",
+      tooltip_text=_("Assertion Consumer Service URL"),
       tooltip_width="w-64"
     ) }}
     
@@ -18,7 +18,7 @@
       name="sp_audience",
       label="Assertion Audience",
       value=login_form.sp_audience,
-      tooltip_text="The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+      tooltip_text=_("The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL.")
     ) }}
     
     {{ readonly_field(

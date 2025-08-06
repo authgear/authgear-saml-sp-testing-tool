@@ -274,7 +274,7 @@
               value=login_form.idp_issuer,
               placeholder="e.g., https://your-idp.com or urn:your-idp:entity",
               required=true,
-              tooltip_text="Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP.",
+              tooltip_text=_("Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP."),
               grid_span="md:col-span-2"
             ) }}
             
@@ -284,7 +284,7 @@
               value=login_form.idp_sso_url,
               placeholder="e.g., https://your-idp.com/saml/sso or /saml/login",
               required=true,
-              tooltip_text="The URL where users will be redirected for authentication. This is your IdP's login endpoint.",
+              tooltip_text=_("The URL where users will be redirected for authentication. This is your IdP's login endpoint."),
               grid_span="md:col-span-2"
             ) }}
             
@@ -304,7 +304,7 @@
 Your IdP's X.509 certificate in PEM format
 -----END CERTIFICATE-----",
               rows=4,
-              tooltip_text="X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers.",
+              tooltip_text=_("X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers."),
               grid_span="md:col-span-2"
             ) }}
             
@@ -313,7 +313,7 @@ Your IdP's X.509 certificate in PEM format
               label="NameID Format",
               options=login_form.nameid_format_options(),
               selected_value=login_form.nameid_format,
-              tooltip_text="The format of the user identifier in SAML responses. Choose based on your IdP's configuration.",
+              tooltip_text=_("The format of the user identifier in SAML responses. Choose based on your IdP's configuration."),
               grid_span="md:col-span-2"
             ) }}
             
@@ -322,7 +322,7 @@ Your IdP's X.509 certificate in PEM format
               label="IdP SSO Binding",
               options=login_form.idp_sso_binding_options(),
               selected_value=login_form.idp_sso_binding,
-              tooltip_text="The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common.",
+              tooltip_text=_("The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common."),
               grid_span="md:col-span-2"
             ) }}
             
@@ -331,7 +331,7 @@ Your IdP's X.509 certificate in PEM format
               label="ACS Binding",
               options=login_form.acs_binding_options(),
               selected_value=login_form.acs_binding,
-              tooltip_text="The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs.",
+              tooltip_text=_("The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs."),
               grid_span="md:col-span-2"
             ) }}
           </div>

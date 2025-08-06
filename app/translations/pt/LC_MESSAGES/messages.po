@@ -253,6 +253,38 @@ msgstr "Erro de Configuração"
 msgid "Invalid Configuration"
 msgstr "Configuração Inválida"
 
+#: templates/index.html:276
+msgid "Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP."
+msgstr "Identificador único do seu Provedor de Identidade. Geralmente uma URL ou URN que identifica seu IdP."
+
+#: templates/index.html:286
+msgid "The URL where users will be redirected for authentication. This is your IdP's login endpoint."
+msgstr "A URL onde os usuários serão redirecionados para autenticação. Este é o endpoint de login do seu IdP."
+
+#: templates/index.html:306
+msgid "X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers."
+msgstr "Certificado X.509 usado para verificar respostas SAML do seu IdP. Deve estar no formato PEM com marcadores BEGIN/END."
+
+#: templates/index.html:315
+msgid "The format of the user identifier in SAML responses. Choose based on your IdP's configuration."
+msgstr "O formato do identificador do usuário nas respostas SAML. Escolha com base na configuração do seu IdP."
+
+#: templates/index.html:324
+msgid "The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common."
+msgstr "A ligação de protocolo para solicitações SAML ao seu IdP. HTTP-Redirect é mais comum."
+
+#: templates/index.html:333
+msgid "The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs."
+msgstr "A ligação de protocolo para receber respostas SAML. HTTP-POST é mais comum para SPs."
+
+#: templates/components/idp_parameters.html:12
+msgid "Assertion Consumer Service URL"
+msgstr "URL do Serviço Consumidor de Asserção"
+
+#: templates/components/idp_parameters.html:20
+msgid "The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+msgstr "O valor de audiência que deve estar presente nas asserções SAML. Geralmente o ID da entidade ou URL do seu SP."
+
 #: templates/components/authn_request_parameters.html:3
 msgid "AuthnRequest Parameters"
 msgstr "Parâmetros AuthnRequest"

@@ -243,6 +243,38 @@ msgstr "配置错误"
 msgid "Invalid Configuration"
 msgstr "无效配置"
 
+#: templates/index.html:276
+msgid "Unique identifier for your Identity Provider. Usually a URL or URN that identifies your IdP."
+msgstr "您的 Identity Provider 的唯一标识符。通常是标识您 IdP 的 URL 或 URN。"
+
+#: templates/index.html:286
+msgid "The URL where users will be redirected for authentication. This is your IdP's login endpoint."
+msgstr "用户将被重定向进行认证的 URL。这是您 IdP 的登录端点。"
+
+#: templates/index.html:306
+msgid "X.509 certificate used to verify SAML responses from your IdP. Must be in PEM format with BEGIN/END markers."
+msgstr "用于验证来自您 IdP 的 SAML 响应的 X.509 证书。必须是带有 BEGIN/END 标记的 PEM 格式。"
+
+#: templates/index.html:315
+msgid "The format of the user identifier in SAML responses. Choose based on your IdP's configuration."
+msgstr "SAML 响应中用户标识符的格式。根据您 IdP 的配置进行选择。"
+
+#: templates/index.html:324
+msgid "The protocol binding for SAML requests to your IdP. HTTP-Redirect is most common."
+msgstr "向您 IdP 发送 SAML 请求的协议绑定。HTTP-Redirect 是最常见的。"
+
+#: templates/index.html:333
+msgid "The protocol binding for receiving SAML responses. HTTP-POST is most common for SPs."
+msgstr "接收 SAML 响应的协议绑定。对于 SP，HTTP-POST 是最常见的。"
+
+#: templates/components/idp_parameters.html:12
+msgid "Assertion Consumer Service URL"
+msgstr "断言消费者服务 URL"
+
+#: templates/components/idp_parameters.html:20
+msgid "The audience value that should be present in SAML assertions. Usually your SP's entity ID or URL."
+msgstr "应该出现在 SAML 断言中的受众值。通常是您 SP 的实体 ID 或 URL。"
+
 #: templates/components/authn_request_parameters.html:3
 msgid "AuthnRequest Parameters"
 msgstr "AuthnRequest 参数"
