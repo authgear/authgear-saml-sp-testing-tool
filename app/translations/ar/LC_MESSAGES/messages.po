@@ -98,9 +98,8 @@ msgid "Set up your SP"
 msgstr "قم بإعداد مزود الخدمة الخاص بك"
 
 #: templates/base.html:199
-#, fuzzy
 msgid "Configure your Service Provider settings"
-msgstr "قم بتكوين إعدادات مزود الهوية الخاص بك"
+msgstr "قم بتكوين إعدادات مزود الخدمة الخاص بك"
 
 #: templates/base.html:200
 msgid "Test authentication"
@@ -249,7 +248,6 @@ msgid "Invalid Configuration"
 msgstr "تكوين غير صالح"
 
 #: templates/components/authn_request_parameters.html:3
-#, fuzzy
 msgid "AuthnRequest Parameters"
 msgstr "معاملات طلب المصادقة"
 
