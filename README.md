@@ -2,6 +2,10 @@
 
 A SAML Service Provider testing tool for configuring and testing SAML authentication flows with Authgear or any other Identity Provider.
 
+## 🌐 Live Demo
+
+**[Try the tool online at https://samlsp.com](https://samlsp.com)**
+
 ## Quick Start
 
 ```sh
