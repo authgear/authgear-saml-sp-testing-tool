@@ -6,7 +6,6 @@ from urllib import parse
 from enum import StrEnum
 from .config import USE_HTTPS
 
-
 class NameID(StrEnum):
     unspecified = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
     emailAddress = "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"

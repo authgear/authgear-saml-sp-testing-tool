@@ -170,9 +170,19 @@ def health():
     return "OK", 200
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def root_redirect():
-    """Redirect root to default language (English)"""
+    """Handle root access and ACS, then redirect to language-specific routes."""
+    # If this is the ACS callback at "/?acs", delegate handling to the language route
+    if "acs" in request.args:
+        # Determine language using existing locale logic, then validate
+        lang = get_locale()
+        if not validate_language(lang):
+            lang = "en"
+        # Reuse the main index handler so SAML processing logic stays in one place
+        return index(lang)
+
+    # Default behavior: redirect root to English homepage
     return redirect("/en/")
 
 @app.route("/<lang>/", methods=["GET", "POST"])
@@ -211,7 +221,7 @@ def index(lang):
         except OneLogin_Saml2_Error as e:
             return render_template("invalid.html", init_error=init_error)
 
-        return_to = "%sattrs/" % request.host_url
+        return_to = f"{request.host_url.rstrip('/')}/{lang}/attrs/"
 
         return redirect(
             auth.login(
